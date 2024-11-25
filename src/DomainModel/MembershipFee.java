@@ -16,9 +16,7 @@ public class MembershipFee {
             return (int) (1600 * 0.75);
          }
 
-        return 1600; //Den normale seniortaks
+        return 1600; //Den normale seniorpris over 18, under 60 år.
     }
-
-
 
 }
