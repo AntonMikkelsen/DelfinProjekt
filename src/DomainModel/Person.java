@@ -1,9 +1,8 @@
 package DomainModel;
-
 import ENUMS.MembershipStatus;
-
 import java.time.LocalDate;
 
+//Person variables
 public abstract class Person {
     protected String firstName;
     protected String lastName;
@@ -14,7 +13,7 @@ public abstract class Person {
     protected String memberId;
     protected MembershipStatus membershipStatus;
 
-
+    //Person constructor
     public Person(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address,
                   String memberId, MembershipStatus membershipStatus) {
         this.firstName = firstName;
@@ -29,7 +28,6 @@ public abstract class Person {
     }
 
     // Getters
-
     public String getFirstName() {
         return firstName;
     }
@@ -95,6 +93,18 @@ public abstract class Person {
     public void setMembershipStatus(MembershipStatus membershipStatus) {
         this.membershipStatus = membershipStatus;
     }
+
+    //Methods to change current membership status of member
+    public void changeMembershipToPassive(Person person){
+        person.setMembershipStatus(MembershipStatus.PASSIVE);
+    }
+
+    public void changeMembershipToActive(Person person){
+        person.setMembershipStatus(MembershipStatus.ACTIVE);
+    }
+
+
+
 }
 
 

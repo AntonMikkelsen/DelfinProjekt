@@ -18,7 +18,7 @@ public class Teams {
     }
 
     public Boolean isJunior(Person person){
-        return person.getAge() < 18;
+        return Integer.valueOf(person.getDateOfBirth()) < 18;
     }
 
 
