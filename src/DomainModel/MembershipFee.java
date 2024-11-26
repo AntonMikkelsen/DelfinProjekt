@@ -1,22 +1,30 @@
 package DomainModel;
+import ENUMS.MembershipStatus;
 
 public class MembershipFee {
 
-    public int MembershipCost(Boolean isActive, int age){
+    public int MembershipCost(Person person, int age){
 
-        if (!isActive) {
-            return 500;
+        // Costs of all different membership
+        final int costOfNormalSeniorMembership = 1600;
+        final int costOfJuniorMembership = 1000;
+        final int costOfPassiveMembership = 500;
+        int costOfAbove60Membership;
+
+        if (person.getMembershipStatus() == MembershipStatus.PASSIVE) {
+            return costOfPassiveMembership;
         }
 
         if(age < 18) {
-            return 1000;
+            return costOfJuniorMembership;
         }
 
         if (age >= 60) {
-            return (int) (1600 * 0.75);
+            costOfAbove60Membership = (int) (1600 * 0.75);
+            return costOfAbove60Membership;
          }
 
-        return 1600; //Den normale seniorpris over 18, under 60 år.
+        return costOfNormalSeniorMembership; //Den normale seniorpris over 18, under 60 år.
     }
 
 }
