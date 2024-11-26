@@ -54,5 +54,6 @@ public abstract class Person {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
 }
 
