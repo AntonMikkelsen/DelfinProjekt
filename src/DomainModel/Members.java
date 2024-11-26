@@ -1,34 +1,12 @@
 package DomainModel;
 
-public class Members extends Person {
-    private boolean isActive; // Aktiv/passiv medlemskab
-    private boolean inArrears; // Restancestatus
+import ENUMS.MembershipStatus;
 
-    public Members(String name, int age, String email, int userid, String gender, boolean isActive, boolean inArrears) {
-        super(name, age, email, userid, gender);
-        this.isActive = isActive;
-        this.inArrears = inArrears;
-    }
+import java.time.LocalDate;
 
-    public boolean isActive() {
-        return isActive;
-    }
+public class Members extends Person{
 
-    public boolean isInArrears() {
-        return inArrears;
-    }
-
-    // Setters
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
-    }
-
-    public void setInArrears(boolean inArrears) {
-        this.inArrears = inArrears;
-    }
-
-    @Override
-    public String toString() {
-        return "Medlem: " + getName() + ", Alder: " + getAge() + ", Aktiv: " + isActive + ", I restance: " + inArrears;
+    public Members(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address, String memberId, MembershipStatus membershipStatus) {
+        super(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberId, membershipStatus);
     }
 }
