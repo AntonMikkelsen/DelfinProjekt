@@ -1,10 +1,8 @@
 package DomainModel;
 import ENUMS.MembershipStatus;
-
-import ENUMS.MembershipStatus;
-
 import java.time.LocalDate;
 
+//Person variables
 public abstract class Person {
     protected String firstName;
     protected String lastName;
@@ -15,7 +13,7 @@ public abstract class Person {
     protected String memberId;
     protected MembershipStatus membershipStatus;
 
-
+    //Person constructor
     public Person(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address,
                   String memberId, MembershipStatus membershipStatus) {
         this.firstName = firstName;
@@ -38,8 +36,8 @@ public abstract class Person {
         return lastName;
     }
 
-    public String getDateOfBirth() {
-        return String.valueOf(dateOfBirth);
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public String getEmail() {
