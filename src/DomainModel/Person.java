@@ -1,59 +1,102 @@
 package DomainModel;
 
+import ENUMS.MembershipStatus;
+
+import java.time.LocalDate;
+
 public abstract class Person {
-    private String name;
-    private int age;
-    private String email;
-    private int userid;
-    private String gender;
+    protected String firstName;
+    protected String lastName;
+    protected LocalDate dateOfBirth;
+    protected String email;
+    protected String phoneNumber;
+    protected String address;
+    protected String memberId;
+    protected MembershipStatus membershipStatus;
 
-    public Person(String name, int age, String email, int userid, String gender){
-        this.name = name;
-        this.age = age;
+
+    public Person(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address,
+                  String memberId, MembershipStatus membershipStatus) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
         this.email = email;
-        this.userid = userid;
-        this.gender = gender;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.memberId = memberId;
+        this.membershipStatus = membershipStatus;
+
     }
 
-    public String getName() {
-        return name;
+    // Getters
+
+    public String getFirstName() {
+        return firstName;
     }
 
-    public int getAge() {
-        return age;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public int getUserid() {
-        return userid;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public String getGender() {
-        return gender;
+    public String getAddress() {
+        return address;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public MembershipStatus getMembershipStatus() {
+        return membershipStatus;
+    }
+
+
+    //Setters
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public void setMembershipStatus(MembershipStatus membershipStatus) {
+        this.membershipStatus = membershipStatus;
     }
 
 }
+
+
 
