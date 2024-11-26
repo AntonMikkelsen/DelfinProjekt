@@ -1,4 +1,5 @@
 package DomainModel;
+import ENUMS.MembershipStatus;
 
 import ENUMS.MembershipStatus;
 
@@ -29,7 +30,6 @@ public abstract class Person {
     }
 
     // Getters
-
     public String getFirstName() {
         return firstName;
     }
@@ -38,8 +38,8 @@ public abstract class Person {
         return lastName;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public String getDateOfBirth() {
+        return String.valueOf(dateOfBirth);
     }
 
     public String getEmail() {
@@ -95,6 +95,18 @@ public abstract class Person {
     public void setMembershipStatus(MembershipStatus membershipStatus) {
         this.membershipStatus = membershipStatus;
     }
+
+    //Methods to change current membership status of member
+    public void changeMembershipToPassive(Person person){
+        person.setMembershipStatus(MembershipStatus.PASSIVE);
+    }
+
+    public void changeMembershipToActive(Person person){
+        person.setMembershipStatus(MembershipStatus.ACTIVE);
+    }
+
+
+
 }
 
 
