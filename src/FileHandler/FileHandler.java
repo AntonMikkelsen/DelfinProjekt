@@ -1,5 +1,5 @@
 package FileHandler;
-import DomainModel.Members;
+import DomainModel.Member;
 import ENUMS.MembershipStatus;
 
 import java.io.*;
@@ -8,9 +8,9 @@ import java.util.ArrayList;
 
 public class FileHandler {
 
-    public void saveMembersToFile (ArrayList<Members> membersArrayList, String fileName) {
+    public void saveMembersToFile (ArrayList<Member> membersArrayList, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))){
-            for (Members members : membersArrayList){
+            for (Member members : membersArrayList){
                 writer.write(members.getFirstName() + ", " + members.getLastName() + ", " + members.getMemberId() + ", "
                         + members.getMembershipStatus() + ", " + members.getPhoneNumber() + ", " + members.getEmail()
                         + ", " + members.getDateOfBirth());
@@ -22,8 +22,8 @@ public class FileHandler {
             System.err.println("Input fejl ved indskrivning i fil" + e.getMessage());
         }
     }
-    public ArrayList<Members> loadMembersFromFile(String fileName) {
-        ArrayList<Members> membersArrayList = new ArrayList<>();
+    public ArrayList<Member> loadMembersFromFile(String fileName) {
+        ArrayList<Member> membersArrayList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -38,7 +38,7 @@ public class FileHandler {
                     String memberEmail = data[6].trim();
                     LocalDate dateOfBirth = LocalDate.parse((data[7].trim()));
 
-                    Members members = new Members(firstName, lastName, dateOfBirth,
+                    Member members = new Member(firstName, lastName, dateOfBirth,
                             memberEmail, phoneNumber, address, memberId, memberShipStatus);
 
                     membersArrayList.add(members);
