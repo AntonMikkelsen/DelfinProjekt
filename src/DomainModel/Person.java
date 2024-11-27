@@ -37,8 +37,8 @@ public abstract class Person {
         return lastName;
     }
 
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
+    public String getDateOfBirth() {
+        return String.valueOf(dateOfBirth);
     }
 
     public String getEmail() {
@@ -96,12 +96,12 @@ public abstract class Person {
     }
 
     //Methods to change current membership status of member
-    public void changeMembershipToPassive(Person person){
-        person.setMembershipStatus(MembershipStatus.PASSIVE);
+    public void changeMembershipToPassive(){
+        this.setMembershipStatus(MembershipStatus.PASSIVE);
     }
 
-    public void changeMembershipToActive(Person person){
-        person.setMembershipStatus(MembershipStatus.ACTIVE);
+    public void changeMembershipToActive(){
+        this.setMembershipStatus(MembershipStatus.ACTIVE);
     }
 
 
