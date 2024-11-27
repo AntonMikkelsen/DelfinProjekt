@@ -14,6 +14,7 @@ public abstract class Person {
     protected String memberId;
     protected MembershipStatus membershipStatus;
 
+
     //Person constructor
     public Person(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address,
                   String memberId, MembershipStatus membershipStatus) {
