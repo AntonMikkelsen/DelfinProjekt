@@ -1,6 +1,7 @@
 package DomainModel;
 import ENUMS.MembershipStatus;
 import java.time.LocalDate;
+import java.time.Period;
 
 //Person variables
 public abstract class Person {
@@ -102,6 +103,11 @@ public abstract class Person {
     public void changeMembershipToActive(Person person){
         person.setMembershipStatus(MembershipStatus.ACTIVE);
     }
+
+    public int calculateAge() {
+        return Period.between(dateOfBirth, LocalDate.now()).getYears();
+    }
+
     @Override
     public String toString() {
         return "Name: " + firstName + " " + lastName +
