@@ -102,9 +102,17 @@ public abstract class Person {
     public void changeMembershipToActive(Person person){
         person.setMembershipStatus(MembershipStatus.ACTIVE);
     }
+    @Override
+    public String toString() {
+        return "Name: " + firstName + " " + lastName +
+                ", Date of Birth: " + dateOfBirth +
+                ", Email: " + email +
+                ", Phone: " + phoneNumber +
+                ", Address: " + address +
+                ", Member ID: " + memberId +
+                ", Membership Status: " + membershipStatus;
 
-
-
+    }
 }
 
 
