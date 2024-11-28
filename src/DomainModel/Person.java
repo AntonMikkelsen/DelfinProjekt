@@ -3,6 +3,7 @@ package DomainModel;
 import ENUMS.MembershipStatus;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public abstract class Person {
     protected String firstName;
@@ -26,6 +27,10 @@ public abstract class Person {
         this.memberId = memberId;
         this.membershipStatus = membershipStatus;
 
+    }
+
+    public int calculateAge(){
+        return Period.between(dateOfBirth,LocalDate.now()).getYears();
     }
 
     // Getters
