@@ -1,5 +1,4 @@
 package FileHandler;
-import DomainModel.Member;
 import ENUMS.MembershipStatus;
 
 import java.io.*;
