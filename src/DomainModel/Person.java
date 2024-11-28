@@ -38,8 +38,8 @@ public abstract class Person {
         return lastName;
     }
 
-    public String getDateOfBirth() {
-        return String.valueOf(dateOfBirth);
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
     }
 
     public String getEmail() {
