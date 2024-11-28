@@ -1,5 +1,5 @@
 package ENUMS;
 
 public enum SwimmerType {
-    RECREATIONAL, COMPETITIVE
+    CASUAL, COMPETITIVE
 }
