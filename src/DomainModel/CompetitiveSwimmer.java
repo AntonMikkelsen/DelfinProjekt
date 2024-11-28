@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
-public class CompetitiveSwimmer extends Person {
+public class CompetitiveSwimmer extends Member {
 
     //Variables
     private Team team;

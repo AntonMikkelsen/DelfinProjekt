@@ -11,21 +11,16 @@ public abstract class Person {
     protected String email;
     protected String phoneNumber;
     protected String address;
-    protected String memberId;
-    protected MembershipStatus membershipStatus;
 
 
     //Person constructor
-    public Person(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address,
-                  String memberId, MembershipStatus membershipStatus) {
+    public Person(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.memberId = memberId;
-        this.membershipStatus = membershipStatus;
 
     }
 
@@ -54,15 +49,6 @@ public abstract class Person {
         return address;
     }
 
-    public String getMemberId() {
-        return memberId;
-    }
-
-    public MembershipStatus getMembershipStatus() {
-        return membershipStatus;
-    }
-
-
     //Setters
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -88,26 +74,14 @@ public abstract class Person {
         this.address = address;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
-
-    public void setMembershipStatus(MembershipStatus membershipStatus) {
-        this.membershipStatus = membershipStatus;
-    }
 
     //Methods to change current membership status of member
-    public void changeMembershipToPassive(){
-        this.setMembershipStatus(MembershipStatus.PASSIVE);
-    }
 
-    public void changeMembershipToActive(){
-        this.setMembershipStatus(MembershipStatus.ACTIVE);
-    }
 
     public int calculateAge() {
         return Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
+
 
     @Override
     public String toString() {
@@ -115,9 +89,7 @@ public abstract class Person {
                 ", Date of Birth: " + dateOfBirth +
                 ", Email: " + email +
                 ", Phone: " + phoneNumber +
-                ", Address: " + address +
-                ", Member ID: " + memberId +
-                ", Membership Status: " + membershipStatus;
+                ", Address: " + address;
 
     }
 

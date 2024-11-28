@@ -10,7 +10,7 @@ public class FileHandler {
     public void saveMembersToFile (ArrayList<Member> membersArrayList, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))){
             for (Member members : membersArrayList){
-                writer.write(members.getFirstName() + ", " + members.getLastName() + ", " + members.getMemberId() + ", "
+                writer.write(members.getFirstName() + ", " + members.getLastName() + ", " + members.getMemberID() + ", "
                         + members.getMembershipStatus() + ", " + members.getPhoneNumber() + ", " + members.getEmail()
                         + ", " + members.getDateOfBirth());
                 writer.newLine();
@@ -40,7 +40,7 @@ public class FileHandler {
                     boolean isPassive = Boolean.parseBoolean(data[8].trim());
 
                     Member members = new Member(firstName, lastName, dateOfBirth,
-                            memberEmail, phoneNumber, address, memberId, memberShipStatus,isActive,isPassive);
+                            memberEmail, phoneNumber, address, memberId, memberShipStatus);
 
                     membersArrayList.add(members);
                 } else {
