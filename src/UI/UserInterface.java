@@ -1,8 +1,12 @@
 package UI;
 
 import DomainModel.*;
-import ENUMS.AgeCategory;import java.util.List;
+import ENUMS.AgeCategory;
+import ENUMS.MembershipStatus;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
+import java.util.logging.SocketHandler;
 
 public class UserInterface {
     private Scanner scanner;
@@ -46,7 +50,10 @@ public class UserInterface {
             scanner.nextLine(); // Consume newline
 
             switch (userResponse) {
-                case 1 -> System.out.println("Add or remove members from existing teams");
+                case 1 -> {
+                    System.out.println("Add or remove members from existing teams");
+                    addNewMember();
+                }
                 case 2 -> System.out.println("Edit info on members");
                 case 3 -> showMemberOverviewMenu();
                 case 4 -> administrativeMenuRunning = false;
@@ -186,7 +193,7 @@ public class UserInterface {
                 swimmer.getMemberID(),
                 swimmer.getFirstName(),
                 swimmer.getLastName(),
-                swimmer.getDateOfBirth(),
+                swimmer.calculateAge(),
                 swimmer.getMembershipStatus(),
                 swimmer.getTeam().getTeamName());
     }
@@ -196,9 +203,49 @@ public class UserInterface {
                 member.getMemberID(),
                 member.getFirstName(),
                 member.getLastName(),
-                member.getDateOfBirth(),
+                member.calculateAge(),
                 member.getMembershipStatus(),
                 "No Team");
+    }
+
+    private void addNewMember(){
+        System.out.println("------------------------");
+        System.out.println("\nEnter first name: ");
+        String firstName = scanner.nextLine();
+        System.out.println("First name: " + firstName);
+
+        System.out.println("\nEnter last name: ");
+        String lastName = scanner.nextLine();
+        System.out.println("Last name: " + lastName);
+
+        System.out.println("\nEnter date of birth (YYYY-MM-DD): ");
+        LocalDate dob = LocalDate.parse(scanner.nextLine());
+        System.out.println("Date of birth: " + dob);
+
+        System.out.println("\nEnter email: ");
+        String email = scanner.nextLine();
+        System.out.println("Email: " + email);
+
+        System.out.println("\nEnter phone number: ");
+        String phone = scanner.nextLine();
+        System.out.println("Phone number: " + phone);
+
+        System.out.println("\nEnter address: ");
+        String address = scanner.nextLine();
+        System.out.println("address: " + address);
+
+        System.out.println("\nEnter membership status *Enter Passive/Active*: ");
+        MembershipStatus status = MembershipStatus.valueOf(scanner.nextLine().toUpperCase());
+        System.out.println("membership stauts: " + status);
+
+
+        String memberId = "ID" + (membershipService.getAllMembers().size() + 1);
+
+        Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
+        membershipService.addMember(newMember);
+
+        System.out.println("Member added successfully: " + newMember.getFirstName() + " " + newMember.getLastName());
+
     }
 
     private void waitForEnter() {

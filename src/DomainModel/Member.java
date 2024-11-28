@@ -13,6 +13,7 @@ public class Member extends Person{
     private double membershipFee;
     private boolean isInArrears;
 
+
     public Member(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address, String memberID, MembershipStatus membershipStatus) {
         super(firstName, lastName, dateOfBirth, email, phoneNumber, address);
         this.memberID = memberID;
@@ -88,7 +89,11 @@ public class Member extends Person{
         membersList.add(members);
     }
 
-    public void setMemberId(String memberId) {
+    public void removeMembers(Member members){
+        membersList.remove(members);
+    }
+
+    public void setMemberID(String memberID) {
         this.memberID = memberID;
     }
 
@@ -112,9 +117,6 @@ public class Member extends Person{
     public Enum getMembershipStatus(){
         return membershipStatus;
     }
-
-
-
 
       // toString metode der gør at teksten bliver príntet rigtigt ud
     @Override

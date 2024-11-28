@@ -1,17 +1,27 @@
+import DataSource.Controller;
 import DomainModel.Member;
 
-import DomainModel.Person;
+import DomainModel.*;
 import ENUMS.MembershipStatus;
+
 
 import java.time.LocalDate;
 
 import ENUMS.MembershipStatus;
+import UI.UserInterface;
 
 import java.time.LocalDate;
 
 public class Main {
+
     public static void main(String[] args) {
-        Member member1 = new Member("Rikke", "Hansen", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.ACTIVE);
+
+        UserInterface ui = new UserInterface(new MembershipRegistrationService(new Controller()));
+
+        ui.startMenu();
+
+        /*
+        Member member1 = new Member("Rikke", "Hansen", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.PASSIVE);
         Member member2 = new Member("Rikke", "Hansen", LocalDate.of(1930, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.ACTIVE);
         Member member3 = new Member("Rikke", "Hansen", LocalDate.of(2020, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.ACTIVE);
 
@@ -39,5 +49,10 @@ public class Main {
         System.out.println(member1);
         System.out.println(member2);
         System.out.println(member3);
+
+
+
+         */
+
     }
 }
