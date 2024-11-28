@@ -16,6 +16,7 @@ public class UserInterface {
         this.membershipService = membershipService;
         this.scanner = new Scanner(System.in);
     }
+
     // Startmenu der gør brugeren kan komme ind på andre menuer bla administrivemenu osv.
     public void startMenu() {
         boolean menuRunning = true;
@@ -36,6 +37,7 @@ public class UserInterface {
             }
         }
     }
+
     // Administrive menu, with administrive abilities
     public void administrativeMenu() {
         boolean administrativeMenuRunning = true;
@@ -67,6 +69,7 @@ public class UserInterface {
             }
         }
     }
+
     // BookingAndTrainingMenu
     public void bookingAndTrainingMenu() {
         boolean bookingAndTrainingMenuRunning = true;
@@ -83,7 +86,7 @@ public class UserInterface {
             switch (userResponse) {
                 case 1 -> System.out.println("See schedule of the day");
                 case 2 -> System.out.println("Edit schedule as a trainer");
-                case 3 -> System.out.println("Cancellation of training or booking");
+                case 3 -> System.out.println("Cancelation of training or booking");
                 case 4 -> bookingAndTrainingMenuRunning = false;
                 default -> System.out.println("Invalid option. Please try again.");
             }
@@ -102,7 +105,11 @@ public class UserInterface {
             scanner.nextLine(); // Consume newline
 
             switch (userResponse) {
-                case 1 -> System.out.println("See membership details");
+                case 1 -> {
+                    System.out.println("Write your member id");
+                    String userMemberID = scanner.nextLine();
+                    showMemberInfo(userMemberID);
+                }
                 case 2 -> System.out.println("Edit membership details and status");
                 case 3 -> membershipMenuRunning = false;
                 default -> System.out.println("Invalid option. Please try again.");
@@ -130,6 +137,7 @@ public class UserInterface {
             }
         }
     }
+
     // Method to show all members,
     private void displayAllMembers() {
         List<Person> members = membershipService.getAllMembers();
@@ -204,7 +212,7 @@ public class UserInterface {
                 swimmer.getTeam().getTeamName());
     }
 
-    private void printMemberInfo(Member member) {
+    private Member printMemberInfo(Member member) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s%n",
                 member.getMemberID(),
                 member.getFirstName(),
@@ -212,32 +220,33 @@ public class UserInterface {
                 member.calculateAge(),
                 member.getMembershipStatus(),
                 "No Team");
+        return member;
     }
 
-    private void removeMember(String memberID){
+    private void removeMember(String memberID) {
 
         System.out.println("enter the a membersID to remove the member");
 
         List<Person> members = membershipService.getAllMembers();
         Member toRemove = null;
 
-        for(Person person : members){
-            if(person instanceof Member && ((Member) person).getMemberID().equals(memberID)){
+        for (Person person : members) {
+            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {
                 toRemove = (Member) person;
                 break;
             }
         }
-        if (toRemove != null && members.remove(toRemove)){
+        if (toRemove != null && members.remove(toRemove)) {
+            members.remove(memberID);
             System.out.println("Member removed successfully: " + toRemove.getFirstName() + " " + toRemove.getLastName());
-        }
-        else {
+        } else {
             System.out.println("Member does not exist");
         }
 
     }
 
 
-    private void addNewMember(){
+    private void addNewMember() {
         System.out.println("------------------------");
         System.out.println("\nEnter first name: ");
         String firstName = scanner.nextLine();
@@ -281,4 +290,45 @@ public class UserInterface {
         System.out.println("\nPress Enter to continue...");
         scanner.nextLine();
     }
+
+    public Member showMemberInfo(String memberID) {
+        List<Person> Members = membershipService.getAllMembers();
+        Member toSearch = null;
+        for (Person person : Members){
+            if(person instanceof Member && ((Member)person).getMemberID().equals(memberID));{
+                toSearch = (Member) person;
+                break;
+            }
+        }
+        if(toSearch != null){
+            System.out.println(printMemberInfo(toSearch));
+        }
+        else {
+            System.out.println("Member does not exist");
+        }
+        return null;
+    }
+
+  /*  private void removeMember(String memberID) {
+
+        System.out.println("enter the a membersID to remove the member");
+
+        List<Person> members = membershipService.getAllMembers();
+        Member toRemove = null;
+
+        for (Person person : members) {
+            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {
+                toRemove = (Member) person;
+                break;
+            }
+        }
+        if (toRemove != null && members.remove(toRemove)) {
+            members.remove(memberID);
+            System.out.println("Member removed successfully: " + toRemove.getFirstName() + " " + toRemove.getLastName());
+        } else {
+            System.out.println("Member does not exist");
+        }
+
+    } */
+
 }

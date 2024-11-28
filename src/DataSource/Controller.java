@@ -19,4 +19,8 @@ public class Controller {
     public void addPerson(Person person){
         persons.add(person);
     }
+
+    public void removePerson(Person person){
+        persons.add(person);
+    }
 }

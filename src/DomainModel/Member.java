@@ -85,8 +85,8 @@ public class Member extends Person{
         isInArrears = inArrears;
     }
 
-    public void addMember(Member members){
-        membersList.add(members);
+    public void addMember(){
+        membersList.add(this);
     }
 
     public void removeMembers(Member members){
@@ -117,6 +117,9 @@ public class Member extends Person{
     public Enum getMembershipStatus(){
         return membershipStatus;
     }
+
+
+
 
       // toString metode der gør at teksten bliver príntet rigtigt ud
     @Override
