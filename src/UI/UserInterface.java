@@ -131,8 +131,8 @@ public class UserInterface {
         for (Person person : members) {
             if (person instanceof CompetitiveSwimmer) {
                 printSwimmerInfo((CompetitiveSwimmer) person);
-            } else if (person instanceof Members) {
-                printMemberInfo((Members) person);
+            } else if (person instanceof Member) {
+                printMemberInfo((Member) person);
             }
         }
         System.out.println("Total Members: " + members.size());
@@ -194,7 +194,7 @@ public class UserInterface {
                 swimmer.getTeam().getTeamName());
     }
 
-    private void printMemberInfo(Members member) {
+    private void printMemberInfo(Member member) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s%n",
                 member.getMemberId(),
                 member.getFirstName(),
