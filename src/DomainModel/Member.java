@@ -1,7 +1,7 @@
 package DomainModel;
 
 import ENUMS.MembershipStatus;
-
+import ENUMS.SwimmerType;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
@@ -12,17 +12,19 @@ public class Member extends Person{
     ArrayList<Member> membersList = new ArrayList<>();
     private double membershipFee;
     private boolean isInArrears;
+    private SwimmerType swimmerType;
 
 
     public Member(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address, String memberID, MembershipStatus membershipStatus) {
         super(firstName, lastName, dateOfBirth, email, phoneNumber, address);
         this.memberID = memberID;
         this.membershipStatus = membershipStatus;
+        setSwimmerType(SwimmerType.CASUAL);
         this.membershipFee = calculateMembershipFee(calculateAge());
         this.isInArrears = false;
     }
 
-    private String generateMemberIDWithRandom(String firstName, String lastName) {
+    private String generateMemberIDRandom(String firstName, String lastName) {
         Random random = new Random();
 
         String firstInitials;
@@ -45,7 +47,7 @@ public class Member extends Person{
     }
 
 
-    // Bruges til at udregne rabatter, hvis medlemmer feks er over 60 år gammel eller under 18.
+    // Bruges til at udregne rabatter, hvis medlemmer fx er over 60 år gammel eller under 18.
            // isPassive er hvis deres medlemskab er passiv, der for koster det 500
     public double calculateMembershipFee(int age){
 
@@ -103,6 +105,15 @@ public class Member extends Person{
 
     public void setMembershipStatus(MembershipStatus membershipStatus) {
         this.membershipStatus = membershipStatus;
+    }
+
+    public void setSwimmerType(SwimmerType swimmerType) {
+        this.swimmerType = swimmerType;
+    }
+
+    // Add this getter method
+    public SwimmerType getSwimmerType() {
+        return swimmerType;
     }
 
     //Methods to change current membership status of member

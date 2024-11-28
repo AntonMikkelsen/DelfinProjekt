@@ -256,13 +256,27 @@ public class UserInterface {
         String lastName = scanner.nextLine();
         System.out.println("Last name: " + lastName);
 
+        LocalDate dob = null;
+        while (dob == null) {
         System.out.println("\nEnter date of birth (YYYY-MM-DD): ");
-        LocalDate dob = LocalDate.parse(scanner.nextLine());
-        System.out.println("Date of birth: " + dob);
+            try {
+                dob = LocalDate.parse(scanner.nextLine());
+                System.out.println("Date of birth: " + dob);
+            } catch (Exception e) {
+                System.out.println("An error has occured: " + e.getMessage() +  " - Please try again");
+            }
+        }
 
-        System.out.println("\nEnter email: ");
-        String email = scanner.nextLine();
-        System.out.println("Email: " + email);
+            System.out.println("\nEnter email: ");
+            String email = scanner.nextLine();
+            while (!email.contains("@") && !email.contains(".")){
+                if (email.contains("@")) {
+                    System.out.println("Email: " + email);
+                } else {
+                    System.out.println("Please enter a valid email");
+                    email = scanner.nextLine();
+                }
+            }
 
         System.out.println("\nEnter phone number: ");
         String phone = scanner.nextLine();
@@ -272,9 +286,17 @@ public class UserInterface {
         String address = scanner.nextLine();
         System.out.println("address: " + address);
 
-        System.out.println("\nEnter membership status *Enter Passive/Active*: ");
-        MembershipStatus status = MembershipStatus.valueOf(scanner.nextLine().toUpperCase());
-        System.out.println("membership stauts: " + status);
+        MembershipStatus status = null;
+        while(status == null){
+            try {
+                System.out.println("\nEnter membership status *Enter Passive/Active*: ");
+                status = MembershipStatus.valueOf(scanner.nextLine().toUpperCase());
+                System.out.println("membership stauts: " + status);
+            } catch (IllegalArgumentException e){
+                System.out.println("An error has occured: " + e.getMessage() + " - Please try again");
+            }
+        }
+
 
 
         String memberId = "ID" + (membershipService.getAllMembers().size() + 1);
