@@ -7,114 +7,117 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
-    Scanner scan = new Scanner(System.in);
-
-    public void startMenu() {
-        grettingsMSG();
-        int userResponse = scan.nextInt();
-        boolean menuRunning = true;
-        while (menuRunning) {
-            switch (userResponse) {
-                case 1 -> {
-                    adminstriveMenu();
-
-                }
-                case 2 -> {
-                    bookingAndTrainingMenu();
-                }
-                case 3 -> {
-                    membershipMenu();
-                }
-            }
-        }
-    }
-
-    public void adminstriveMenu() {
-        boolean administriveMenuRunning = true;
-        while (administriveMenuRunning) {
-            int userResponse = scan.nextInt();
-            switch (userResponse) {
-                case 1 -> System.out.println("Add or remove members from existing teams");
-                case 2 -> System.out.println("Edit info on members");
-                case 3 -> {
-                    System.out.println("Exit menu");
-                    administriveMenuRunning = false;
-                }
-
-            }
-        }
-    }
-
-    public void bookingAndTrainingMenu() {
-        boolean bookingAndTrainingMenu = true;
-        while (bookingAndTrainingMenu) {
-            int userResponse = scan.nextInt();
-            switch (userResponse) {
-                case 1 -> System.out.println("See schedule of the day");
-                case 2 -> System.out.println("Edit schedule as a trainer");
-                case 3 -> System.out.println("Cancelation of training or booking");
-                case 4 -> {
-                    System.out.println("Exit bookingAndTrainingMenu");
-                    bookingAndTrainingMenu = false;
-                }
-
-            }
-        }
-    }
-
-    public void membershipMenu() {
-        boolean membershipMenu = true;
-        while (membershipMenu) {
-            int userResponse = scan.nextInt();
-            switch (userResponse) {
-                case 1 -> System.out.println("See membership details");
-                case 2 -> System.out.println("Edit membership details and status");
-                case 3 -> {
-                    System.out.println("Exit menu");
-                    membershipMenu = false;
-                }
-            }
-        }
-    }
-
-    public void grettingsMSG() {
-        System.out.println("Welcome To Your Own Swimming Park System");
-        System.out.println("Press 1 for administrive data");
-        System.out.println("Press 2 for data involving booking and training");
-        System.out.println("Press 3 to watch and edit membership");
-    }
-}
     private Scanner scanner;
     private MembershipRegistrationService membershipService;
 
     public UserInterface(MembershipRegistrationService membershipService) {
         this.membershipService = membershipService;
+        this.scanner = new Scanner(System.in);
+    }
+
+    public void startMenu() {
+        boolean menuRunning = true;
+        while (menuRunning) {
+            greetingsMSG();
+            int userResponse = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (userResponse) {
+                case 1 -> administrativeMenu();
+                case 2 -> bookingAndTrainingMenu();
+                case 3 -> membershipMenu();
+                case 4 -> {
+                    System.out.println("Exiting program...");
+                    menuRunning = false;
+                }
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    public void administrativeMenu() {
+        boolean administrativeMenuRunning = true;
+        while (administrativeMenuRunning) {
+            System.out.println("\n=== Administrative Menu ===");
+            System.out.println("1. Add or remove members from existing teams");
+            System.out.println("2. Edit info on members");
+            System.out.println("3. Show member overview");
+            System.out.println("4. Exit menu");
+
+            int userResponse = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (userResponse) {
+                case 1 -> System.out.println("Add or remove members from existing teams");
+                case 2 -> System.out.println("Edit info on members");
+                case 3 -> showMemberOverviewMenu();
+                case 4 -> administrativeMenuRunning = false;
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    public void bookingAndTrainingMenu() {
+        boolean bookingAndTrainingMenuRunning = true;
+        while (bookingAndTrainingMenuRunning) {
+            System.out.println("\n=== Booking and Training Menu ===");
+            System.out.println("1. See schedule of the day");
+            System.out.println("2. Edit schedule as a trainer");
+            System.out.println("3. Cancelation of training or booking");
+            System.out.println("4. Exit menu");
+
+            int userResponse = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (userResponse) {
+                case 1 -> System.out.println("See schedule of the day");
+                case 2 -> System.out.println("Edit schedule as a trainer");
+                case 3 -> System.out.println("Cancelation of training or booking");
+                case 4 -> bookingAndTrainingMenuRunning = false;
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
+
+    public void membershipMenu() {
+        boolean membershipMenuRunning = true;
+        while (membershipMenuRunning) {
+            System.out.println("\n=== Membership Menu ===");
+            System.out.println("1. See membership details");
+            System.out.println("2. Edit membership details and status");
+            System.out.println("3. Exit menu");
+
+            int userResponse = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (userResponse) {
+                case 1 -> System.out.println("See membership details");
+                case 2 -> System.out.println("Edit membership details and status");
+                case 3 -> membershipMenuRunning = false;
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        }
     }
 
     private void showMemberOverviewMenu() {
-        System.out.println("===MEMBER OVERVIEW===");
-        System.out.println("1. View all members");
-        System.out.println("2. View team members");
-        System.out.println("0. back to main menu");
-        System.out.print("Enter your choice");
+        boolean overviewMenuRunning = true;
+        while (overviewMenuRunning) {
+            System.out.println("\n=== Member Overview ===");
+            System.out.println("1. View all members");
+            System.out.println("2. View team members");
+            System.out.println("0. Back to main menu");
+            System.out.print("Enter your choice: ");
 
-        int choice = scanner.nextInt();
-        scanner.nextLine();
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-        switch (choice) {
-            case 1:
-                displayAllMembers();
-                break;
-            case 2:
-                displayAllTeamMembers();
-                break;
-            case 0:
-                break;
-            default:
-                System.out.println("invalid Choice lease try again");
-
+            switch (choice) {
+                case 1 -> displayAllMembers();
+                case 2 -> displayAllTeamMembers();
+                case 0 -> overviewMenuRunning = false;
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
         }
-
     }
 
     private void displayAllMembers() {
@@ -124,9 +127,8 @@ public class UserInterface {
 
         for (Person person : members) {
             if (person instanceof CompetitiveSwimmer) {
-                CompetitiveSwimmer swimmer = (CompetitiveSwimmer) person;
-                printSwimmerInfo(swimmer);
-            } else {
+                printSwimmerInfo((CompetitiveSwimmer) person);
+            } else if (person instanceof Members) {
                 printMemberInfo((Members) person);
             }
         }
@@ -140,33 +142,39 @@ public class UserInterface {
         System.out.print("Select team: ");
 
         int choice = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine(); // Consume newline
 
-        Team selectedTeam;
-        switch (choice) {
-            case 1:
-                selectedTeam = new Team("Junior Team", AgeCategory.JUNIOR);
-                break;
-            case 2:
-                selectedTeam = new Team("Senior Team", AgeCategory.SENIOR);
-                break;
-            default:
+        Team selectedTeam = switch (choice) {
+            case 1 -> new Team("Junior Team", AgeCategory.JUNIOR);
+            case 2 -> new Team("Senior Team", AgeCategory.SENIOR);
+            default -> {
                 System.out.println("Invalid team selection");
-                return;
-        }
-        List<CompetitiveSwimmer> teamMembers = membershipService.getTeamMembers(selectedTeam);
-        System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
-        printHeaderLine();
+                yield null;
+            }
+        };
 
-        for (CompetitiveSwimmer swimmer : teamMembers) {
-            printSwimmerInfo(swimmer);
+        if (selectedTeam != null) {
+            List<CompetitiveSwimmer> teamMembers = membershipService.getTeamMembers(selectedTeam);
+            System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
+            printHeaderLine();
+
+            for (CompetitiveSwimmer swimmer : teamMembers) {
+                printSwimmerInfo(swimmer);
+            }
+            System.out.println("Total Team Members: " + teamMembers.size());
         }
-        System.out.println("Total Team Members: " + teamMembers.size());
         waitForEnter();
     }
 
+    private void greetingsMSG() {
+        System.out.println("\n=== Welcome To Your Swimming Park System ===");
+        System.out.println("1. Administrative data");
+        System.out.println("2. Booking and training");
+        System.out.println("3. Membership management");
+        System.out.println("4. Exit");
+        System.out.print("Enter your choice: ");
+    }
 
-    //Helping methods
     private void printHeaderLine() {
         System.out.printf("%-10s %-15s %-15s %-5s %-10s %-15s%n",
                 "ID", "First Name", "Last Name", "Age", "Status", "Team");
@@ -198,5 +206,3 @@ public class UserInterface {
         scanner.nextLine();
     }
 }
-
-
