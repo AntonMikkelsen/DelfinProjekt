@@ -8,9 +8,9 @@ import java.util.ArrayList;
 public class Members extends Person{
     ArrayList<Members> membersList = new ArrayList<>();
     private boolean isActive;
-private boolean isPassive;
-private double membershipFee;
-private boolean isInArrears;
+    private boolean isPassive;
+    private double membershipFee;
+    private boolean isInArrears;
 
     public Members(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address, String memberId, MembershipStatus membershipStatus, boolean isActive, boolean isPassive) {
         super(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberId, membershipStatus);
