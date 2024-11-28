@@ -1,5 +1,7 @@
 package DomainModel;
 
+import ENUMS.AgeCategory;
+
 import java.util.ArrayList;
 
 public class Team {
@@ -12,6 +14,7 @@ public class Team {
         this.teamName = teamName;
         this.ageCategory = ageCategory;
     }
+
 
     public void addToTeam(Person person) {
         if (isJunior(person)) {
