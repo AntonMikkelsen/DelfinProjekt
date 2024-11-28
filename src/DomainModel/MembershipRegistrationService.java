@@ -16,6 +16,11 @@ public class MembershipRegistrationService {
         return controller.getAllPersons();
     }
 
+    public void addMember(Member member) {
+        controller.addPerson(member); // Sørg for, at Controller har denne metode
+    }
+
+
     public List<CompetitiveSwimmer> getTeamMembers(Team team) {
         List<Person> allPersons = controller.getAllPersons();
         List<CompetitiveSwimmer> teamMembers = new ArrayList<>();

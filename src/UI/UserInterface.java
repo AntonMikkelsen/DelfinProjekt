@@ -51,7 +51,10 @@ public class UserInterface {
             scanner.nextLine(); // Consume newline
 
             switch (userResponse) {
-                case 1 -> System.out.println("Add or remove members from existing teams");
+                case 1 -> {
+                    System.out.println("Add or remove members from existing teams");
+                    addNewMember();
+                }
                 case 2 -> System.out.println("Edit info on members");
                 case 3 -> showMemberOverviewMenu();
                 case 4 -> administrativeMenuRunning = false;
@@ -239,10 +242,10 @@ public class UserInterface {
 
         String memberId = "ID" + (membershipService.getAllMembers().size() + 1);
 
-        Members newMember = new Members(firstName, lastName, dob, email, phone, address, memberId, status);
+        Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
         membershipService.addMember(newMember);
 
-
+        System.out.println("Member added successfully: " + newMember.getFirstName() + " " + newMember.getLastName());
 
     }
 

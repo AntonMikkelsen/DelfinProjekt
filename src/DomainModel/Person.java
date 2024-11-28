@@ -74,7 +74,6 @@ public abstract class Person {
         this.address = address;
     }
 
-
     //Methods to change current membership status of member
 
 
