@@ -42,22 +42,28 @@ public class UserInterface {
         boolean administrativeMenuRunning = true;
         while (administrativeMenuRunning) {
             System.out.println("\n=== Administrative Menu ===");
-            System.out.println("1. Add or remove members from existing teams");
-            System.out.println("2. Edit info on members");
-            System.out.println("3. Show member overview");
-            System.out.println("4. Exit menu");
+            System.out.println("1. Add members from existing teams");
+            System.out.println("2. Remove existing members");
+            System.out.println("3. Edit info on members");
+            System.out.println("4. Show member overview");
+            System.out.println("5. Exit menu");
 
             int userResponse = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
             switch (userResponse) {
                 case 1 -> {
-                    System.out.println("Add or remove members from existing teams");
+                    System.out.println("Add members from existing teams");
                     addNewMember();
                 }
-                case 2 -> System.out.println("Edit info on members");
-                case 3 -> showMemberOverviewMenu();
-                case 4 -> administrativeMenuRunning = false;
+                case 2 -> {
+                    System.out.println("Remove existing members");
+                    String memberId = scanner.nextLine(); // Indhent ID fra brugeren
+                    removeMember(memberId); // Kald metoden til at fjerne medlemmet
+                }
+                case 3 -> System.out.println("Edit info on members");
+                case 4 -> showMemberOverviewMenu();
+                case 5 -> administrativeMenuRunning = false;
                 default -> System.out.println("Invalid option. Please try again.");
             }
         }
@@ -78,7 +84,7 @@ public class UserInterface {
             switch (userResponse) {
                 case 1 -> System.out.println("See schedule of the day");
                 case 2 -> System.out.println("Edit schedule as a trainer");
-                case 3 -> System.out.println("Cancelation of training or booking");
+                case 3 -> System.out.println("Cancellation of training or booking");
                 case 4 -> bookingAndTrainingMenuRunning = false;
                 default -> System.out.println("Invalid option. Please try again.");
             }
@@ -208,6 +214,29 @@ public class UserInterface {
                 member.getMembershipStatus(),
                 "No Team");
     }
+
+    private void removeMember(String memberID){
+
+        System.out.println("enter the a membersID to remove the member");
+
+        List<Person> members = membershipService.getAllMembers();
+        Member toRemove = null;
+
+        for(Person person : members){
+            if(person instanceof Member && ((Member) person).getMemberID().equals(memberID)){
+                toRemove = (Member) person;
+                break;
+            }
+        }
+        if (toRemove != null && members.remove(toRemove)){
+            System.out.println("Member removed successfully: " + toRemove.getFirstName() + " " + toRemove.getLastName());
+        }
+        else {
+            System.out.println("Member does not exist");
+        }
+
+    }
+
 
     private void addNewMember(){
         System.out.println("------------------------");
