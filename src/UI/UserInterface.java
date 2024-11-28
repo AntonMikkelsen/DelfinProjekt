@@ -183,7 +183,7 @@ public class UserInterface {
 
     private void printSwimmerInfo(CompetitiveSwimmer swimmer) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s%n",
-                swimmer.getMemberId(),
+                swimmer.getMemberID(),
                 swimmer.getFirstName(),
                 swimmer.getLastName(),
                 swimmer.getDateOfBirth(),
@@ -193,7 +193,7 @@ public class UserInterface {
 
     private void printMemberInfo(Member member) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s%n",
-                member.getMemberId(),
+                member.getMemberID(),
                 member.getFirstName(),
                 member.getLastName(),
                 member.getDateOfBirth(),

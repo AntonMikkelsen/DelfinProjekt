@@ -40,7 +40,7 @@ public class FileHandler {
                     boolean isPassive = Boolean.parseBoolean(data[8].trim());
 
                     Member members = new Member(firstName, lastName, dateOfBirth,
-                            memberEmail, phoneNumber, address, memberId, memberShipStatus,isActive,isPassive);
+                            memberEmail, phoneNumber, address, memberId, memberShipStatus);
 
                     membersArrayList.add(members);
                 } else {
