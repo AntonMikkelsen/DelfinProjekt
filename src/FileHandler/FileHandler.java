@@ -1,6 +1,6 @@
 package FileHandler;
+import DomainModel.Member;
 import ENUMS.MembershipStatus;
-
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class FileHandler {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(", ");
-                if (data.length == 8) {
+                if (data.length == 10) {
                     String firstName = data[0].trim();
                     String lastName = data[1].trim();
                     String memberId = data[2].trim();
@@ -36,9 +36,11 @@ public class FileHandler {
                     String address = data[5].trim();
                     String memberEmail = data[6].trim();
                     LocalDate dateOfBirth = LocalDate.parse((data[7].trim()));
+                    boolean isActive = Boolean.parseBoolean(data[7].trim());
+                    boolean isPassive = Boolean.parseBoolean(data[8].trim());
 
                     Member members = new Member(firstName, lastName, dateOfBirth,
-                            memberEmail, phoneNumber, address, memberId, memberShipStatus);
+                            memberEmail, phoneNumber, address, memberId, memberShipStatus,isActive,isPassive);
 
                     membersArrayList.add(members);
                 } else {
