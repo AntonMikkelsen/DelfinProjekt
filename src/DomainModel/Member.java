@@ -4,6 +4,7 @@ import ENUMS.MembershipStatus;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Member extends Person{
     private String memberID;
@@ -18,6 +19,28 @@ public class Member extends Person{
         this.membershipStatus = membershipStatus;
         this.membershipFee = calculateMembershipFee(calculateAge());
         this.isInArrears = false;
+    }
+
+    private String generateMemberIDWithRandom(String firstName, String lastName) {
+        Random random = new Random();
+
+        String firstInitials;
+        if (firstName.length() >= 2) {
+            firstInitials = firstName.substring(0, 2).toUpperCase();
+        } else {
+            firstInitials = firstName.substring(0, 1).toUpperCase();
+        }
+
+        String lastInitials;
+        if (lastName.length() >= 2) {
+            lastInitials = lastName.substring(0, 2).toUpperCase();
+        } else {
+            lastInitials = lastName.substring(0, 1).toUpperCase();
+        }
+
+        int randomNum = random.nextInt(8999) + 1000;
+
+        return firstInitials + lastInitials + randomNum;
     }
 
 

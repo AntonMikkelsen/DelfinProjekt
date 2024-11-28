@@ -1,9 +1,7 @@
 package UI;
 
 import DomainModel.*;
-import ENUMS.AgeCategory;
-
-import java.util.List;
+import ENUMS.AgeCategory;import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
