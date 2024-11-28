@@ -200,7 +200,7 @@ public class UserInterface {
                 swimmer.getMemberID(),
                 swimmer.getFirstName(),
                 swimmer.getLastName(),
-                swimmer.getDateOfBirth(),
+                swimmer.calculateAge(),
                 swimmer.getMembershipStatus(),
                 swimmer.getTeam().getTeamName());
     }
@@ -210,7 +210,7 @@ public class UserInterface {
                 member.getMemberID(),
                 member.getFirstName(),
                 member.getLastName(),
-                member.getDateOfBirth(),
+                member.calculateAge(),
                 member.getMembershipStatus(),
                 "No Team");
     }
@@ -264,7 +264,7 @@ public class UserInterface {
         String address = scanner.nextLine();
         System.out.println("address: " + address);
 
-        System.out.println("\nEnter membership status: ");
+        System.out.println("\nEnter membership status *Enter Passive/Active*: ");
         MembershipStatus status = MembershipStatus.valueOf(scanner.nextLine().toUpperCase());
         System.out.println("membership stauts: " + status);
 

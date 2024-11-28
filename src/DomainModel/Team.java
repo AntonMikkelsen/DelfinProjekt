@@ -7,8 +7,12 @@ import java.util.ArrayList;
 public class Team {
     private String teamName;
     private AgeCategory ageCategory;
-    private ArrayList<Person> Juniorhold = new ArrayList<>();
-    private ArrayList<Person> Seniorhold = new ArrayList<>();
+    private ArrayList<Person> juniorTeam = new ArrayList<>();
+    private ArrayList<Person> seniorTeam = new ArrayList<>();
+    private ArrayList<Person> casualSwimmers = new ArrayList<>();
+    private ArrayList<Person> competitiveSwimmers = new ArrayList<>();
+    private ArrayList<Person> allSwimmers = new ArrayList<>();
+
 
     public Team(String teamName, AgeCategory ageCategory) {
         this.teamName = teamName;
@@ -18,10 +22,10 @@ public class Team {
 
     public void addToTeam(Person person) {
         if (isJunior(person)) {
-            Juniorhold.add(person);
+            juniorTeam.add(person);
             System.out.println(person + "has been added to the Junior Team");
         } else {
-            Seniorhold.add(person);
+            seniorTeam.add(person);
             System.out.println(person + "has been added to the Senior Team");
         }
     }
@@ -33,4 +37,13 @@ public class Team {
     public String getTeamName() {
         return teamName;
     }
+
+
+    /*
+    public void addToTeam(Person person){
+        if(person.calculateAge() < 18){
+            juniorTeam.add(person);
+        }
+    }
+     */
 }
