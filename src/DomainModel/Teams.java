@@ -9,11 +9,11 @@ public class Teams {
     public void addToTeam(Person person){
         if (isJunior(person)) {
             Juniorhold.add(person);
-            System.out.println(person + "has been added to the Junior Team");
+            System.out.println(person.getFirstName() + "has been added to the Junior Team");
         }
         else {
             Seniorhold.add(person);
-            System.out.println(person + "has been added to the Senior Team");
+            System.out.println(person.getFirstName() + "has been added to the Senior Team");
         }
     }
 

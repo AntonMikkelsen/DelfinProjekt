@@ -10,7 +10,7 @@ public class Main {
             Member member = new Member(
                     "Hussain",
                     "Ali",
-                    LocalDate.of(1995, 5, 15),
+                    LocalDate.of(2000, 12, 7),
                     "hussain.ali@example.com",
                     "12345678",
                     "Main Street 123",
@@ -23,6 +23,7 @@ public class Main {
             System.out.println(member.getMembershipStatus());
             System.out.println(member.getFirstName());
             System.out.println(member.getDateOfBirth());
+            System.out.println(member.calculateAge());
 
 
     }
