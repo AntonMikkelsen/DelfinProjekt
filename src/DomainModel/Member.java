@@ -65,6 +65,10 @@ public class Member extends Person{
         membersList.add(members);
     }
 
+    public void removeMembers(Member members){
+        membersList.remove(members);
+    }
+
     public void setMemberId(String memberId) {
         this.memberID = memberID;
     }
