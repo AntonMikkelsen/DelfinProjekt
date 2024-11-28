@@ -20,6 +20,10 @@ public class MembershipRegistrationService {
         controller.addPerson(member); // Sørg for, at Controller har denne metode
     }
 
+    public void removeMembers(Member members){
+        controller.removePerson(members);
+    }
+
 
     public List<CompetitiveSwimmer> getTeamMembers(Team team) {
         List<Person> allPersons = controller.getAllPersons();
