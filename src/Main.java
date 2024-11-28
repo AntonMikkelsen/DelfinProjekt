@@ -4,11 +4,36 @@ import ENUMS.MembershipStatus;
 
 import java.time.LocalDate;
 
+import DomainModel.Member;
+import ENUMS.MembershipStatus;
+
+import java.time.LocalDate;
+
 public class Main {
     public static void main(String[] args) {
         Members member1 = new Members("Rikke", "Hansen", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.ACTIVE, true, false);
         Members member2 = new Members("Rikke", "Hansen", LocalDate.of(1930, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.ACTIVE, true, false);
         Members member3 = new Members("Rikke", "Hansen", LocalDate.of(2020, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.ACTIVE, true, false);
+
+        //Test til member / ændring af medlemskabsaktivitet osv.
+            Member member = new Member(
+                    "Hussain",
+                    "Ali",
+                    LocalDate.of(2000, 12, 7),
+                    "hussain.ali@example.com",
+                    "12345678",
+                    "Main Street 123",
+                    "M123",
+                    MembershipStatus.ACTIVE);
+
+            System.out.println(member.getMemberId());
+            System.out.println(member.getMembershipStatus());
+            member.changeMembershipToPassive();
+            System.out.println(member.getMembershipStatus());
+            System.out.println(member.getFirstName());
+            System.out.println(member.getDateOfBirth());
+            System.out.println(member.calculateAge());
+
 
         System.out.println(member1);
         System.out.println(member2);

@@ -75,4 +75,6 @@ private boolean isInArrears;
                 ", Membership Fee: " + membershipFee + ", In Arrears: " + isInArrears;
     }
 
+
+
 }
