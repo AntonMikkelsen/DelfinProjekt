@@ -73,7 +73,7 @@ private boolean isInArrears;
     }
       // toString metode der gør at teksten bliver príntet rigtigt ud
     public String toString(){
-        return super.toString() + ", Active: " + isActive() + ", Passive: " + isPassive +
+        return super.toString() + "MembershipStatus" + getMembershipStatus() +
                 ", Membership Fee: " + membershipFee + ", In Arrears: " + isInArrears;
     }
 

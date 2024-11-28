@@ -14,7 +14,7 @@ public class UserInterface {
         this.membershipService = membershipService;
         this.scanner = new Scanner(System.in);
     }
-
+    // Startmenu der gør brugeren kan komme ind på andre menuer bla administrivemenu osv.
     public void startMenu() {
         boolean menuRunning = true;
         while (menuRunning) {
@@ -34,7 +34,7 @@ public class UserInterface {
             }
         }
     }
-
+    // Administrive menu, with administrive abilities
     public void administrativeMenu() {
         boolean administrativeMenuRunning = true;
         while (administrativeMenuRunning) {
@@ -56,7 +56,7 @@ public class UserInterface {
             }
         }
     }
-
+    // BookingAndTrainingMenu
     public void bookingAndTrainingMenu() {
         boolean bookingAndTrainingMenuRunning = true;
         while (bookingAndTrainingMenuRunning) {
@@ -119,7 +119,7 @@ public class UserInterface {
             }
         }
     }
-
+    // Method to show all members,
     private void displayAllMembers() {
         List<Person> members = membershipService.getAllMembers();
         System.out.println("\n=== All Members Overview ===");
@@ -166,6 +166,7 @@ public class UserInterface {
         waitForEnter();
     }
 
+    // Method to greet the user, and save sout's.
     private void greetingsMSG() {
         System.out.println("\n=== Welcome To Your Swimming Park System ===");
         System.out.println("1. Administrative data");
@@ -175,6 +176,7 @@ public class UserInterface {
         System.out.print("Enter your choice: ");
     }
 
+    //
     private void printHeaderLine() {
         System.out.printf("%-10s %-15s %-15s %-5s %-10s %-15s%n",
                 "ID", "First Name", "Last Name", "Age", "Status", "Team");
