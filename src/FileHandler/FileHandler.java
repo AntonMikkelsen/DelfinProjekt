@@ -10,7 +10,7 @@ public class FileHandler {
     public void saveMembersToFile (ArrayList<Member> membersArrayList, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))){
             for (Member members : membersArrayList){
-                writer.write(members.getFirstName() + ", " + members.getLastName() + ", " + members.getMemberId() + ", "
+                writer.write(members.getFirstName() + ", " + members.getLastName() + ", " + members.getMemberID() + ", "
                         + members.getMembershipStatus() + ", " + members.getPhoneNumber() + ", " + members.getEmail()
                         + ", " + members.getDateOfBirth());
                 writer.newLine();
