@@ -2,26 +2,32 @@ package DomainModel;
 
 import java.util.ArrayList;
 
-public class Teams {
+public class Team {
+    private String teamName;
+    private AgeCategory ageCategory;
     private ArrayList<Person> Juniorhold = new ArrayList<>();
     private ArrayList<Person> Seniorhold = new ArrayList<>();
 
-    public void addToTeam(Person person){
+    public Team(String teamName, AgeCategory ageCategory) {
+        this.teamName = teamName;
+        this.ageCategory = ageCategory;
+    }
+
+    public void addToTeam(Person person) {
         if (isJunior(person)) {
             Juniorhold.add(person);
             System.out.println(person + "has been added to the Junior Team");
-        }
-        else {
+        } else {
             Seniorhold.add(person);
             System.out.println(person + "has been added to the Senior Team");
         }
     }
 
-    public Boolean isJunior(Person person){
-        return person.calculateAge() < 18;
+    public Boolean isJunior(Person person) {
+        return Integer.valueOf(person.getDateOfBirth()) < 18;
     }
 
-
-
-
+    public String getTeamName() {
+        return teamName;
+    }
 }
