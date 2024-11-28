@@ -29,7 +29,7 @@ public class CompetitiveSwimmer extends Member {
     }
 
 
-    private void setSwimmerType(SwimmerType swimmerType) {
+    public void setSwimmerType(SwimmerType swimmerType) {
         this.swimmerType = swimmerType;
     }
 
