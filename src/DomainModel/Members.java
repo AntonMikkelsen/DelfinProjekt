@@ -82,7 +82,7 @@ public class Members extends Person{
     }
       // toString metode der gør at teksten bliver príntet rigtigt ud
     public String toString(){
-        return super.toString() + ", Active: " + isActive() + ", Passive: " + isPassive +
+        return super.toString() + ", Membership Status: " + getMembershipStatus() +
                 ", Membership Fee: " + membershipFee + ", In Arrears: " + isInArrears;
     }
 
