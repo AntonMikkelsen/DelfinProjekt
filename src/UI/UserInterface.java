@@ -233,9 +233,7 @@ public class UserInterface {
         else {
             System.out.println("Member does not exist");
         }
-
     }
-
 
     private void addNewMember(){
         System.out.println("------------------------");
