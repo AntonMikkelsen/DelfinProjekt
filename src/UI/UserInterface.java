@@ -1,5 +1,5 @@
 package UI;
-
+import DataSource.Controller;
 import DomainModel.*;
 import ENUMS.AgeCategory;
 import ENUMS.MembershipStatus;
@@ -7,10 +7,12 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.SocketHandler;
+import java.util.InputMismatchException;
 
 public class UserInterface {
     private Scanner scanner;
     private MembershipRegistrationService membershipService;
+    Controller controller = new Controller();
 
     public UserInterface(MembershipRegistrationService membershipService) {
         this.membershipService = membershipService;
@@ -62,7 +64,11 @@ public class UserInterface {
                     String memberId = scanner.nextLine(); // Indhent ID fra brugeren
                     removeMember(memberId); // Kald metoden til at fjerne medlemmet
                 }
-                case 3 -> System.out.println("Edit info on members");
+                case 3 -> {
+                    System.out.println("What is the users member ID");
+                    String  memberID =scanner.nextLine();
+                    administatorEditInfo(memberID);
+                }
                 case 4 -> showMemberOverviewMenu();
                 case 5 -> administrativeMenuRunning = false;
                 default -> System.out.println("Invalid option. Please try again.");
@@ -330,6 +336,92 @@ public class UserInterface {
         }
         return null;
     }
+
+    public Member administatorEditInfo(String memberID) {
+        List<Person> Members = membershipService.getAllMembers();
+        Member toSearch = null;
+        for (Person person : Members) {
+            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;
+            toSearch = (Member) person;
+            break;
+        }
+        if(toSearch != null){
+            System.out.println(toSearch);
+        return toSearch;
+    }
+    return null;
+    }
+
+    private void AdministrativeEditMember() {
+    boolean administrativeEditMemberRunning = true;
+    while(administrativeEditMemberRunning){
+        int userInput = scanner.nextInt();
+        switch(userInput){
+            case 1 -> {
+                System.out.println("Enter new first name");
+                String newFirstName = scanner.nextLine();
+            }
+            case 2 -> {
+                System.out.println("Enter new last name ");
+                String newLastName = scanner.nextLine();
+            }
+            case 3 -> {
+                System.out.println("enter new date of birth ");
+            }
+            case 4 -> {
+                System.out.println("Enter new email (yes/no): ");
+                String newEmail = scanner.nextLine();
+            }
+            case 5 -> {
+                System.out.println("Enter new  phone number ");
+                String newPhonenumber = scanner.nextLine();
+            }
+            case 6 -> {
+                System.out.println("Enter new address");
+                String newAddress = scanner.nextLine();
+            }
+            case 7 -> {
+                System.out.println("Enter new memberID");
+                String newMemberID = scanner.nextLine();
+            }
+            case 8 -> {
+                System.out.println("Change membership status, write either passive or active");
+                MembershipStatus newMembershipStatus;
+                String toSearch = scanner.nextLine();
+                if(toSearch.equalsIgnoreCase("Passive")){
+                  newMembershipStatus = MembershipStatus.PASSIVE;
+                } else {
+                    newMembershipStatus = MembershipStatus.ACTIVE;
+                }
+            }
+            case 9 -> {
+                System.out.println("Change membershipteam, write either Casual or Competetive");
+                String toSearch = scanner.nextLine();
+                if(toSearch.equalsIgnoreCase("Casual")){
+                    controller.addTeamCasualSwimmers();
+                }
+            }
+        }
+    }
+
+        // Redigerer filmen via controlleren
+        boolean success = controller.editMovie(searchTitle, newTitle, newDirector, newYear, newLength, newIsInColor, newGenre);
+        if (success) {
+            System.out.println("Movie updated successfully.");
+        } else {
+            System.out.println("Movie not found.");
+        }
+    }
+
+    private int validateInt(){
+        while(true){
+            try {
+                return scanner.nextInt();        }
+            catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number");
+                scanner.nextLine();        }    }}
+
+
 
   /*  private void removeMember(String memberID) {
 

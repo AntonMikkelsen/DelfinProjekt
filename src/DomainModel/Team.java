@@ -38,6 +38,23 @@ public class Team {
         return teamName;
     }
 
+    public void addtoTeamCasualSwimmers(Person person){
+        casualSwimmers.add(person);
+    }
+
+    public void addtoTeamCompetitiveSwimmers(Person person){
+        competitiveSwimmers.add(person);
+    }
+
+    public void removeTeamCasualSwimmers(Person person){
+        casualSwimmers.remove(person);
+    }
+
+    public void removeTeamCompetetiveSwimmers(Person person){
+        casualSwimmers.remove(person);
+    }
+
+
 
     /*
     public void addToTeam(Person person){
