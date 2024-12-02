@@ -129,6 +129,7 @@ public class UserInterface {
             System.out.println("\n=== Member Overview ===");
             System.out.println("1. View all members");
             System.out.println("2. View team members");
+            System.out.println("3. View competitive swimmers sorted by discipline");
             System.out.println("0. Back to main menu");
             System.out.print("Enter your choice: ");
 
@@ -138,6 +139,7 @@ public class UserInterface {
             switch (choice) {
                 case 1 -> displayAllMembers();
                 case 2 -> displayAllTeamMembers();
+                case 3 -> // implemnter
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -199,6 +201,11 @@ public class UserInterface {
         System.out.println("3. Membership management");
         System.out.println("4. Exit");
         System.out.print("Enter your choice: ");
+    }
+
+
+    public void CompSwimmersByDiscipline(){
+
     }
 
     //

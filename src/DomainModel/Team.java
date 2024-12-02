@@ -20,19 +20,14 @@ public class Team {
     }
 
 
-    public void addToTeam(Person person) {
-        if (isJunior(person)) {
-            juniorTeam.add(person);
-            System.out.println(person + "has been added to the Junior Team");
-        } else {
-            seniorTeam.add(person);
-            System.out.println(person + "has been added to the Senior Team");
-        }
+    public Boolean isSenior(Person person) {
+        return person.calculateAge() >= 18;
     }
 
     public Boolean isJunior(Person person) {
         return person.calculateAge() < 18;
     }
+
 
     public String getTeamName() {
         return teamName;
