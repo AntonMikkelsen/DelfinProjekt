@@ -426,7 +426,7 @@ public class UserInterface {
                         }
                     }
                 }
-                case 8 -> {
+                case 7 -> {
                     System.out.println("Enter new MemberID: ");
                     String newMemberID = scanner.nextLine();
 
@@ -445,7 +445,7 @@ public class UserInterface {
                         System.out.println("The MemberID is already in use. Please try a different one.");
                     }
                 }
-                case 7 -> {
+                case 8 -> {
                     System.out.println("Changes saved successfully.");
                     editing = false;
                 }
