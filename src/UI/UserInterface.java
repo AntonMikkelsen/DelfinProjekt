@@ -6,7 +6,7 @@ import ENUMS.MembershipStatus;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.SocketHandler;
+
 
 public class UserInterface {
     private Scanner scanner;
@@ -352,5 +352,101 @@ public class UserInterface {
         }
 
     } */
+
+    private void editMember() {
+        System.out.println("\n=== Edit Member Information ===");
+        System.out.println("Enter member ID to edit: ");
+        String memberID = scanner.nextLine();
+
+        List<Person> members = membershipService.getAllMembers();
+        Member memberToEdit = null;
+
+        // Find the member
+        for (Person person : members) {
+            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {
+                memberToEdit = (Member) person;
+                break;
+            }
+        }
+
+        if (memberToEdit == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        boolean editing = true;
+        while (editing) {
+            System.out.println("\nCurrent Member Information:");
+            printMemberInfo(memberToEdit);
+
+            System.out.println("\nWhat would you like to edit?");
+            System.out.println("1. First Name (Current: " + memberToEdit.getFirstName() + ")");
+            System.out.println("2. Last Name (Current: " + memberToEdit.getLastName() + ")");
+            System.out.println("3. Email (Current: " + memberToEdit.getEmail() + ")");
+            System.out.println("4. Phone Number (Current: " + memberToEdit.getPhoneNumber() + ")");
+            System.out.println("5. Address (Current: " + memberToEdit.getAddress() + ")");
+            System.out.println("6. Membership Status (Current: " + memberToEdit.getMembershipStatus() + ")");
+            System.out.println("7. Save and Exit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.println("Enter new first name: ");
+                    String firstName = scanner.nextLine();
+                    memberToEdit.setFirstName(firstName);
+                    System.out.println("First name updated successfully.");
+                }
+                case 2 -> {
+                    System.out.println("Enter new last name: ");
+                    String lastName = scanner.nextLine();
+                    memberToEdit.setLastName(lastName);
+                    System.out.println("Last name updated successfully.");
+                }
+                case 3 -> {
+                    System.out.println("Enter new email: ");
+                    String email = scanner.nextLine();
+                    while (!email.contains("@") || !email.contains(".")) {
+                        System.out.println("Please enter a valid email address: ");
+                        email = scanner.nextLine();
+                    }
+                    memberToEdit.setEmail(email);
+                    System.out.println("Email updated successfully.");
+                }
+                case 4 -> {
+                    System.out.println("Enter new phone number: ");
+                    String phone = scanner.nextLine();
+                    memberToEdit.setPhoneNumber(phone);
+                    System.out.println("Phone number updated successfully.");
+                }
+                case 5 -> {
+                    System.out.println("Enter new address: ");
+                    String address = scanner.nextLine();
+                    memberToEdit.setAddress(address);
+                    System.out.println("Address updated successfully.");
+                }
+                case 6 -> {
+                    MembershipStatus newStatus = null;
+                    while (newStatus == null) {
+                        try {
+                            System.out.println("Enter new membership status (ACTIVE/PASSIVE): ");
+                            String statusInput = scanner.nextLine().toUpperCase();
+                            newStatus = MembershipStatus.valueOf(statusInput);
+                            memberToEdit.setMembershipStatus(newStatus);
+                            System.out.println("Membership status updated successfully.");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Invalid status. Please enter either ACTIVE or PASSIVE.");
+                        }
+                    }
+                }
+                case 7 -> {
+                    System.out.println("Changes saved successfully.");
+                    editing = false;
+                }
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        }
+    }
 
 }
