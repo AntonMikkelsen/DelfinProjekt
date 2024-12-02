@@ -35,8 +35,6 @@ public class CompetitiveSwimmer extends Member {
         this.swimmerType = swimmerType;
     }
 
-
-
     // Getters
     public Team getTeam() {
         return team;

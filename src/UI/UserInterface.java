@@ -142,7 +142,7 @@ public class UserInterface {
             switch (choice) {
                 case 1 -> displayAllMembers();
                 case 2 -> displayAllTeamMembers();
-                case 3 -> // implemnter
+                case 3 -> // implemnter view competitive swimmers by discipline
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
             }
