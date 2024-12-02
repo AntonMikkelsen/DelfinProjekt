@@ -18,10 +18,15 @@ public abstract class Person {
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        if (phoneNumber.length() != 8){
+            throw new IllegalArgumentException();
+        } else {
+            this.phoneNumber = phoneNumber;
+        }
         this.address = address;
 
     }
+
 
     // Getters
     public String getFirstName() {

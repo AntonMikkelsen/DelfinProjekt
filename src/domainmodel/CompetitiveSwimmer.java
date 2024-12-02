@@ -17,25 +17,18 @@ public class CompetitiveSwimmer extends Member {
     //Competitive
     public CompetitiveSwimmer(String firstName, String lastName, LocalDate dateOfBirth,
                               String email, String phoneNumber, String address,
-                              String memberId, MembershipStatus membershipStatus) {
+                              String memberId, MembershipStatus membershipStatus, Team team, Coach assignedCoach) {
         super(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberId, membershipStatus);
         this.results = new ArrayList<>();
         this.disciplines = new ArrayList<>();
+        this.team = team;
+        this.assignedCoach = assignedCoach;
         setSwimmerType(SwimmerType.COMPETITIVE);
     }
 
 
     public void setSwimmerType(SwimmerType swimmerType) {
         this.swimmerType = swimmerType;
-    }
-
-    public CompetitiveSwimmer(String firstName, String lastName, LocalDate dateOfBirth,
-                              String email, String phoneNumber, String address,
-                              String memberId, MembershipStatus membershipStatus,
-                              Team team, Coach assignedCoach) {
-        this(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberId, membershipStatus);
-        this.team = team;
-        this.assignedCoach = assignedCoach;
     }
 
     // Getters

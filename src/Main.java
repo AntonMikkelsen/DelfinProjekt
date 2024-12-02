@@ -17,8 +17,12 @@ public class Main {
 
 
         Member member1 = new Member("Rikke", "Hansen", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.PASSIVE);
-        Member member2 = new Member("Rikke", "Hansen", LocalDate.of(1930, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.ACTIVE);
-        Member member3 = new Member("Rikke", "Hansen", LocalDate.of(2020, 06, 05), "RikkeSnabelA", "50", "Vægterparken", "55",MembershipStatus.ACTIVE);
+        Member member2 = new Member("Rikke", "Hansen", LocalDate.of(1930, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55",MembershipStatus.ACTIVE);
+        Member member3 = new Member("Rikke", "Hansen", LocalDate.of(2020, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55",MembershipStatus.ACTIVE);
+
+        // CompetitiveSwimmer swimmer1 = new CompetitiveSwimmer();
+
+
         hgg.addMember(member1);
         hgg.addMember(member2);
         hgg.addMember(member3);
