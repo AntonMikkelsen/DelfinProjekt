@@ -129,9 +129,6 @@ public class Member extends Person{
         return membershipStatus;
     }
 
-
-
-
       // toString metode der gør at teksten bliver príntet rigtigt ud
     @Override
     public String toString() {

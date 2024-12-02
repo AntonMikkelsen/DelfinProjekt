@@ -66,8 +66,8 @@ public class UserInterface {
                 }
                 case 3 -> {
                     System.out.println("What is the users member ID");
-                    String  memberID =scanner.nextLine();
-                    administatorEditInfo(memberID);
+                    String memberID = scanner.nextLine();
+                    administatorEditInfo();
                 }
                 case 4 -> showMemberOverviewMenu();
                 case 5 -> administrativeMenuRunning = false;
@@ -83,11 +83,11 @@ public class UserInterface {
             System.out.println("\n=== Booking and Training Menu ===");
             System.out.println("1. See schedule of the day");
             System.out.println("2. Edit schedule as a trainer");
-            System.out.println("3. Cancelation of training or booking");
+            System.out.println("3. Cancellation of training or booking");
             System.out.println("4. Exit menu");
 
             int userResponse = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (userResponse) {
                 case 1 -> System.out.println("See schedule of the day");
@@ -108,7 +108,7 @@ public class UserInterface {
             System.out.println("3. Exit menu");
 
             int userResponse = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (userResponse) {
                 case 1 -> {
@@ -116,7 +116,10 @@ public class UserInterface {
                     String userMemberID = scanner.nextLine();
                     showMemberInfo(userMemberID);
                 }
-                case 2 -> System.out.println("Edit membership details and status");
+                case 2 -> {
+                    System.out.println("Edit membership details and status");
+                    editMember();
+                }
                 case 3 -> membershipMenuRunning = false;
                 default -> System.out.println("Invalid option. Please try again.");
             }
@@ -133,7 +136,7 @@ public class UserInterface {
             System.out.print("Enter your choice: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1 -> displayAllMembers();
@@ -335,107 +338,7 @@ public class UserInterface {
         return null;
     }
 
-    public Member administatorEditInfo(String memberID) {
-        List<Person> Members = membershipService.getAllMembers();
-        Member toSearch = null;
-        for (Person person : Members) {
-            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;
-            toSearch = (Member) person;
-            break;
-        }
-        if(toSearch != null){
-            System.out.println(toSearch);
-        return toSearch;
-    }
-    return null;
-    }
-
-    private void AdministrativeEditMember() {
-    boolean administrativeEditMemberRunning = true;
-    while(administrativeEditMemberRunning){
-        int userInput = scanner.nextInt();
-        switch(userInput){
-            case 1 -> {
-                System.out.println("Enter new first name");
-                String newFirstName = scanner.nextLine();
-            }
-            case 2 -> {
-                System.out.println("Enter new last name ");
-                String newLastName = scanner.nextLine();
-            }
-            case 3 -> {
-                System.out.println("enter new date of birth ");
-            }
-            case 4 -> {
-                System.out.println("Enter new email (yes/no): ");
-                String newEmail = scanner.nextLine();
-            }
-            case 5 -> {
-                System.out.println("Enter new  phone number ");
-                String newPhonenumber = scanner.nextLine();
-            }
-            case 6 -> {
-                System.out.println("Enter new address");
-                String newAddress = scanner.nextLine();
-            }
-            case 7 -> {
-                System.out.println("Enter new memberID");
-                String newMemberID = scanner.nextLine();
-            }
-            case 8 -> {
-                System.out.println("Change membership status, write either passive or active");
-                MembershipStatus newMembershipStatus;
-                String toSearch = scanner.nextLine();
-                if(toSearch.equalsIgnoreCase("Passive")){
-                  newMembershipStatus = MembershipStatus.PASSIVE;
-                } else {
-                    newMembershipStatus = MembershipStatus.ACTIVE;
-                }
-            }
-            case 9 -> {
-                System.out.println("Change membershipteam, write either Casual or Competetive");
-                String toSearch = scanner.nextLine();
-                if(toSearch.equalsIgnoreCase("Casual")){
-
-                }
-            }
-        }
-    }
-    }
-
-    private int validateInt(){
-        while(true){
-            try {
-                return scanner.nextInt();        }
-            catch (InputMismatchException e) {
-                System.out.println("Please enter a valid number");
-                scanner.nextLine();        }    }}
-
-
-
-  /*  private void removeMember(String memberID) {
-
-        System.out.println("enter the a membersID to remove the member");
-
-        List<Person> members = membershipService.getAllMembers();
-        Member toRemove = null;
-
-        for (Person person : members) {
-            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {
-                toRemove = (Member) person;
-                break;
-            }
-        }
-        if (toRemove != null && members.remove(toRemove)) {
-            members.remove(memberID);
-            System.out.println("Member removed successfully: " + toRemove.getFirstName() + " " + toRemove.getLastName());
-        } else {
-            System.out.println("Member does not exist");
-        }
-
-    } */
-
-    private void editMember() {
+    public Member administatorEditInfo() {
         System.out.println("\n=== Edit Member Information ===");
         System.out.println("Enter member ID to edit: ");
         String memberID = scanner.nextLine();
@@ -453,7 +356,7 @@ public class UserInterface {
 
         if (memberToEdit == null) {
             System.out.println("Member not found.");
-            return;
+            return null;
         }
 
         boolean editing = true;
@@ -467,8 +370,9 @@ public class UserInterface {
             System.out.println("3. Email (Current: " + memberToEdit.getEmail() + ")");
             System.out.println("4. Phone Number (Current: " + memberToEdit.getPhoneNumber() + ")");
             System.out.println("5. Address (Current: " + memberToEdit.getAddress() + ")");
-            System.out.println("6. Membership Status (Current: " + memberToEdit.getMembershipStatus() + ")");
-            System.out.println("7. Save and Exit");
+            System.out.println("6. MemberID(Current: " + memberToEdit.getMemberID() + ")");
+            System.out.println("7. Membership Status (Current: " + memberToEdit.getMembershipStatus() + ")");
+            System.out.println("8. Save and Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
@@ -522,7 +426,110 @@ public class UserInterface {
                         }
                     }
                 }
+                case 8 -> {
+                    System.out.println("Enter new MemberID: ");
+                    String newMemberID = scanner.nextLine();
+
+                    // Check if the new MemberID is already in use
+                    boolean idExists = false;
+                    for (Person person : members) {
+                        if (person instanceof Member && ((Member) person).getMemberID().equals(newMemberID)) {
+                            idExists = true;
+                            break;
+                        }
+                    }
+                    if (!idExists) {
+                        memberToEdit.setMemberID(newMemberID);
+                        System.out.println("MemberID updated successfully.");
+                    } else {
+                        System.out.println("The MemberID is already in use. Please try a different one.");
+                    }
+                }
                 case 7 -> {
+                    System.out.println("Changes saved successfully.");
+                    editing = false;
+                }
+                default -> System.out.println("Invalid option. Please try again.");
+            }
+        }
+        return null;
+    }
+
+    private int validateInt(){
+        while(true){
+            try {
+                return scanner.nextInt();
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println("Please enter a valid number");
+                scanner.nextLine();
+            }
+        }
+    }
+
+    private void editMember() {
+        System.out.println("\n=== Edit Member Information ===");
+        System.out.println("Enter member ID to edit: ");
+        String memberID = scanner.nextLine();
+
+        List<Person> members = membershipService.getAllMembers();
+        Member memberToEdit = null;
+
+        // Find the member
+        for (Person person : members) {
+            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {
+                memberToEdit = (Member) person;
+                break;
+            }
+        }
+
+        if (memberToEdit == null) {
+            System.out.println("Member not found.");
+            return;
+        }
+
+        boolean editing = true;
+        while (editing) {
+            System.out.println("\nCurrent Member Information:");
+            printMemberInfo(memberToEdit);
+
+            System.out.println("\nWhat would you like to edit?");
+            System.out.println("1. First Name (Current: " + memberToEdit.getFirstName() + ")");
+            System.out.println("2. Last Name (Current: " + memberToEdit.getLastName() + ")");
+            System.out.println("3. Email (Current: " + memberToEdit.getEmail() + ")");
+            System.out.println("4. Phone Number (Current: " + memberToEdit.getPhoneNumber() + ")");
+            System.out.println("5. Address (Current: " + memberToEdit.getAddress() + ")");
+            System.out.println("6. Membership Status (Current: " + memberToEdit.getMembershipStatus() + ")");
+            System.out.println("7. Save and Exit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1 -> {
+                    System.out.println("Enter new email: ");
+                    String email = scanner.nextLine();
+                    while (!email.contains("@") || !email.contains(".")) {
+                        System.out.println("Please enter a valid email address: ");
+                        email = scanner.nextLine();
+                    }
+                    memberToEdit.setEmail(email);
+                    System.out.println("Email updated successfully.");
+                }
+                case 2 -> {
+                    System.out.println("Enter new phone number: ");
+                    String phone = scanner.nextLine();
+                    memberToEdit.setPhoneNumber(phone);
+                    System.out.println("Phone number updated successfully.");
+                }
+                case 3 -> {
+                    System.out.println("Enter new address: ");
+                    String address = scanner.nextLine();
+                    memberToEdit.setAddress(address);
+                    System.out.println("Address updated successfully.");
+                }
+                case 4 -> {
                     System.out.println("Changes saved successfully.");
                     editing = false;
                 }
