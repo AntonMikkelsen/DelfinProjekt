@@ -1,4 +1,4 @@
-package ENUMS;
+package domainmodel;
 
 public enum SwimmingDiscipline {
     BACK_CRAWL("Back Crawl", "Backstroke"),

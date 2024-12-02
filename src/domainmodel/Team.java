@@ -1,6 +1,4 @@
-package DomainModel;
-
-import ENUMS.AgeCategory;
+package domainmodel;
 
 import java.util.ArrayList;
 

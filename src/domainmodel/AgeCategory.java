@@ -1,4 +1,4 @@
-package ENUMS;
+package domainmodel;
 
 import static java.lang.Float.POSITIVE_INFINITY;
 

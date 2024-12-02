@@ -1,23 +1,18 @@
-import DataSource.Controller;
-import DomainModel.Member;
-
-import DomainModel.*;
-import ENUMS.MembershipStatus;
+import datasource.Controller;
+import domainmodel.Member;
+import domainmodel.MembershipStatus;
 
 
 import java.time.LocalDate;
 
-import ENUMS.MembershipStatus;
-import UI.UserInterface;
-
-import java.time.LocalDate;
+import ui.UserInterface;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Controller controller = new Controller();
-        MembershipRegistrationService hgg = new MembershipRegistrationService(controller);
+        Controller.MembershipRegistrationService hgg = new Controller.MembershipRegistrationService(controller);
         UserInterface ui = new UserInterface(hgg);
 
 

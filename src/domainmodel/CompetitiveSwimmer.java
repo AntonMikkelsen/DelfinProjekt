@@ -1,8 +1,4 @@
-package DomainModel;
-
-import ENUMS.MembershipStatus;
-import ENUMS.SwimmerType;
-import ENUMS.SwimmingDiscipline;
+package domainmodel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

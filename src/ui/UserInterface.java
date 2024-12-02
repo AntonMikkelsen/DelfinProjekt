@@ -1,20 +1,22 @@
-package UI;
-import DataSource.Controller;
-import DomainModel.*;
-import ENUMS.AgeCategory;
-import ENUMS.MembershipStatus;
+package ui;
+
+import datasource.Controller;
+import domainmodel.*;
+import domainmodel.AgeCategory;
+import domainmodel.MembershipStatus;
+
 import java.time.LocalDate;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.InputMismatchException;
 
 
 public class UserInterface {
     private Scanner scanner;
-    private MembershipRegistrationService membershipService;
+    private Controller.MembershipRegistrationService membershipService;
     Controller controller = new Controller();
 
-    public UserInterface(MembershipRegistrationService membershipService) {
+    public UserInterface(Controller.MembershipRegistrationService membershipService) {
         this.membershipService = membershipService;
         this.scanner = new Scanner(System.in);
     }
@@ -66,7 +68,7 @@ public class UserInterface {
                 }
                 case 3 -> {
                     System.out.println("What is the users member ID");
-                    String  memberID =scanner.nextLine();
+                    String memberID = scanner.nextLine();
                     administatorEditInfo(memberID);
                 }
                 case 4 -> showMemberOverviewMenu();
@@ -149,6 +151,7 @@ public class UserInterface {
         List<Person> members = membershipService.getAllMembers();
         System.out.println("\n=== All Members Overview ===");
         printHeaderLine();
+
 
         for (Person person : members) {
             if (person instanceof CompetitiveSwimmer) {
@@ -264,25 +267,25 @@ public class UserInterface {
 
         LocalDate dob = null;
         while (dob == null) {
-        System.out.println("\nEnter date of birth (YYYY-MM-DD): ");
+            System.out.println("\nEnter date of birth (YYYY-MM-DD): ");
             try {
                 dob = LocalDate.parse(scanner.nextLine());
                 System.out.println("Date of birth: " + dob);
             } catch (Exception e) {
-                System.out.println("An error has occured: " + e.getMessage() +  " - Please try again");
+                System.out.println("An error has occured: " + e.getMessage() + " - Please try again");
             }
         }
 
-            System.out.println("\nEnter email: ");
-            String email = scanner.nextLine();
-            while (!email.contains("@") && !email.contains(".")){
-                if (email.contains("@")) {
-                    System.out.println("Email: " + email);
-                } else {
-                    System.out.println("Please enter a valid email");
-                    email = scanner.nextLine();
-                }
+        System.out.println("\nEnter email: ");
+        String email = scanner.nextLine();
+        while (!email.contains("@") && !email.contains(".")) {
+            if (email.contains("@")) {
+                System.out.println("Email: " + email);
+            } else {
+                System.out.println("Please enter a valid email");
+                email = scanner.nextLine();
             }
+        }
 
         System.out.println("\nEnter phone number: ");
         String phone = scanner.nextLine();
@@ -293,16 +296,15 @@ public class UserInterface {
         System.out.println("address: " + address);
 
         MembershipStatus status = null;
-        while(status == null){
+        while (status == null) {
             try {
                 System.out.println("\nEnter membership status *Enter Passive/Active*: ");
                 status = MembershipStatus.valueOf(scanner.nextLine().toUpperCase());
                 System.out.println("membership stauts: " + status);
-            } catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println("An error has occured: " + e.getMessage() + " - Please try again");
             }
         }
-
 
 
         String memberId = "ID" + (membershipService.getAllMembers().size() + 1);
@@ -322,16 +324,16 @@ public class UserInterface {
     public Member showMemberInfo(String memberID) {
         List<Person> Members = membershipService.getAllMembers();
         Member toSearch = null;
-        for (Person person : Members){
-            if(person instanceof Member && ((Member)person).getMemberID().equals(memberID));{
+        for (Person person : Members) {
+            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;
+            {
                 toSearch = (Member) person;
                 break;
             }
         }
-        if(toSearch != null){
+        if (toSearch != null) {
             System.out.println(printMemberInfo(toSearch));
-        }
-        else {
+        } else {
             System.out.println("Member does not exist");
         }
         return null;
@@ -345,73 +347,76 @@ public class UserInterface {
             toSearch = (Member) person;
             break;
         }
-        if(toSearch != null){
+        if (toSearch != null) {
             System.out.println(toSearch);
-        return toSearch;
-    }
-    return null;
+            return toSearch;
+        }
+        return null;
     }
 
     private void AdministrativeEditMember() {
-    boolean administrativeEditMemberRunning = true;
-    while(administrativeEditMemberRunning){
-        int userInput = scanner.nextInt();
-        switch(userInput){
-            case 1 -> {
-                System.out.println("Enter new first name");
-                String newFirstName = scanner.nextLine();
-            }
-            case 2 -> {
-                System.out.println("Enter new last name ");
-                String newLastName = scanner.nextLine();
-            }
-            case 3 -> {
-                System.out.println("enter new date of birth ");
-            }
-            case 4 -> {
-                System.out.println("Enter new email (yes/no): ");
-                String newEmail = scanner.nextLine();
-            }
-            case 5 -> {
-                System.out.println("Enter new  phone number ");
-                String newPhonenumber = scanner.nextLine();
-            }
-            case 6 -> {
-                System.out.println("Enter new address");
-                String newAddress = scanner.nextLine();
-            }
-            case 7 -> {
-                System.out.println("Enter new memberID");
-                String newMemberID = scanner.nextLine();
-            }
-            case 8 -> {
-                System.out.println("Change membership status, write either passive or active");
-                MembershipStatus newMembershipStatus;
-                String toSearch = scanner.nextLine();
-                if(toSearch.equalsIgnoreCase("Passive")){
-                  newMembershipStatus = MembershipStatus.PASSIVE;
-                } else {
-                    newMembershipStatus = MembershipStatus.ACTIVE;
+        boolean administrativeEditMemberRunning = true;
+        while (administrativeEditMemberRunning) {
+            int userInput = scanner.nextInt();
+            switch (userInput) {
+                case 1 -> {
+                    System.out.println("Enter new first name");
+                    String newFirstName = scanner.nextLine();
                 }
-            }
-            case 9 -> {
-                System.out.println("Change membershipteam, write either Casual or Competetive");
-                String toSearch = scanner.nextLine();
-                if(toSearch.equalsIgnoreCase("Casual")){
+                case 2 -> {
+                    System.out.println("Enter new last name ");
+                    String newLastName = scanner.nextLine();
+                }
+                case 3 -> {
+                    System.out.println("enter new date of birth ");
+                }
+                case 4 -> {
+                    System.out.println("Enter new email (yes/no): ");
+                    String newEmail = scanner.nextLine();
+                }
+                case 5 -> {
+                    System.out.println("Enter new  phone number ");
+                    String newPhonenumber = scanner.nextLine();
+                }
+                case 6 -> {
+                    System.out.println("Enter new address");
+                    String newAddress = scanner.nextLine();
+                }
+                case 7 -> {
+                    System.out.println("Enter new memberID");
+                    String newMemberID = scanner.nextLine();
+                }
+                case 8 -> {
+                    System.out.println("Change membership status, write either passive or active");
+                    MembershipStatus newMembershipStatus;
+                    String toSearch = scanner.nextLine();
+                    if (toSearch.equalsIgnoreCase("Passive")) {
+                        newMembershipStatus = MembershipStatus.PASSIVE;
+                    } else {
+                        newMembershipStatus = MembershipStatus.ACTIVE;
+                    }
+                }
+                case 9 -> {
+                    System.out.println("Change membershipteam, write either Casual or Competetive");
+                    String toSearch = scanner.nextLine();
+                    if (toSearch.equalsIgnoreCase("Casual")) {
 
+                    }
                 }
             }
         }
     }
-    }
 
-    private int validateInt(){
-        while(true){
+    private int validateInt() {
+        while (true) {
             try {
-                return scanner.nextInt();        }
-            catch (InputMismatchException e) {
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number");
-                scanner.nextLine();        }    }}
+                scanner.nextLine();
+            }
+        }
+    }
 
 
 
@@ -464,31 +469,57 @@ public class UserInterface {
             printMemberInfo(memberToEdit);
 
             System.out.println("\nWhat would you like to edit?");
-            System.out.println("1. First Name (Current: " + memberToEdit.getFirstName() + ")");
-            System.out.println("2. Last Name (Current: " + memberToEdit.getLastName() + ")");
-            System.out.println("3. Email (Current: " + memberToEdit.getEmail() + ")");
-            System.out.println("4. Phone Number (Current: " + memberToEdit.getPhoneNumber() + ")");
-            System.out.println("5. Address (Current: " + memberToEdit.getAddress() + ")");
-            System.out.println("6. Membership Status (Current: " + memberToEdit.getMembershipStatus() + ")");
-            System.out.println("7. Save and Exit");
+            System.out.println("1. Member ID (Current: " + memberToEdit.getMemberID() + ")");
+            System.out.println("2. First Name (Current: " + memberToEdit.getFirstName() + ")");
+            System.out.println("3. Last Name (Current: " + memberToEdit.getLastName() + ")");
+            System.out.println("4. Email (Current: " + memberToEdit.getEmail() + ")");
+            System.out.println("5. Phone Number (Current: " + memberToEdit.getPhoneNumber() + ")");
+            System.out.println("6. Address (Current: " + memberToEdit.getAddress() + ")");
+            System.out.println("7. Membership Status (Current: " + memberToEdit.getMembershipStatus() + ")");
+            System.out.println("8. Save and Exit");
 
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
             switch (choice) {
+
                 case 1 -> {
+                    System.out.println("Enter new member ID: ");
+                    String newMemberID = scanner.nextLine();
+
+                    // Check if the new member ID already exists
+                    boolean idExists = false;
+                    for (Person person : members) {
+                        if (person instanceof Member) {
+                            Member member = (Member) person;
+                            if (member.getMemberID().equals(newMemberID) && member != memberToEdit) {
+                                idExists = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (idExists) {
+                        System.out.println("This member ID already exists. Please choose a different one.");
+                    } else {
+                        memberToEdit.setMemberID(newMemberID);
+                        System.out.println("Member ID updated successfully.");
+                    }
+
+                }
+                case 2 -> {
                     System.out.println("Enter new first name: ");
                     String firstName = scanner.nextLine();
                     memberToEdit.setFirstName(firstName);
                     System.out.println("First name updated successfully.");
                 }
-                case 2 -> {
+                case 3 -> {
                     System.out.println("Enter new last name: ");
                     String lastName = scanner.nextLine();
                     memberToEdit.setLastName(lastName);
                     System.out.println("Last name updated successfully.");
                 }
-                case 3 -> {
+                case 4 -> {
                     System.out.println("Enter new email: ");
                     String email = scanner.nextLine();
                     while (!email.contains("@") || !email.contains(".")) {
@@ -498,19 +529,19 @@ public class UserInterface {
                     memberToEdit.setEmail(email);
                     System.out.println("Email updated successfully.");
                 }
-                case 4 -> {
+                case 5 -> {
                     System.out.println("Enter new phone number: ");
                     String phone = scanner.nextLine();
                     memberToEdit.setPhoneNumber(phone);
                     System.out.println("Phone number updated successfully.");
                 }
-                case 5 -> {
+                case 6 -> {
                     System.out.println("Enter new address: ");
                     String address = scanner.nextLine();
                     memberToEdit.setAddress(address);
                     System.out.println("Address updated successfully.");
                 }
-                case 6 -> {
+                case 7 -> {
                     MembershipStatus newStatus = null;
                     while (newStatus == null) {
                         try {
@@ -524,7 +555,7 @@ public class UserInterface {
                         }
                     }
                 }
-                case 7 -> {
+                case 8 -> {
                     System.out.println("Changes saved successfully.");
                     editing = false;
                 }

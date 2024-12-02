@@ -1,6 +1,4 @@
-package DomainModel;
-
-import ENUMS.MembershipStatus;
+package domainmodel;
 
 import java.time.LocalDate;
 

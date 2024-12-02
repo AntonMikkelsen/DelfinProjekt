@@ -1,4 +1,4 @@
-package ENUMS;
+package domainmodel;
 
 public enum SwimmerType {
     CASUAL("Casual", false),
