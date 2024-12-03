@@ -17,7 +17,6 @@ public class Team {
         this.ageCategory = ageCategory;
     }
 
-
     public Boolean isSenior(Person person) {
         return person.calculateAge() >= 18;
     }
@@ -26,10 +25,40 @@ public class Team {
         return person.calculateAge() < 18;
     }
 
+    public boolean isAgeCategoryValid(Person person) {
+        if (ageCategory == AgeCategory.JUNIOR) {
+            return isJunior(person);
+        } else if (ageCategory == AgeCategory.SENIOR) {
+            return isSenior(person);
+        }
+        return false;
+    }
 
     public String getTeamName() {
         return teamName;
     }
+
+    public void addToTeam(Person person) {
+        if (!allSwimmers.contains(person)) {
+            allSwimmers.add(person);
+            if (isJunior(person)) {
+                juniorTeam.add(person);
+            } else {
+                seniorTeam.add(person);
+            }
+        } else {
+            System.out.println(person.getFirstName() + person.getLastName() + " is already in the team.");
+        }
+    }
+
+    public void removeFromTeam(Person person) {
+        allSwimmers.remove(person);
+        juniorTeam.remove(person);
+        seniorTeam.remove(person);
+        casualSwimmers.remove(person);
+        competitiveSwimmers.remove(person);
+    }
+
 
     public void addtoTeamCasualSwimmers(Person person){
         casualSwimmers.add(person);
@@ -44,16 +73,6 @@ public class Team {
     }
 
     public void removeTeamCompetetiveSwimmers(Person person){
-        casualSwimmers.remove(person);
+        competitiveSwimmers.remove(person);
     }
-
-
-
-    /*
-    public void addToTeam(Person person){
-        if(person.calculateAge() < 18){
-            juniorTeam.add(person);
-        }
-    }
-     */
 }
