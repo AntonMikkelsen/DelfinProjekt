@@ -31,7 +31,7 @@ public class Main {
         CompetitiveSwimmer swimmer2 = new CompetitiveSwimmer("Peter", "Lausen", LocalDate.of(1955, 06, 05), "PetLauk", "50503333", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
         CompetitiveSwimmer swimmer3 = new CompetitiveSwimmer("Rikmp", "narar", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
 
-        // D
+        // Created results for each swimmer
         swimmer1.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 50.3, LocalDate.now()));
         swimmer1.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 50.4, LocalDate.now()));
 
