@@ -10,9 +10,29 @@ import java.util.List;
 
 public class Controller {
     private List<Person> persons;
+    private FileHandler fileHandler;
+    private List<Team> teams;
+
 
     public Controller() {
-        persons = new ArrayList<>();
+        this.persons = new ArrayList<>();
+        this.fileHandler = new FileHandler();
+        this.teams = new ArrayList();
+    }
+
+    public void saveMembers (String fileName){
+        ArrayList<Member> members = new ArrayList<>();
+        for (Person person : persons){
+            if (person instanceof Member){
+                members.add((Member) person);
+            }
+        }
+        fileHandler.saveMembersToFile(members, fileName);
+    }
+
+    public void loadMembers(String fileName){
+        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);
+        persons.addAll(loadedMembers);
     }
 
     public List<Person> getAllPersons(){
@@ -24,23 +44,27 @@ public class Controller {
     }
 
     public void removePerson(Person person){
-        persons.add(person);
+        persons.remove(person);
     }
 
-    public void removeTeamCompetetiveSwimmers(Person person){
-        removeTeamCompetetiveSwimmers(person);
+    public ArrayList<Team> getTeams(){
+        return teams;
     }
 
-    public void removeTeamCasualSwimmers(Person person){
-        removeTeamCasualSwimmers(person);
+    public void removeTeamCompetetiveSwimmers(Team team, Person person){
+        team.removeTeamCompetetiveSwimmers(person);
     }
 
-    public void addTeamCompetitiveSwimmers(Person person){
-        addTeamCompetitiveSwimmers(person);
+    public void removeTeamCasualSwimmers(Team team, Person person){
+        team.removeTeamCasualSwimmers(person);
     }
 
-    public void addTeamCasualSwimmers(Person person){
-        addTeamCasualSwimmers(person);
+    public void addTeamCompetitiveSwimmers(Team team, Person person){
+        team.addtoTeamCompetitiveSwimmers(person);
+    }
+
+    public void addTeamCasualSwimmers(Team team, Person person){
+        team.addtoTeamCasualSwimmers(person);
     }
 
     public static class MembershipRegistrationService {
@@ -58,8 +82,33 @@ public class Controller {
             controller.addPerson(member); // Sørg for, at Controller har denne metode
         }
 
+        public void addTeam(Team team) {
+            teams.add(team);
+        }
+
+        public void removeTeam(Team team) {
+            teams.remove(team);
+        }
+
+
         public void removeMembers(Member members){
             controller.removePerson(members);
+        }
+
+        public void addToTeam(Team team, Person person, boolean isCompetitive) {
+            if (isCompetitive) {
+                team.addtoTeamCompetitiveSwimmers(person);
+            } else {
+                team.addtoTeamCasualSwimmers(person);
+            }
+        }
+
+        public void removeFromTeam(Team team, Person person, boolean isCompetitive) {
+            if (isCompetitive) {
+                team.removeTeamCompetetiveSwimmers(person);
+            } else {
+                team.removeTeamCasualSwimmers(person);
+            }
         }
 
         public List<CompetitiveSwimmer> getTeamMembers(Team team) {
