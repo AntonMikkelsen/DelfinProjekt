@@ -110,15 +110,82 @@ public class CompetitiveSwimmer extends Member {
     }
 
 
-    // Method to access the best discipline (index 0 of array) **Unsure if we're gonna use it
-    public SwimmingDiscipline getBestDiscipline(){
-        if (results.isEmpty()){
-            System.out.println("No results");
+    public static void printAllCompSwimmersBestDiscipline(List<CompetitiveSwimmer> swimmers) {
+        for (CompetitiveSwimmer swimmer : swimmers) {
+            List<SwimmingDiscipline> sortedDisciplines = new ArrayList<>(swimmer.getDisciplinesArray());
+
+            // Sorter disciplinerne efter bedste tid
+            sortedDisciplines.sort((discipline1, discipline2) -> {
+                double time1 = swimmer.getBestTimeForEachDiscipline(discipline1);
+                double time2 = swimmer.getBestTimeForEachDiscipline(discipline2);
+                return Double.compare(time1, time2);
+            });
+
+
+            // Udskriv information om svømmeren og de bedste tider
+            System.out.println("\n Swimmers name: " + swimmer.getFirstName() + " " + swimmer.getLastName());
+
+            for (int i = 0; i < sortedDisciplines.size(); i++) {
+                double time = swimmer.getBestTimeForEachDiscipline(sortedDisciplines.get(i));
+                String timeString = (time == Double.MAX_VALUE) ? "N/A" : String.valueOf(time);
+
+                // Best, second best, third best, etc.
+                if (i == 0) {
+                    System.out.println(" - Best Discipline: " + sortedDisciplines.get(i).getFullName() + " - Time: " + timeString);
+                } else if (i == 1) {
+                    System.out.println(" - Second Best Discipline: " + sortedDisciplines.get(i).getFullName() + " - Time: " + timeString);
+                } else if (i == 2) {
+                    System.out.println(" - Third Best Discipline: " + sortedDisciplines.get(i).getFullName() + " - Time: " + timeString);
+                }
+            }
+
+            // Værste disciplin
+            double worstTime = swimmer.getBestTimeForEachDiscipline(sortedDisciplines.get(sortedDisciplines.size() - 1));
+            String worstTimeString = (worstTime == Double.MAX_VALUE) ? "N/A" : String.valueOf(worstTime);
+            System.out.println(" - Worst Discipline: " + sortedDisciplines.get(sortedDisciplines.size() - 1).getFullName() + " - Time: " + worstTimeString);
         }
-       return disciplines.get(0);
     }
 
 
 
 
+
+    public void sortDisciplinesByPerformance() {
+        for (int i = 0; i < disciplines.size() - 1; i++) {
+            for (int j = 0; j < disciplines.size() - 1 - i; j++) {
+                double time1 = getBestTimeForEachDiscipline(disciplines.get(j));
+                double time2 = getBestTimeForEachDiscipline(disciplines.get(j + 1));
+
+                // Swap if time1 is greater than time2
+                if (time1 < time2) {
+                    SwimmingDiscipline temp = disciplines.get(j);
+                    disciplines.set(j, disciplines.get(j + 1));
+                    disciplines.set(j + 1, temp);
+                }
+            }
+        }
+    }
+
+
+    public double getBestTimeForEachDiscipline(SwimmingDiscipline discipline) {
+        double bestTime = Double.MAX_VALUE;
+
+        for (Result result : results) {
+            if (result.getDiscipline() == discipline) {
+                if (result.getTime() < bestTime) {
+                    bestTime = result.getTime();
+                }
+            }
+        }
+        return bestTime;
+    }
+
+
+    public void addResult(Result result) {
+        if (result != null) {
+            this.results.add(result);
+        }
+    }
 }
+
+
