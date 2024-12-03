@@ -11,7 +11,7 @@ import java.util.List;
 public class Controller {
     private List<Person> persons;
     private FileHandler fileHandler;
-    private List<Team> teams;
+    private ArrayList<Team> teams;
 
 
     public Controller() {
@@ -83,11 +83,11 @@ public class Controller {
         }
 
         public void addTeam(Team team) {
-            teams.add(team);
+            controller.teams.add(team);
         }
 
         public void removeTeam(Team team) {
-            teams.remove(team);
+            controller.teams.remove(team);
         }
 
 

@@ -21,7 +21,12 @@ public class CompetitiveSwimmer extends Member {
                               String memberId, MembershipStatus membershipStatus, Team team, Coach assignedCoach) {
         super(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberId, membershipStatus);
         this.results = new ArrayList<>();
-        this.disciplines = new ArrayList<>(Arrays.asList(SwimmingDiscipline.BACK_CRAWL, SwimmingDiscipline.BREAST_STROKE, SwimmingDiscipline.BUTTERFLY,SwimmingDiscipline.CRAWL));
+        this.disciplines = new ArrayList<>(Arrays.asList(
+                SwimmingDiscipline.BACK_CRAWL,
+                SwimmingDiscipline.BREAST_STROKE,
+                SwimmingDiscipline.BUTTERFLY,
+                SwimmingDiscipline.CRAWL)
+        );
         this.team = team;
         this.assignedCoach = assignedCoach;
         setSwimmerType(SwimmerType.COMPETITIVE);
@@ -45,9 +50,17 @@ public class CompetitiveSwimmer extends Member {
         return new ArrayList<>(results);
     }
 
+    //Returns as char sequence
     public CharSequence getDisciplines() {
         return (CharSequence) new ArrayList<>(disciplines);
     }
+
+
+    // Returns as normal array
+    public ArrayList<SwimmingDiscipline> getDisciplinesArray() {
+        return disciplines;
+    }
+
 
     public SwimmerType getSwimmerType() {
         return swimmerType;
@@ -70,6 +83,8 @@ public class CompetitiveSwimmer extends Member {
         this.disciplines = new ArrayList<>(disciplines);
     }
 
+
+
     @Override
     public String toString() {
         String teamName;
@@ -85,7 +100,6 @@ public class CompetitiveSwimmer extends Member {
         } else {
             coachName = "No Coach";
         }
-
         return String.format("CompetitiveSwimmer{id=%s, name='%s %s', team=%s, coach=%s, disciplines=%d}",
                 getMemberID(),
                 getFirstName(),
@@ -94,5 +108,17 @@ public class CompetitiveSwimmer extends Member {
                 coachName,
                 disciplines.size());
     }
+
+
+    // Method to access the best discipline (index 0 of array) **Unsure if we're gonna use it
+    public SwimmingDiscipline getBestDiscipline(){
+        if (results.isEmpty()){
+            System.out.println("No results");
+        }
+       return disciplines.get(0);
+    }
+
+
+
 
 }
