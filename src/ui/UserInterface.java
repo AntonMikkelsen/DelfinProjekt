@@ -320,6 +320,8 @@ public class UserInterface {
 
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
         membershipService.addMember(newMember);
+        controller.addPerson(newMember);
+        controller.saveMembers("members.csv");
 
         System.out.println("Member added successfully: " + newMember.getFirstName() + " " + newMember.getLastName());
 
@@ -458,6 +460,8 @@ public class UserInterface {
                 }
                 case 8 -> {
                     System.out.println("Changes saved successfully.");
+                    controller.addPerson(memberToEdit);
+                    controller.saveMembers("members.csv");
                     editing = false;
                 }
                 default -> System.out.println("Invalid option. Please try again.");
@@ -542,6 +546,8 @@ public class UserInterface {
                 }
                 case 4 -> {
                     System.out.println("Changes saved successfully.");
+                    controller.addPerson(memberToEdit);
+                    controller.saveMembers("members.csv");
                     editing = false;
                 }
                 default -> System.out.println("Invalid option. Please try again.");

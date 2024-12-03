@@ -5,19 +5,20 @@ import domainmodel.Member;
 import domainmodel.Person;
 import domainmodel.Team;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
-    private List<Person> persons;
-    private FileHandler fileHandler;
-    private List<Team> teams;
+    private final ArrayList<Person> persons;
+    private final FileHandler fileHandler;
+    private final ArrayList<Team> teams;
 
 
     public Controller() {
         this.persons = new ArrayList<>();
         this.fileHandler = new FileHandler();
-        this.teams = new ArrayList();
+        this.teams = new ArrayList<>();
     }
 
     public void saveMembers (String fileName){
@@ -27,11 +28,19 @@ public class Controller {
                 members.add((Member) person);
             }
         }
-        fileHandler.saveMembersToFile(members, fileName);
+        if (members.isEmpty()) {
+            System.out.println("No members to save.");
+            return;
+        }
+        fileHandler.saveMembersToFile(members);
     }
 
     public void loadMembers(String fileName){
         ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);
+        if (loadedMembers.isEmpty()) {
+            System.out.println("No members were loaded from the file.");
+            return;
+        }
         persons.addAll(loadedMembers);
     }
 
@@ -83,13 +92,12 @@ public class Controller {
         }
 
         public void addTeam(Team team) {
-            teams.add(team);
+            controller.teams.add(team);
         }
 
         public void removeTeam(Team team) {
-            teams.remove(team);
+            controller.teams.remove(team);
         }
-
 
         public void removeMembers(Member members){
             controller.removePerson(members);
