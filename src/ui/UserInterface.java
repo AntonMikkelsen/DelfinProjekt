@@ -229,6 +229,7 @@ public class UserInterface {
                 swimmer.calculateAge(),
                 swimmer.getMembershipStatus(),
                 swimmer.getTeam().getTeamName());
+                swimmer.getDisciplines();
     }
 
     private Member printMemberInfo(Member member) {
