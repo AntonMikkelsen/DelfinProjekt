@@ -27,4 +27,9 @@ public class Result {
         return localDate;
     }
 
+
+    @Override
+    public String toString() {
+        return "----------Result---------\n" + discipline + " time: " + time + "\nTime achieved: " + localDate;
+    }
 }
