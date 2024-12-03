@@ -99,6 +99,7 @@ public class Controller {
             controller.teams.remove(team);
         }
 
+
         public void removeMembers(Member members){
             controller.removePerson(members);
         }

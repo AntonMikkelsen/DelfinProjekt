@@ -6,6 +6,7 @@ import domainmodel.AgeCategory;
 import domainmodel.MembershipStatus;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -210,7 +211,10 @@ public class UserInterface {
     }
 
 
-    public void CompSwimmersByDiscipline(){
+    // views competitive swimmers by sorting their best and their worst discipline swimming
+    public void CompSwimmersByDiscipline(CompetitiveSwimmer competitiveSwimmer){
+
+
 
     }
 
@@ -222,14 +226,14 @@ public class UserInterface {
     }
 
     private void printSwimmerInfo(CompetitiveSwimmer swimmer) {
-        System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s%n",
+        System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s %s%n",
                 swimmer.getMemberID(),
                 swimmer.getFirstName(),
                 swimmer.getLastName(),
                 swimmer.calculateAge(),
                 swimmer.getMembershipStatus(),
-                swimmer.getTeam().getTeamName());
-                swimmer.getDisciplines();
+                swimmer.getTeam().getTeamName(),
+                String.join(", ", swimmer.getDisciplines()));
     }
 
     private Member printMemberInfo(Member member) {

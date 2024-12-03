@@ -1,11 +1,12 @@
 import datasource.Controller;
 import datasource.FileHandler;
-import domainmodel.Member;
-import domainmodel.MembershipStatus;
+import domainmodel.*;
 
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import ui.UserInterface;
 
@@ -24,7 +25,30 @@ public class Main {
         Member member2 = new Member("Rikke", "Hansen", LocalDate.of(1930, 6, 5), "RikkeSnabelA", "50505050", "Vægterparken", "55",MembershipStatus.ACTIVE);
         Member member3 = new Member("Rikke", "Hansen", LocalDate.of(2020, 6, 5), "RikkeSnabelA", "50505050", "Vægterparken", "55",MembershipStatus.ACTIVE);
 
-        // CompetitiveSwimmer swimmer1 = new CompetitiveSwimmer();
+
+        // Competitive swimmers:
+        CompetitiveSwimmer swimmer1 = new CompetitiveSwimmer("RikkeComp", "HansenComp", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.PASSIVE, null, null);
+        CompetitiveSwimmer swimmer2 = new CompetitiveSwimmer("Peter", "Lausen", LocalDate.of(1955, 06, 05), "PetLauk", "50503333", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
+        CompetitiveSwimmer swimmer3 = new CompetitiveSwimmer("Rikmp", "narar", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
+
+        // D
+        swimmer1.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 50.3, LocalDate.now()));
+        swimmer1.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 50.4, LocalDate.now()));
+
+        swimmer2.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 20.3, LocalDate.now()));
+        swimmer2.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 54.3, LocalDate.now()));
+
+        swimmer3.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 51.4 , LocalDate.now()));
+        swimmer3.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 100.6, LocalDate.now()));
+        swimmer3.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 25.4 , LocalDate.now()));
+
+        List<CompetitiveSwimmer> swimmers = Arrays.asList(swimmer1);
+
+
+        CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(swimmers);
+
+        System.out.println();
+
 
 
         members.add(member1);
