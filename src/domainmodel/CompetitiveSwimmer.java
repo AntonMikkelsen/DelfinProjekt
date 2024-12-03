@@ -2,6 +2,7 @@ package domainmodel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -20,7 +21,7 @@ public class CompetitiveSwimmer extends Member {
                               String memberId, MembershipStatus membershipStatus, Team team, Coach assignedCoach) {
         super(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberId, membershipStatus);
         this.results = new ArrayList<>();
-        this.disciplines = new ArrayList<>();
+        this.disciplines = new ArrayList<>(Arrays.asList(SwimmingDiscipline.BACK_CRAWL, SwimmingDiscipline.BREAST_STROKE, SwimmingDiscipline.BUTTERFLY,SwimmingDiscipline.CRAWL));
         this.team = team;
         this.assignedCoach = assignedCoach;
         setSwimmerType(SwimmerType.COMPETITIVE);

@@ -6,6 +6,7 @@ import domainmodel.AgeCategory;
 import domainmodel.MembershipStatus;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -210,7 +211,10 @@ public class UserInterface {
     }
 
 
-    public void CompSwimmersByDiscipline(){
+    // views competitive swimmers by sorting their best and their worst discipline swimming
+    public void CompSwimmersByDiscipline(CompetitiveSwimmer competitiveSwimmer){
+
+
 
     }
 
