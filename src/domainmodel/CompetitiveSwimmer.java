@@ -46,7 +46,7 @@ public class CompetitiveSwimmer extends Member {
     }
 
     public CharSequence getDisciplines() {
-        return new ArrayList<>(disciplines);
+        return (CharSequence) new ArrayList<>(disciplines);
     }
 
     public SwimmerType getSwimmerType() {
