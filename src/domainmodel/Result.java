@@ -27,9 +27,21 @@ public class Result {
         return localDate;
     }
 
+    public void setDiscipline(SwimmingDiscipline discipline){
+        this.discipline = discipline;
+    }
+
+    public void setTime(double time){
+        this.time = time;
+    }
+
+    public void setLocalDate(LocalDate localDate){
+        this.localDate = localDate;
+    }
+
 
     @Override
     public String toString() {
-        return "----------Result---------\n" + discipline + " time: " + time + "\nTime achieved: " + localDate;
+        return "========== Result ==========\n" + discipline + " time: " + time + "\nTime achieved: " + localDate;
     }
 }
