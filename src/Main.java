@@ -1,9 +1,11 @@
 import datasource.Controller;
+import datasource.FileHandler;
 import domainmodel.Member;
 import domainmodel.MembershipStatus;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import ui.UserInterface;
 
@@ -14,6 +16,8 @@ public class Main {
         Controller controller = new Controller();
         Controller.MembershipRegistrationService hgg = new Controller.MembershipRegistrationService(controller);
         UserInterface ui = new UserInterface(hgg);
+        FileHandler fileHandler = new FileHandler();
+        ArrayList<Member> members = new ArrayList<>();
 
 
         Member member1 = new Member("Rikke", "Hansen", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.PASSIVE);
@@ -22,6 +26,14 @@ public class Main {
 
         // CompetitiveSwimmer swimmer1 = new CompetitiveSwimmer();
 
+        String fileName = "members.txt";
+        fileHandler.saveMembersToFile(members, fileName);
+
+        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);
+
+        for (Member member : loadedMembers){
+            System.out.println(member);
+        }
 
         hgg.addMember(member1);
         hgg.addMember(member2);
