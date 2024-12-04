@@ -145,7 +145,7 @@ public class UserInterface {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 -> displayAllMembers();
+                case 1 -> controller.displayAllMembers();
                 case 2 -> displayAllTeamMembers();
                // case 3 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
                 case 0 -> overviewMenuRunning = false;
@@ -158,8 +158,8 @@ public class UserInterface {
     private void displayAllMembers() {
         List<Person> members = membershipService.getAllMembers();
 
-        System.out.println("\n=== All Members Overview ===");
-        printHeaderLine();
+       /* System.out.println("\n=== All Members Overview ===");
+        printHeaderLine(); */
 
 
         for (Person person : members) {
@@ -170,8 +170,8 @@ public class UserInterface {
 
             }
         }
-        System.out.println("Total Members: " + members.size());
-        waitForEnter();
+      /*  System.out.println("Total Members: " + members.size());
+        waitForEnter(); */
     }
 
     private void displayAllTeamMembers() {

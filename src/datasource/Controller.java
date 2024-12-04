@@ -19,7 +19,8 @@ public class Controller {
     public Controller() {
         this.persons = new ArrayList<>();
         this.fileHandler = new FileHandler();
-        this.teams = new ArrayList();
+        this.teams = new ArrayList<Team>();
+
     }
 
     public void saveMembers(String fileName) {
@@ -71,7 +72,6 @@ public class Controller {
 
     public static class MembershipRegistrationService {
         private final Controller controller;
-        UserInterface ui = new UserInterface();
 
         public MembershipRegistrationService(Controller controller) {
             this.controller = controller;
@@ -114,23 +114,6 @@ public class Controller {
             }
         }
 
-        private void displayAllMembers() {
-            List<Person> members = getAllMembers();
-
-            System.out.println("\n=== All Members Overview ===");
-            printHeaderLine();
-
-
-            for (Person person : members) {
-                if (person instanceof CompetitiveSwimmer) {
-                    ui.printSwimmerInfo((CompetitiveSwimmer) person);
-                } else if (person instanceof Member) {
-                    ui.printMemberInfo((Member) person);
-
-                }
-            }
-        }
-
         public List<CompetitiveSwimmer> getTeamMembers(Team team) {
             List<Person> allPersons = controller.getAllPersons();
             List<CompetitiveSwimmer> teamMembers = new ArrayList<>();
@@ -146,15 +129,34 @@ public class Controller {
             }
             return teamMembers;
         }
+    }
+
+    public List<Person> getAllMembers1() {
+        return getAllPersons();
+    }
 
 
-        private void printHeaderLine() {
-            System.out.printf("%-10s %-15s %-15s %-5s %-10s %-15s%n",
-                    "ID", "First Name", "Last Name", "Age", "Status", "Team");
-            System.out.println("=".repeat(70));
+    private void printHeaderLine() {
+        System.out.printf("%-10s %-15s %-15s %-5s %-10s %-15s%n",
+                "ID", "First Name", "Last Name", "Age", "Status", "Team");
+        System.out.println("=".repeat(70));
+    }
+
+    public void displayAllMembers() {
+        List<Person> members = getAllMembers1();
+
+        System.out.println("\n=== All Members Overview ===");
+        printHeaderLine();
+
+
+        for (Person person : members) {
+            if (person instanceof CompetitiveSwimmer) {
+                ui.printSwimmerInfo((CompetitiveSwimmer) person);
+            } else if (person instanceof Member) {
+                ui.printMemberInfo((Member) person);
+
+            }
         }
-
-
     }
 }
 
