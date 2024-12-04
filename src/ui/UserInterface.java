@@ -15,7 +15,6 @@ import java.util.Scanner;
 public class UserInterface {
     private Scanner scanner;
     private Controller.MembershipRegistrationService membershipService;
-    Controller controller = new Controller();
 
     public UserInterface() {
         this.membershipService = membershipService;
@@ -53,9 +52,9 @@ public class UserInterface {
             System.out.println("3. Edit info on members");
             System.out.println("4. Show member overview");
             System.out.println("5. Exit menu");
-
             int userResponse = scanner.nextInt();
             scanner.nextLine(); // Consume newline
+
 
             switch (userResponse) {
                 case 1 -> {
@@ -130,14 +129,14 @@ public class UserInterface {
     }
 
 
-
     private void showMemberOverviewMenu() {
         boolean overviewMenuRunning = true;
         while (overviewMenuRunning) {
             System.out.println("\n=== Member Overview ===");
             System.out.println("1. View all members");
             System.out.println("2. View team members");
-            System.out.println("3. View competitive swimmers sorted by discipline");
+            System.out.println("3. View competitive team members"); // nyt implementering
+            System.out.println("4. View competitive swimmers sorted by discipline"); // nyt implementering
             System.out.println("0. Back to main menu");
             System.out.print("Enter your choice: ");
 
@@ -147,7 +146,8 @@ public class UserInterface {
             switch (choice) {
                 case 1 -> displayAllMembers();
                 case 2 -> displayAllTeamMembers();
-               // case 3 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
+                // case 3 - > view all comp members by team
+                // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -174,6 +174,7 @@ public class UserInterface {
         waitForEnter();
     }
 
+
     private void displayAllTeamMembers() {
         System.out.println("\n1. Junior Team");
         System.out.println("2. Senior Team");
@@ -191,6 +192,7 @@ public class UserInterface {
             }
         };
 
+
         if (selectedTeam != null) {
             List<CompetitiveSwimmer> teamMembers = membershipService.getTeamMembers(selectedTeam);
             System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
@@ -203,6 +205,31 @@ public class UserInterface {
         }
         waitForEnter();
     }
+
+
+/*
+    // Displays competitive members by team
+    private void displayAllCompetitiveTeamMembers() {
+        System.out.println("\n1. Junior Team");
+        System.out.println("2. Senior Team");
+        System.out.print("Select team: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        String teamName = null;
+
+
+        if (choice == 1){
+            teamName == "Junior Team";
+        }
+
+    }
+
+ */
+
+
+
 
     // Method to greet the user, and save sout's.
     private void greetingsMSG() {

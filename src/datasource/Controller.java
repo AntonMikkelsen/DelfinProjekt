@@ -13,7 +13,6 @@ public class Controller {
     private List<Person> persons;
     private FileHandler fileHandler;
     private ArrayList<Team> teams;
-    UserInterface ui = new UserInterface();
 
 
     public Controller() {
@@ -97,6 +96,7 @@ public class Controller {
         public void removeMembers(Member members) {
             controller.removePerson(members);
         }
+
 
         public void addToTeam(Team team, Person person, boolean isCompetitive) {
             if (isCompetitive) {
