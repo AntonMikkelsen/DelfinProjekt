@@ -72,7 +72,7 @@ public class Main {
         List<CompetitiveSwimmer> swimmers = Arrays.asList(swimmer1,swimmer2,swimmer3, swimmer4, swimmer5, swimmer6);
 
 
-        CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(swimmers);
+        // CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(swimmers);
 
         CompetitiveSwimmer.printTop5SwimmersByDiscipline(swimmers);
 
