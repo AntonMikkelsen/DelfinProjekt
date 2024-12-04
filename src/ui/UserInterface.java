@@ -129,6 +129,8 @@ public class UserInterface {
         }
     }
 
+
+
     private void showMemberOverviewMenu() {
         boolean overviewMenuRunning = true;
         while (overviewMenuRunning) {
@@ -145,7 +147,7 @@ public class UserInterface {
             switch (choice) {
                 case 1 -> displayAllMembers();
                 case 2 -> displayAllTeamMembers();
-                case 3 -> System.out.println("");// implemnter view competitive swimmers by discipline
+               // case 3 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -155,6 +157,7 @@ public class UserInterface {
     // Method to show all members,
     private void displayAllMembers() {
         List<Person> members = membershipService.getAllMembers();
+
         System.out.println("\n=== All Members Overview ===");
         printHeaderLine();
 
@@ -164,6 +167,7 @@ public class UserInterface {
                 printSwimmerInfo((CompetitiveSwimmer) person);
             } else if (person instanceof Member) {
                 printMemberInfo((Member) person);
+
             }
         }
         System.out.println("Total Members: " + members.size());
@@ -211,12 +215,6 @@ public class UserInterface {
     }
 
 
-    // views competitive swimmers by sorting their best and their worst discipline swimming
-    public void CompSwimmersByDiscipline(CompetitiveSwimmer competitiveSwimmer){
-
-
-
-    }
 
     //
     private void printHeaderLine() {
@@ -246,6 +244,7 @@ public class UserInterface {
                 "No Team");
         return member;
     }
+
 
     private void removeMember(String memberID) {
 
