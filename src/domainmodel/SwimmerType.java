@@ -12,6 +12,10 @@ public enum SwimmerType {
         this.requiresCoach = requiresCoach;
     }
 
-    public String getDisplayName() { return displayName; }
-    public boolean requiresCoach() { return requiresCoach; }
+    public String getDisplayName() {
+        return displayName;
+    }
+    public boolean requiresCoach() {
+        return requiresCoach;
+    }
 }

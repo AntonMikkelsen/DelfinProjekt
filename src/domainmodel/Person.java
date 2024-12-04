@@ -79,8 +79,6 @@ public abstract class Person {
     }
 
     //Methods to change current membership status of member
-
-
     public int calculateAge() {
         return Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
@@ -93,7 +91,6 @@ public abstract class Person {
                 ", Email: " + email +
                 ", Phone: " + phoneNumber +
                 ", Address: " + address;
-
     }
 
 }

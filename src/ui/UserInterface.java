@@ -170,8 +170,9 @@ public class UserInterface {
 
             }
         }
-      /*  System.out.println("Total Members: " + members.size());
-        waitForEnter(); */
+
+      System.out.println("Total Members: " + members.size());
+        waitForEnter();
     }
 
 
@@ -223,9 +224,7 @@ public class UserInterface {
         if (choice == 1){
             teamName == "Junior Team";
         }
-
     }
-
  */
 
 
@@ -364,8 +363,7 @@ public class UserInterface {
         List<Person> Members = membershipService.getAllMembers();
         Member toSearch = null;
         for (Person person : Members) {
-            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;
-            {
+            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;{
                 toSearch = (Member) person;
                 break;
             }

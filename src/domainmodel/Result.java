@@ -20,7 +20,6 @@ public class Result {
         return discipline;
     }
 
-
     public double getTime(){
         return time;
     }

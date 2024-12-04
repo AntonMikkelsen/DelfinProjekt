@@ -245,14 +245,6 @@ public class CompetitiveSwimmer extends Member {
     }
 
 
-    public void getTop5BestSwimmers(ArrayList<CompetitiveSwimmer> competitiveSwimmers){
-        CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(competitiveSwimmers);
-
-        System.out.println();
-    }
-
-
-
 
     public void addResult(Result result) {
         if (result != null) {

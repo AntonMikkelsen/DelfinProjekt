@@ -13,13 +13,12 @@ public class Controller {
     private List<Person> persons;
     private FileHandler fileHandler;
     private ArrayList<Team> teams;
-
+    UserInterface ui = new UserInterface();
 
     public Controller() {
         this.persons = new ArrayList<>();
         this.fileHandler = new FileHandler();
         this.teams = new ArrayList<Team>();
-
     }
 
     public void saveMembers(String fileName) {
@@ -147,7 +146,6 @@ public class Controller {
 
         System.out.println("\n=== All Members Overview ===");
         printHeaderLine();
-
 
         for (Person person : members) {
             if (person instanceof CompetitiveSwimmer) {
