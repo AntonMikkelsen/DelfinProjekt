@@ -16,7 +16,7 @@ public class Main {
 
         Controller controller = new Controller();
         Controller.MembershipRegistrationService hgg = new Controller.MembershipRegistrationService(controller);
-        UserInterface ui = new UserInterface(hgg);
+        UserInterface ui = new UserInterface();
         FileHandler fileHandler = new FileHandler();
         ArrayList<Member> members = new ArrayList<>();
 

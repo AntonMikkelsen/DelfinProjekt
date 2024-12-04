@@ -17,7 +17,7 @@ public class UserInterface {
     private Controller.MembershipRegistrationService membershipService;
     Controller controller = new Controller();
 
-    public UserInterface(Controller.MembershipRegistrationService membershipService) {
+    public UserInterface() {
         this.membershipService = membershipService;
         this.scanner = new Scanner(System.in);
     }
@@ -223,7 +223,7 @@ public class UserInterface {
         System.out.println("=".repeat(70));
     }
 
-    private void printSwimmerInfo(CompetitiveSwimmer swimmer) {
+    public void printSwimmerInfo(CompetitiveSwimmer swimmer) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s %s%n",
                 swimmer.getMemberID(),
                 swimmer.getFirstName(),
@@ -234,7 +234,7 @@ public class UserInterface {
                 String.join(", ", swimmer.getDisciplines()));
     }
 
-    private Member printMemberInfo(Member member) {
+    public Member printMemberInfo(Member member) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s%n",
                 member.getMemberID(),
                 member.getFirstName(),
@@ -550,6 +550,9 @@ public class UserInterface {
                 default -> System.out.println("Invalid option. Please try again.");
             }
         }
+    }
+    public void printMSG(String msg){
+        System.out.println(msg);
     }
 
 }
