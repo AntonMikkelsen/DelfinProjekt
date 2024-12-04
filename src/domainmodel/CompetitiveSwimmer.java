@@ -3,6 +3,7 @@ package domainmodel;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -123,7 +124,7 @@ public class CompetitiveSwimmer extends Member {
 
 
             // Udskriv information om svømmeren og de bedste tider
-            System.out.println("\n Swimmers name: " + swimmer.getFirstName() + " " + swimmer.getLastName());
+            System.out.println("\n Competitive swimmers name: " + swimmer.getFirstName() + " " + swimmer.getLastName());
 
             for (int i = 0; i < sortedDisciplines.size(); i++) {
                 double time = swimmer.getBestTimeForEachDiscipline(sortedDisciplines.get(i));
@@ -139,6 +140,7 @@ public class CompetitiveSwimmer extends Member {
                 }
             }
 
+
             // Værste disciplin
             double worstTime = swimmer.getBestTimeForEachDiscipline(sortedDisciplines.get(sortedDisciplines.size() - 1));
             String worstTimeString = (worstTime == Double.MAX_VALUE) ? "N/A" : String.valueOf(worstTime);
@@ -146,9 +148,72 @@ public class CompetitiveSwimmer extends Member {
         }
     }
 
+    public static void printTop5SwimmersByDiscipline(List<CompetitiveSwimmer> swimmers) {
+        List<Result> topButterfly = new ArrayList<>();
+        List<Result> topBackCrawl = new ArrayList<>();
+        List<Result> topBreastStroke = new ArrayList<>();
+        List<Result> topCrawl = new ArrayList<>();
+
+        for (CompetitiveSwimmer swimmer : swimmers) {
+            for (Result result : swimmer.getResults()) {
+                switch (result.getDiscipline()) {
+                    case BUTTERFLY -> addAndSortTopResults(topButterfly, result);
+                    case BACK_CRAWL -> addAndSortTopResults(topBackCrawl, result);
+                    case BREAST_STROKE -> addAndSortTopResults(topBreastStroke, result);
+                    case CRAWL -> addAndSortTopResults(topCrawl, result);
+                }
+            }
+        }
+
+        System.out.println("Top 5 Swimmers for Butterfly:");
+        if (topButterfly.isEmpty()){
+            System.out.println("No results recoreded");
+        } else {
+            printTopResults(topButterfly);
+        }
+
+        System.out.println("\nTop 5 Swimmers for Back Crawl:");
+        if (topBackCrawl.isEmpty()){
+            System.out.println("No results recoreded");
+        } else {
+            printTopResults(topBackCrawl);
+        }
 
 
+        System.out.println("\nTop 5 Swimmers for Breast Stroke:");
+        if (topBreastStroke.isEmpty()){
+            System.out.println("No results recoreded");
+        } else {
+            printTopResults(topBreastStroke);
+        }
 
+
+        System.out.println("\nTop 5 Swimmers for Crawl:");
+        if (topCrawl.isEmpty()){
+            System.out.println("No results recoreded");
+        } else {
+            printTopResults(topCrawl);
+        }
+    }
+
+    private static void addAndSortTopResults(List<Result> topResults, Result newResult) {
+        topResults.add(newResult);
+        topResults.sort(Comparator.comparingDouble(Result::getTime));
+        if (topResults.size() > 5) {
+            topResults.remove(5); // Keep only top 5
+        }
+    }
+
+    private static void printTopResults(List<Result> results) {
+        for (int i = 0; i < results.size(); i++) {
+            Result result = results.get(i);
+            System.out.printf("%d. %s %s - Time: %.2f%n",
+                    i + 1,
+                    result.getSwimmer().getFirstName(),
+                    result.getSwimmer().getLastName(),
+                    result.getTime());
+        }
+    }
 
     public void sortDisciplinesByPerformance() {
         for (int i = 0; i < disciplines.size() - 1; i++) {
@@ -157,7 +222,7 @@ public class CompetitiveSwimmer extends Member {
                 double time2 = getBestTimeForEachDiscipline(disciplines.get(j + 1));
 
                 // Swap if time1 is greater than time2
-                if (time1 < time2) {
+                if (time1 > time2) {
                     SwimmingDiscipline temp = disciplines.get(j);
                     disciplines.set(j, disciplines.get(j + 1));
                     disciplines.set(j + 1, temp);
@@ -165,7 +230,6 @@ public class CompetitiveSwimmer extends Member {
             }
         }
     }
-
 
     public double getBestTimeForEachDiscipline(SwimmingDiscipline discipline) {
         double bestTime = Double.MAX_VALUE;
@@ -179,6 +243,15 @@ public class CompetitiveSwimmer extends Member {
         }
         return bestTime;
     }
+
+
+    public void getTop5BestSwimmers(ArrayList<CompetitiveSwimmer> competitiveSwimmers){
+        CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(competitiveSwimmers);
+
+        System.out.println();
+    }
+
+
 
 
     public void addResult(Result result) {

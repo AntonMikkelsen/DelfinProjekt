@@ -7,6 +7,8 @@ public class Team {
     private AgeCategory ageCategory;
     private ArrayList<Person> juniorTeam = new ArrayList<>();
     private ArrayList<Person> seniorTeam = new ArrayList<>();
+    private ArrayList<Person> juniorTeamCompetitive = new ArrayList<>();
+    private ArrayList<Person> seniorTeamCompetitive = new ArrayList<>();
     private ArrayList<Person> casualSwimmers = new ArrayList<>();
     private ArrayList<Person> competitiveSwimmers = new ArrayList<>();
     private ArrayList<Person> allSwimmers = new ArrayList<>();

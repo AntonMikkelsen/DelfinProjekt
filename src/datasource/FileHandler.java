@@ -27,6 +27,7 @@ public class FileHandler {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(", ");
+
                 if (data.length == 10) {
                     String firstName = data[0].trim();
                     String lastName = data[1].trim();
@@ -41,7 +42,6 @@ public class FileHandler {
 
                     Member members = new Member(firstName, lastName, dateOfBirth,
                             memberEmail, phoneNumber, address, memberId, memberShipStatus);
-
                     membersArrayList.add(members);
                 } else {
                     System.out.println("Datatype not accepted in line: " + line);

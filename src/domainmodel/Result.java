@@ -6,12 +6,14 @@ public class Result {
     private SwimmingDiscipline discipline;
     private double time;
     private LocalDate localDate;
+    private CompetitiveSwimmer swimmer; // Reference to the swimmer
 
 
-    public Result(SwimmingDiscipline discipline, double time, LocalDate localDate) {
+    public Result(SwimmingDiscipline discipline, double time, LocalDate localDate, CompetitiveSwimmer swimmer) {
         this.discipline = discipline;
         this.time = time;
         this.localDate = localDate;
+        this.swimmer = swimmer;
     }
 
     public SwimmingDiscipline getDiscipline(){
@@ -39,9 +41,14 @@ public class Result {
         this.localDate = localDate;
     }
 
+    public CompetitiveSwimmer getSwimmer() {
+        return swimmer;
+    }
 
     @Override
     public String toString() {
         return "========== Result ==========\n" + discipline + " time: " + time + "\nTime achieved: " + localDate;
     }
+
+
 }
