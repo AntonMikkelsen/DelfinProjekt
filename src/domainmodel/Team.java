@@ -5,18 +5,13 @@ import java.util.ArrayList;
 public class Team {
     private String teamName;
     private AgeCategory ageCategory;
-    private ArrayList<Person> juniorTeam = new ArrayList<>();
-    private ArrayList<Person> seniorTeam = new ArrayList<>();
-    private ArrayList<Person> juniorTeamCompetitive = new ArrayList<>();
-    private ArrayList<Person> seniorTeamCompetitive = new ArrayList<>();
-    private ArrayList<Person> casualSwimmers = new ArrayList<>();
-    private ArrayList<Person> competitiveSwimmers = new ArrayList<>();
     private ArrayList<Person> allSwimmers = new ArrayList<>();
 
 
     public Team(String teamName, AgeCategory ageCategory) {
         this.teamName = teamName;
         this.ageCategory = ageCategory;
+        this.allSwimmers = new ArrayList<>();
     }
 
     public Boolean isSenior(Person person) {
@@ -36,11 +31,33 @@ public class Team {
         return false;
     }
 
+
+
     public String getTeamName() {
         return teamName;
     }
 
-    public void addToTeam(Person person) {
+
+    public void addSwimmersToTeam(Member member){
+        if(!allSwimmers.contains(member)){
+            allSwimmers.add(member);
+            System.out.println("You have now added " + member.getFirstName() + " " + member.getLastName() + " To " + getTeamName());
+
+        //Adds competitive swimmers to their respective team
+        if (member instanceof CompetitiveSwimmer) {
+            ((CompetitiveSwimmer) member).setTeam(this);
+            System.out.println(member.getFirstName() + " has been added to the competitive team");
+            }
+        } else {
+            System.out.println(member.getFirstName() + " is already apart of the team");
+        }
+    }
+
+
+
+    /* Dette skal højst sandsynligt  slettes pga gamle arraylister
+
+        public void addToTeam(Person person) {
         if (!allSwimmers.contains(person)) {
             allSwimmers.add(person);
             if (isJunior(person)) {
@@ -52,11 +69,12 @@ public class Team {
             System.out.println(person.getFirstName() + person.getLastName() + " is already in the team.");
         }
     }
-
     public void removeFromTeam(Person person) {
         allSwimmers.remove(person);
         juniorTeam.remove(person);
         seniorTeam.remove(person);
+        juniorTeamCompetitive.remove(person);
+        seniorTeamCompetitive.remove(person);
         casualSwimmers.remove(person);
         competitiveSwimmers.remove(person);
     }
@@ -77,4 +95,5 @@ public class Team {
     public void removeTeamCompetetiveSwimmers(Person person){
         competitiveSwimmers.remove(person);
     }
+*/
 }
