@@ -123,10 +123,6 @@ public class Main {
             System.out.println(member);
         }
 
-        hgg.addMember(member1);
-        hgg.addMember(member2);
-        hgg.addMember(member3);
-
         ui.startMenu();
 
 
