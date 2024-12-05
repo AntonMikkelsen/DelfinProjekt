@@ -2,6 +2,7 @@ package domainmodel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Member extends Person{
@@ -125,6 +126,14 @@ public class Member extends Person{
 
     public Enum getMembershipStatus(){
         return membershipStatus;
+    }
+
+    public List<String> getAllMemberDetails() {
+        List<String> memberDetails = new ArrayList<>();
+        for (Member member : membersList) {
+            memberDetails.add(member.toString()); // Eller en custom formattering
+        }
+        return memberDetails;
     }
 
       // toString metode der gør at teksten bliver príntet rigtigt ud

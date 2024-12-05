@@ -15,7 +15,6 @@ public class Main {
     public static void main(String[] args) {
 
         Controller controller = new Controller();
-        Controller.MembershipRegistrationService hgg = new Controller.MembershipRegistrationService(controller);
         UserInterface ui = new UserInterface();
         FileHandler fileHandler = new FileHandler();
         ArrayList<Member> members = new ArrayList<>();
@@ -123,11 +122,9 @@ public class Main {
             System.out.println(member);
         }
 
-        hgg.addMember(member1);
-        hgg.addMember(member2);
-        hgg.addMember(member3);
-
         ui.startMenu();
+
+
 
 
 

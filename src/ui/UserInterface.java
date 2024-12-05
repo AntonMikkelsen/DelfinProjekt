@@ -14,11 +14,12 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner;
-    private Controller.MembershipRegistrationService membershipService;
+    private Controller controller;
 
     public UserInterface() {
-        this.membershipService = membershipService;
         this.scanner = new Scanner(System.in);
+        this.controller = controller;
+
     }
 
     // Startmenu der gør brugeren kan komme ind på andre menuer bla administrivemenu osv.
@@ -144,7 +145,7 @@ public class UserInterface {
             scanner.nextLine();
 
             switch (choice) {
-                // case 1 -> controller.displayAllMembers();
+                 case 1 -> controller.displayAllMembers();
                 case 2 -> displayAllTeamMembers();
                 // case 3 - > view all comp members by team
                 // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
@@ -153,28 +154,6 @@ public class UserInterface {
             }
         }
     }
-
-    // Method to show all members,
-    private void displayAllMembers() {
-        List<Person> members = membershipService.getAllMembers();
-
-       /* System.out.println("\n=== All Members Overview ===");
-        printHeaderLine(); */
-
-
-        for (Person person : members) {
-            if (person instanceof CompetitiveSwimmer) {
-                printSwimmerInfo((CompetitiveSwimmer) person);
-            } else if (person instanceof Member) {
-                printMemberInfo((Member) person);
-
-            }
-        }
-
-      System.out.println("Total Members: " + members.size());
-        waitForEnter();
-    }
-
 
     private void displayAllTeamMembers() {
         System.out.println("\n1. Junior Team");
@@ -195,7 +174,7 @@ public class UserInterface {
 
 
         if (selectedTeam != null) {
-            List<CompetitiveSwimmer> teamMembers = membershipService.getTeamMembers(selectedTeam);
+            List<CompetitiveSwimmer> teamMembers = controller.getTeamMembers(selectedTeam);
             System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
             printHeaderLine();
 
@@ -276,7 +255,7 @@ public class UserInterface {
 
         System.out.println("enter the a membersID to remove the member");
 
-        List<Person> members = membershipService.getAllMembers();
+        List<Person> members = controller.getAllMembers();
         Member toRemove = null;
 
         for (Person person : members) {
@@ -345,10 +324,11 @@ public class UserInterface {
         }
 
 
-        String memberId = "ID" + (membershipService.getAllMembers().size() + 1);
+        String memberId = "ID" + (controller.getAllMembers().size() + 1);
 
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
-        membershipService.addMember(newMember);
+        // Ændre til nye add metode
+         controller.addMemberToTeam(newMember);
 
         System.out.println("Member added successfully: " + newMember.getFirstName() + " " + newMember.getLastName());
 
@@ -360,7 +340,7 @@ public class UserInterface {
     }
 
     public Member showMemberInfo(String memberID) {
-        List<Person> Members = membershipService.getAllMembers();
+        List<Person> Members = controller.getAllMembers();
         Member toSearch = null;
         for (Person person : Members) {
             if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;{
@@ -381,7 +361,7 @@ public class UserInterface {
         System.out.println("Enter member ID to edit: ");
         String memberID = scanner.nextLine();
 
-        List<Person> members = membershipService.getAllMembers();
+        List<Person> members = controller.getAllMembers();
         Member memberToEdit = null;
 
         // Find the member
@@ -512,7 +492,7 @@ public class UserInterface {
         System.out.println("Enter member ID to edit: ");
         String memberID = scanner.nextLine();
 
-        List<Person> members = membershipService.getAllMembers();
+        List<Person> members = controller.getAllMembers();
         Member memberToEdit = null;
 
         // Find the member
@@ -579,5 +559,8 @@ public class UserInterface {
     public void printMSG(String msg){
         System.out.println(msg);
     }
+
+
+
 
 }

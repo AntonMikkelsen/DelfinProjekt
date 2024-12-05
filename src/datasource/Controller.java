@@ -14,6 +14,7 @@ public class Controller {
     private FileHandler fileHandler;
     private ArrayList<Team> teams;
     UserInterface ui = new UserInterface();
+    private Team team;
 
     public Controller() {
         this.persons = new ArrayList<>();
@@ -52,40 +53,36 @@ public class Controller {
         return teams;
     }
 
-
-
-    public static class MembershipRegistrationService {
-        private final Controller controller;
-
-        public MembershipRegistrationService(Controller controller) {
-            this.controller = controller;
-        }
-
         public List<Person> getAllMembers() {
-            return controller.getAllPersons();
+            return getAllPersons();
         }
 
-        public void addMember(Member member) {
-            controller.addPerson(member); // Sørg for, at Controller har denne metode
+        public void addMemberToTeam(Member member) {
+             // Sørg for, at Controller har denne metode
+            team.addSwimmersToTeam(member);
+        }
+
+        public void displayAllMembers(){
+        team.displayAllMembers();
         }
 
         public void addTeam(Team team) {
-            controller.teams.add(team);
+            teams.add(team);
         }
 
         public void removeTeam(Team team) {
-            controller.teams.remove(team);
+            teams.remove(team);
         }
 
 
         public void removeMembers(Member members) {
-            controller.removePerson(members);
+            removePerson(members);
         }
 
 
 
         public List<CompetitiveSwimmer> getTeamMembers(Team team) {
-            List<Person> allPersons = controller.getAllPersons();
+            List<Person> allPersons = getAllPersons();
             List<CompetitiveSwimmer> teamMembers = new ArrayList<>();
 
             for (Person person : allPersons) {
@@ -99,7 +96,7 @@ public class Controller {
             }
             return teamMembers;
         }
-    }
+
 
     public List<Person> getAllMembers1() {
         return getAllPersons();
@@ -112,7 +109,7 @@ public class Controller {
         System.out.println("=".repeat(70));
     }
 
-    public void displayAllMembers() {
+  /*  public void displayAllMembers() {
         List<Person> members = getAllMembers1();
 
         System.out.println("\n=== All Members Overview ===");
@@ -126,7 +123,7 @@ public class Controller {
 
             }
         }
-    }
+    } */
 
 
 }
