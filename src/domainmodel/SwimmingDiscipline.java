@@ -14,6 +14,11 @@ public enum SwimmingDiscipline {
         this.shortName = shortName;
     }
 
-    public String getFullName() { return fullName; }
-    public String getShortName() { return shortName; }
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
 }

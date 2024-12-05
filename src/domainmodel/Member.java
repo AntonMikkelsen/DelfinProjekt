@@ -2,12 +2,12 @@ package domainmodel;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Member extends Person{
     private String memberID;
     private Enum<MembershipStatus> membershipStatus;
-    ArrayList<Member> membersList = new ArrayList<>();
     private double membershipFee;
     private boolean isInArrears;
     private SwimmerType swimmerType;
@@ -83,14 +83,6 @@ public class Member extends Person{
 
     public void setInArrears(boolean inArrears){
         isInArrears = inArrears;
-    }
-
-    public void addMember(){
-        membersList.add(this);
-    }
-
-    public void removeMembers(Member members){
-        membersList.remove(members);
     }
 
     public void setMemberID(String memberID) {

@@ -1,20 +1,23 @@
 package domainmodel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Team {
     private String teamName;
     private AgeCategory ageCategory;
-    private ArrayList<Person> juniorTeam = new ArrayList<>();
-    private ArrayList<Person> seniorTeam = new ArrayList<>();
-    private ArrayList<Person> casualSwimmers = new ArrayList<>();
-    private ArrayList<Person> competitiveSwimmers = new ArrayList<>();
     private ArrayList<Person> allSwimmers = new ArrayList<>();
 
 
     public Team(String teamName, AgeCategory ageCategory) {
         this.teamName = teamName;
         this.ageCategory = ageCategory;
+        this.allSwimmers = new ArrayList<>();
+    }
+
+    public Team(String teamName) {
+        this.teamName = teamName;
+        this.allSwimmers = new ArrayList<>();
     }
 
     public Boolean isSenior(Person person) {
@@ -31,14 +34,57 @@ public class Team {
         } else if (ageCategory == AgeCategory.SENIOR) {
             return isSenior(person);
         }
-        return false;
+        return false; // For casual teams, this check is bypassed
     }
+
+
 
     public String getTeamName() {
         return teamName;
     }
 
-    public void addToTeam(Person person) {
+
+    public void addSwimmersToTeam(Member member) {
+        // Check if the swimmer is already on the team
+        if (!allSwimmers.contains(member)) {
+            // Casual teams accept all swimmers regardless of age
+            if (ageCategory == null || isAgeCategoryValid(member)) {
+                allSwimmers.add(member);
+                System.out.println("You have now added " + member.getFirstName() + " " + member.getLastName() + " to " + getTeamName());
+
+                // Handle competitive swimmer logic
+                if (member instanceof CompetitiveSwimmer) {
+                    ((CompetitiveSwimmer) member).setTeam(this);
+                    System.out.println(member.getFirstName() + " has been added to the competitive team for " + getTeamName());
+                }
+            } else {
+                // Error: swimmer doesn't match the team's age category
+                System.out.println("Error: " + member.getFirstName() + " " + member.getLastName() +
+                        " does not meet the age criteria for the " + getTeamName() + " team.");
+            }
+        } else {
+            // Error: swimmer is already on the team
+            System.out.println(member.getFirstName() + " is already a part of the " + getTeamName() + " team.");
+        }
+    }
+
+
+    public String displayAllMembers(){
+        String string = "";
+        for(Person person : allSwimmers){
+            string += person.toString() + "\n";
+
+        }
+        return string;
+    }
+
+
+
+
+
+    /* Dette skal højst sandsynligt  slettes pga gamle arraylister
+
+        public void addToTeam(Person person) {
         if (!allSwimmers.contains(person)) {
             allSwimmers.add(person);
             if (isJunior(person)) {
@@ -50,11 +96,12 @@ public class Team {
             System.out.println(person.getFirstName() + person.getLastName() + " is already in the team.");
         }
     }
-
     public void removeFromTeam(Person person) {
         allSwimmers.remove(person);
         juniorTeam.remove(person);
         seniorTeam.remove(person);
+        juniorTeamCompetitive.remove(person);
+        seniorTeamCompetitive.remove(person);
         casualSwimmers.remove(person);
         competitiveSwimmers.remove(person);
     }
@@ -75,4 +122,5 @@ public class Team {
     public void removeTeamCompetetiveSwimmers(Person person){
         competitiveSwimmers.remove(person);
     }
+*/
 }

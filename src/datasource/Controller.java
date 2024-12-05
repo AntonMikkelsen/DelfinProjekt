@@ -4,124 +4,71 @@ import domainmodel.CompetitiveSwimmer;
 import domainmodel.Member;
 import domainmodel.Person;
 import domainmodel.Team;
+import ui.UserInterface;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
-    private final ArrayList<Person> persons;
-    private final FileHandler fileHandler;
-    private final ArrayList<Team> teams;
-
+    private List<Person> persons;
+    private FileHandler fileHandler;
+    private Team team;
 
     public Controller() {
         this.persons = new ArrayList<>();
         this.fileHandler = new FileHandler();
-        this.teams = new ArrayList<>();
+         /*this.teams = new ArrayList<Team>(); */
     }
 
-    public void saveMembers (String fileName){
+    public void saveMembers(String fileName) {
         ArrayList<Member> members = new ArrayList<>();
-        for (Person person : persons){
-            if (person instanceof Member){
+        for (Person person : persons) {
+            if (person instanceof Member) {
                 members.add((Member) person);
             }
         }
-        if (members.isEmpty()) {
-            System.out.println("No members to save.");
-            return;
-        }
-        fileHandler.saveMembersToFile(members);
+        fileHandler.saveMembersToFile(members, fileName);
     }
 
-    public void loadMembers(String fileName){
+    public void loadMembers(String fileName) {
         ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);
-        if (loadedMembers.isEmpty()) {
-            System.out.println("No members were loaded from the file.");
-            return;
-        }
         persons.addAll(loadedMembers);
     }
 
-    public List<Person> getAllPersons(){
+    public List<Person> getAllPersons() {
         return persons;
     }
 
-    public void addPerson(Person person){
+    public void addPerson(Person person) {
         persons.add(person);
     }
 
-    public void removePerson(Person person){
+    public void removePerson(Person person) {
         persons.remove(person);
     }
 
-    public ArrayList<Team> getTeams(){
-        return teams;
-    }
-
-    public void removeTeamCompetetiveSwimmers(Team team, Person person){
-        team.removeTeamCompetetiveSwimmers(person);
-    }
-
-    public void removeTeamCasualSwimmers(Team team, Person person){
-        team.removeTeamCasualSwimmers(person);
-    }
-
-    public void addTeamCompetitiveSwimmers(Team team, Person person){
-        team.addtoTeamCompetitiveSwimmers(person);
-    }
-
-    public void addTeamCasualSwimmers(Team team, Person person){
-        team.addtoTeamCasualSwimmers(person);
-    }
-
-    public static class MembershipRegistrationService {
-        private final Controller controller;
-
-        public MembershipRegistrationService(Controller controller) {
-            this.controller = controller;
-        }
-
         public List<Person> getAllMembers() {
-            return controller.getAllPersons();
+            return getAllPersons();
         }
 
-        public void addMember(Member member) {
-            controller.addPerson(member); // Sørg for, at Controller har denne metode
+        public void addMemberToTeam(Member member) {
+             // Sørg for, at Controller har denne metode
+            team.addSwimmersToTeam(member);
         }
 
-        public void addTeam(Team team) {
-            controller.teams.add(team);
-        }
-
-        public void removeTeam(Team team) {
-            controller.teams.remove(team);
+        public void displayAllMembers(){
+        team.displayAllMembers();
         }
 
 
-        public void removeMembers(Member members){
-            controller.removePerson(members);
+        public void removeMembers(Member members) {
+            removePerson(members);
         }
 
-        public void addToTeam(Team team, Person person, boolean isCompetitive) {
-            if (isCompetitive) {
-                team.addtoTeamCompetitiveSwimmers(person);
-            } else {
-                team.addtoTeamCasualSwimmers(person);
-            }
-        }
 
-        public void removeFromTeam(Team team, Person person, boolean isCompetitive) {
-            if (isCompetitive) {
-                team.removeTeamCompetetiveSwimmers(person);
-            } else {
-                team.removeTeamCasualSwimmers(person);
-            }
-        }
 
         public List<CompetitiveSwimmer> getTeamMembers(Team team) {
-            List<Person> allPersons = controller.getAllPersons();
+            List<Person> allPersons = getAllPersons();
             List<CompetitiveSwimmer> teamMembers = new ArrayList<>();
 
             for (Person person : allPersons) {
@@ -135,6 +82,48 @@ public class Controller {
             }
             return teamMembers;
         }
+
+
+    public List<Person> getAllMembers1() {
+        return getAllPersons();
     }
 
+
+    private void printHeaderLine() {
+        System.out.printf("%-10s %-15s %-15s %-5s %-10s %-15s%n",
+                "ID", "First Name", "Last Name", "Age", "Status", "Team");
+        System.out.println("=".repeat(70));
+    }
+
+  /*  public void displayAllMembers() {
+        List<Person> members = getAllMembers1();
+
+        System.out.println("\n=== All Members Overview ===");
+        printHeaderLine();
+
+        for (Person person : members) {
+            if (person instanceof CompetitiveSwimmer) {
+                ui.printSwimmerInfo((CompetitiveSwimmer) person);
+            } else if (person instanceof Member) {
+                ui.printMemberInfo((Member) person);
+            }
+        }
+    } */
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

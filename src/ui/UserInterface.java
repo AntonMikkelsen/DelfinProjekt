@@ -13,14 +13,10 @@ import java.util.Scanner;
 
 
 public class UserInterface {
-    private Scanner scanner;
-    private Controller.MembershipRegistrationService membershipService;
-    Controller controller = new Controller();
+   Controller controller = new Controller();
+   Scanner scanner = new Scanner(System.in);
 
-    public UserInterface(Controller.MembershipRegistrationService membershipService) {
-        this.membershipService = membershipService;
-        this.scanner = new Scanner(System.in);
-    }
+
 
     // Startmenu der gør brugeren kan komme ind på andre menuer bla administrivemenu osv.
     public void startMenu() {
@@ -53,9 +49,9 @@ public class UserInterface {
             System.out.println("3. Edit info on members");
             System.out.println("4. Show member overview");
             System.out.println("5. Exit menu");
-
             int userResponse = scanner.nextInt();
             scanner.nextLine(); // Consume newline
+
 
             switch (userResponse) {
                 case 1 -> {
@@ -130,14 +126,14 @@ public class UserInterface {
     }
 
 
-
     private void showMemberOverviewMenu() {
         boolean overviewMenuRunning = true;
         while (overviewMenuRunning) {
             System.out.println("\n=== Member Overview ===");
             System.out.println("1. View all members");
             System.out.println("2. View team members");
-            System.out.println("3. View competitive swimmers sorted by discipline");
+            System.out.println("3. View competitive team members"); // nyt implementering
+            System.out.println("4. View competitive swimmers sorted by discipline"); // nyt implementering
             System.out.println("0. Back to main menu");
             System.out.print("Enter your choice: ");
 
@@ -145,33 +141,14 @@ public class UserInterface {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 -> displayAllMembers();
+                 case 1 -> controller.displayAllMembers();
                 case 2 -> displayAllTeamMembers();
-               // case 3 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
+                // case 3 - > view all comp members by team
+                // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
             }
         }
-    }
-
-    // Method to show all members,
-    private void displayAllMembers() {
-        List<Person> members = membershipService.getAllMembers();
-
-        System.out.println("\n=== All Members Overview ===");
-        printHeaderLine();
-
-
-        for (Person person : members) {
-            if (person instanceof CompetitiveSwimmer) {
-                printSwimmerInfo((CompetitiveSwimmer) person);
-            } else if (person instanceof Member) {
-                printMemberInfo((Member) person);
-
-            }
-        }
-        System.out.println("Total Members: " + members.size());
-        waitForEnter();
     }
 
     private void displayAllTeamMembers() {
@@ -191,8 +168,9 @@ public class UserInterface {
             }
         };
 
+
         if (selectedTeam != null) {
-            List<CompetitiveSwimmer> teamMembers = membershipService.getTeamMembers(selectedTeam);
+            List<CompetitiveSwimmer> teamMembers = controller.getTeamMembers(selectedTeam);
             System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
             printHeaderLine();
 
@@ -203,6 +181,29 @@ public class UserInterface {
         }
         waitForEnter();
     }
+
+
+/*
+    // Displays competitive members by team
+    private void displayAllCompetitiveTeamMembers() {
+        System.out.println("\n1. Junior Team");
+        System.out.println("2. Senior Team");
+        System.out.print("Select team: ");
+
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        String teamName = null;
+
+
+        if (choice == 1){
+            teamName == "Junior Team";
+        }
+    }
+ */
+
+
+
 
     // Method to greet the user, and save sout's.
     private void greetingsMSG() {
@@ -223,7 +224,7 @@ public class UserInterface {
         System.out.println("=".repeat(70));
     }
 
-    private void printSwimmerInfo(CompetitiveSwimmer swimmer) {
+    public void printSwimmerInfo(CompetitiveSwimmer swimmer) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s %s%n",
                 swimmer.getMemberID(),
                 swimmer.getFirstName(),
@@ -234,7 +235,7 @@ public class UserInterface {
                 String.join(", ", swimmer.getDisciplines()));
     }
 
-    private Member printMemberInfo(Member member) {
+    public Member printMemberInfo(Member member) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s%n",
                 member.getMemberID(),
                 member.getFirstName(),
@@ -250,7 +251,7 @@ public class UserInterface {
 
         System.out.println("enter the a membersID to remove the member");
 
-        List<Person> members = membershipService.getAllMembers();
+        List<Person> members = controller.getAllMembers();
         Member toRemove = null;
 
         for (Person person : members) {
@@ -319,12 +320,11 @@ public class UserInterface {
         }
 
 
-        String memberId = "ID" + (membershipService.getAllMembers().size() + 1);
+        String memberId = "ID" + (controller.getAllMembers().size() + 1);
 
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
-        membershipService.addMember(newMember);
-        controller.addPerson(newMember);
-        controller.saveMembers("members.csv");
+        // Ændre til nye add metode
+         controller.addMemberToTeam(newMember);
 
         System.out.println("Member added successfully: " + newMember.getFirstName() + " " + newMember.getLastName());
 
@@ -336,11 +336,10 @@ public class UserInterface {
     }
 
     public Member showMemberInfo(String memberID) {
-        List<Person> Members = membershipService.getAllMembers();
+        List<Person> Members = controller.getAllMembers();
         Member toSearch = null;
         for (Person person : Members) {
-            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;
-            {
+            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;{
                 toSearch = (Member) person;
                 break;
             }
@@ -358,7 +357,7 @@ public class UserInterface {
         System.out.println("Enter member ID to edit: ");
         String memberID = scanner.nextLine();
 
-        List<Person> members = membershipService.getAllMembers();
+        List<Person> members = controller.getAllMembers();
         Member memberToEdit = null;
 
         // Find the member
@@ -463,8 +462,6 @@ public class UserInterface {
                 }
                 case 8 -> {
                     System.out.println("Changes saved successfully.");
-                    controller.addPerson(memberToEdit);
-                    controller.saveMembers("members.csv");
                     editing = false;
                 }
                 default -> System.out.println("Invalid option. Please try again.");
@@ -491,7 +488,7 @@ public class UserInterface {
         System.out.println("Enter member ID to edit: ");
         String memberID = scanner.nextLine();
 
-        List<Person> members = membershipService.getAllMembers();
+        List<Person> members = controller.getAllMembers();
         Member memberToEdit = null;
 
         // Find the member
@@ -549,13 +546,17 @@ public class UserInterface {
                 }
                 case 4 -> {
                     System.out.println("Changes saved successfully.");
-                    controller.addPerson(memberToEdit);
-                    controller.saveMembers("members.csv");
                     editing = false;
                 }
                 default -> System.out.println("Invalid option. Please try again.");
             }
         }
     }
+    public void printMSG(String msg){
+        System.out.println(msg);
+    }
+
+
+
 
 }
