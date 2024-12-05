@@ -33,7 +33,7 @@ public class Team {
         } else if (ageCategory == AgeCategory.SENIOR) {
             return isSenior(person);
         }
-        return false;
+        return false; // For casual teams, this check is bypassed
     }
 
 
@@ -44,8 +44,10 @@ public class Team {
 
 
     public void addSwimmersToTeam(Member member) {
+        // Check if the swimmer is already on the team
         if (!allSwimmers.contains(member)) {
-            if (isAgeCategoryValid(member)) {
+            // Casual teams accept all swimmers regardless of age
+            if (ageCategory == null || isAgeCategoryValid(member)) {
                 allSwimmers.add(member);
                 System.out.println("You have now added " + member.getFirstName() + " " + member.getLastName() + " to " + getTeamName());
 
@@ -55,12 +57,26 @@ public class Team {
                     System.out.println(member.getFirstName() + " has been added to the competitive team for " + getTeamName());
                 }
             } else {
-                System.out.println("Error: " + member.getFirstName() + " " + member.getLastName() + " does not meet the age criteria for the " + getTeamName() + " team.");
+                // Error: swimmer doesn't match the team's age category
+                System.out.println("Error: " + member.getFirstName() + " " + member.getLastName() +
+                        " does not meet the age criteria for the " + getTeamName() + " team.");
             }
         } else {
-            System.out.println(member.getFirstName() + " is already a part of the team.");
+            // Error: swimmer is already on the team
+            System.out.println(member.getFirstName() + " is already a part of the " + getTeamName() + " team.");
         }
     }
+
+
+    public String displayAllMembers(){
+        String string = "";
+        for(Person person : allSwimmers){
+            string += person.toString() + "\n";
+
+        }
+        return string;
+    }
+
 
 
 

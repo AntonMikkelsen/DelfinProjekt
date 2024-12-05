@@ -91,6 +91,7 @@ public class Main {
         regularTeam.addSwimmersToTeam(member3);
 
 
+
         competitveTeamJunior.addSwimmersToTeam(member3);
 
 
@@ -106,6 +107,11 @@ public class Main {
         competitveTeamSenior.addSwimmersToTeam(swimmer2);
 
         competitveTeamSenior.addSwimmersToTeam(swimmer3);
+
+
+
+
+        System.out.println(regularTeam.displayAllMembers());
 
 
         String fileName = "members.txt";
