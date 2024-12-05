@@ -8,7 +8,6 @@ import java.util.Random;
 public class Member extends Person{
     private String memberID;
     private Enum<MembershipStatus> membershipStatus;
-    ArrayList<Member> membersList = new ArrayList<>();
     private double membershipFee;
     private boolean isInArrears;
     private SwimmerType swimmerType;
@@ -86,14 +85,6 @@ public class Member extends Person{
         isInArrears = inArrears;
     }
 
-    public void addMember(Member members){
-        membersList.add(members);
-    }
-
-    public void removeMembers(Member members){
-        membersList.remove(members);
-    }
-
     public void setMemberID(String memberID) {
         this.memberID = memberID;
     }
@@ -126,14 +117,6 @@ public class Member extends Person{
 
     public Enum getMembershipStatus(){
         return membershipStatus;
-    }
-
-    public List<String> getAllMemberDetails() {
-        List<String> memberDetails = new ArrayList<>();
-        for (Member member : membersList) {
-            memberDetails.add(member.toString()); // Eller en custom formattering
-        }
-        return memberDetails;
     }
 
       // toString metode der gør at teksten bliver príntet rigtigt ud
