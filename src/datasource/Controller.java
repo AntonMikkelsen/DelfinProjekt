@@ -12,13 +12,12 @@ import java.util.List;
 public class Controller {
     private List<Person> persons;
     private FileHandler fileHandler;
-    private ArrayList<Team> teams;
     private Team team;
 
     public Controller() {
         this.persons = new ArrayList<>();
         this.fileHandler = new FileHandler();
-        this.teams = new ArrayList<Team>();
+         /*this.teams = new ArrayList<Team>(); */
     }
 
     public void saveMembers(String fileName) {
@@ -48,10 +47,6 @@ public class Controller {
         persons.remove(person);
     }
 
-    public ArrayList<Team> getTeams() {
-        return teams;
-    }
-
         public List<Person> getAllMembers() {
             return getAllPersons();
         }
@@ -63,14 +58,6 @@ public class Controller {
 
         public void displayAllMembers(){
         team.displayAllMembers();
-        }
-
-        public void addTeam(Team team) {
-            teams.add(team);
-        }
-
-        public void removeTeam(Team team) {
-            teams.remove(team);
         }
 
 
