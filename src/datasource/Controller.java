@@ -120,7 +120,6 @@ public class Controller {
                 ui.printSwimmerInfo((CompetitiveSwimmer) person);
             } else if (person instanceof Member) {
                 ui.printMemberInfo((Member) person);
-
             }
         }
     } */
