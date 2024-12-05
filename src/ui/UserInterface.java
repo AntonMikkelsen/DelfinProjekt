@@ -144,7 +144,7 @@ public class UserInterface {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 -> controller.displayAllMembers();
+                // case 1 -> controller.displayAllMembers();
                 case 2 -> displayAllTeamMembers();
                 // case 3 - > view all comp members by team
                 // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();

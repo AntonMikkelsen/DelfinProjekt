@@ -21,14 +21,13 @@ public class Main {
         ArrayList<Member> members = new ArrayList<>();
 
 
-        Member member1 = new Member("Rikke", "Hansen", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006", MembershipStatus.PASSIVE);
-        Member member2 = new Member("Rikke", "Hansen", LocalDate.of(1930, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55", MembershipStatus.ACTIVE);
-        Member member3 = new Member("Rikke", "Hansen", LocalDate.of(2020, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55", MembershipStatus.ACTIVE);
-
+        Member member1 = new Member("Rikke", "Hansen1", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006", MembershipStatus.PASSIVE);
+        Member member2 = new Member("Rikke", "Hansen2", LocalDate.of(1930, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55", MembershipStatus.ACTIVE);
+        Member member3 = new Member("Rikke", "Hansen3", LocalDate.of(1999, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55", MembershipStatus.ACTIVE);
 
         // Competitive swimmers:
         CompetitiveSwimmer swimmer1 = new CompetitiveSwimmer("RikkeComp", "HansenComp", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.PASSIVE, null, null);
-        CompetitiveSwimmer swimmer2 = new CompetitiveSwimmer("Peter", "Lausen", LocalDate.of(1955, 06, 05), "PetLauk", "50503333", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
+        CompetitiveSwimmer swimmer2 = new CompetitiveSwimmer("Peter", "Lausen", LocalDate.of(2019, 06, 05), "PetLauk", "50503333", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
         CompetitiveSwimmer swimmer3 = new CompetitiveSwimmer("Rikmp", "narar", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
         CompetitiveSwimmer swimmer4 = new CompetitiveSwimmer("Lars", "HansenComp", LocalDate.of(1955, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.PASSIVE, null, null);
         CompetitiveSwimmer swimmer5 = new CompetitiveSwimmer("Kaus", "KOOO", LocalDate.of(1933, 06, 05), "PetLauk", "50503333", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
@@ -79,6 +78,34 @@ public class Main {
         CompetitiveSwimmer.printTop5SwimmersByDiscipline(swimmers);
 
         System.out.println();
+
+
+        Team competitveTeamSenior = new Team("Competitive Team Senior", AgeCategory.SENIOR);
+        Team competitveTeamJunior = new Team("Competitive Team Junior", AgeCategory.JUNIOR);
+
+        Team regularTeam = new Team("Casual Swimmers");
+
+
+        regularTeam.addSwimmersToTeam(member1);
+        regularTeam.addSwimmersToTeam(member2);
+        regularTeam.addSwimmersToTeam(member3);
+
+
+        competitveTeamJunior.addSwimmersToTeam(member3);
+
+
+        competitveTeamJunior.addSwimmersToTeam(swimmer1);
+
+
+        competitveTeamJunior.addSwimmersToTeam(swimmer2);
+
+
+        competitveTeamSenior.addSwimmersToTeam(swimmer1);
+
+
+        competitveTeamSenior.addSwimmersToTeam(swimmer2);
+
+        competitveTeamSenior.addSwimmersToTeam(swimmer3);
 
 
         String fileName = "members.txt";

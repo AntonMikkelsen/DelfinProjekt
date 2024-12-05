@@ -52,21 +52,7 @@ public class Controller {
         return teams;
     }
 
-    public void removeTeamCompetetiveSwimmers(Team team, Person person) {
-        team.removeTeamCompetetiveSwimmers(person);
-    }
 
-    public void removeTeamCasualSwimmers(Team team, Person person) {
-        team.removeTeamCasualSwimmers(person);
-    }
-
-    public void addTeamCompetitiveSwimmers(Team team, Person person) {
-        team.addtoTeamCompetitiveSwimmers(person);
-    }
-
-    public void addTeamCasualSwimmers(Team team, Person person) {
-        team.addtoTeamCasualSwimmers(person);
-    }
 
     public static class MembershipRegistrationService {
         private final Controller controller;
@@ -97,21 +83,6 @@ public class Controller {
         }
 
 
-        public void addToTeam(Team team, Person person, boolean isCompetitive) {
-            if (isCompetitive) {
-                team.addtoTeamCompetitiveSwimmers(person);
-            } else {
-                team.addtoTeamCasualSwimmers(person);
-            }
-        }
-
-        public void removeFromTeam(Team team, Person person, boolean isCompetitive) {
-            if (isCompetitive) {
-                team.removeTeamCompetetiveSwimmers(person);
-            } else {
-                team.removeTeamCasualSwimmers(person);
-            }
-        }
 
         public List<CompetitiveSwimmer> getTeamMembers(Team team) {
             List<Person> allPersons = controller.getAllPersons();

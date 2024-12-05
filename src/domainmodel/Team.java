@@ -14,6 +14,11 @@ public class Team {
         this.allSwimmers = new ArrayList<>();
     }
 
+    public Team(String teamName) {
+        this.teamName = teamName;
+        this.allSwimmers = new ArrayList<>();
+    }
+
     public Boolean isSenior(Person person) {
         return person.calculateAge() >= 18;
     }
@@ -38,20 +43,25 @@ public class Team {
     }
 
 
-    public void addSwimmersToTeam(Member member){
-        if(!allSwimmers.contains(member)){
-            allSwimmers.add(member);
-            System.out.println("You have now added " + member.getFirstName() + " " + member.getLastName() + " To " + getTeamName());
+    public void addSwimmersToTeam(Member member) {
+        if (!allSwimmers.contains(member)) {
+            if (isAgeCategoryValid(member)) {
+                allSwimmers.add(member);
+                System.out.println("You have now added " + member.getFirstName() + " " + member.getLastName() + " to " + getTeamName());
 
-        //Adds competitive swimmers to their respective team
-        if (member instanceof CompetitiveSwimmer) {
-            ((CompetitiveSwimmer) member).setTeam(this);
-            System.out.println(member.getFirstName() + " has been added to the competitive team");
+                // Handle competitive swimmer logic
+                if (member instanceof CompetitiveSwimmer) {
+                    ((CompetitiveSwimmer) member).setTeam(this);
+                    System.out.println(member.getFirstName() + " has been added to the competitive team for " + getTeamName());
+                }
+            } else {
+                System.out.println("Error: " + member.getFirstName() + " " + member.getLastName() + " does not meet the age criteria for the " + getTeamName() + " team.");
             }
         } else {
-            System.out.println(member.getFirstName() + " is already apart of the team");
+            System.out.println(member.getFirstName() + " is already a part of the team.");
         }
     }
+
 
 
 
