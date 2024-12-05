@@ -15,7 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         Controller controller = new Controller();
-        UserInterface ui = new UserInterface();
+        UserInterface ui = new UserInterface(controller);
         FileHandler fileHandler = new FileHandler();
         ArrayList<Member> members = new ArrayList<>();
 

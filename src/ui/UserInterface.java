@@ -16,7 +16,7 @@ public class UserInterface {
     private Scanner scanner;
     private Controller controller;
 
-    public UserInterface() {
+    public UserInterface(Controller controller) {
         this.scanner = new Scanner(System.in);
         this.controller = controller;
 

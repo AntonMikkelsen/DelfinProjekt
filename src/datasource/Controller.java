@@ -13,7 +13,6 @@ public class Controller {
     private List<Person> persons;
     private FileHandler fileHandler;
     private ArrayList<Team> teams;
-    UserInterface ui = new UserInterface();
     private Team team;
 
     public Controller() {
