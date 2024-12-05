@@ -85,8 +85,8 @@ public class Member extends Person{
         isInArrears = inArrears;
     }
 
-    public void addMember(){
-        membersList.add(this);
+    public void addMember(Member members){
+        membersList.add(members);
     }
 
     public void removeMembers(Member members){
