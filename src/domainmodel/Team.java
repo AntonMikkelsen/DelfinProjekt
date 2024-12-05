@@ -68,6 +68,34 @@ public class Team {
         }
     }
 
+    //Chatgpt's bedre version af min egen kode
+    public ArrayList<CompetitiveSwimmer> getTeamMembersComp() {
+        ArrayList<CompetitiveSwimmer> teamMembersTemp = new ArrayList<>();
+
+        //Checks if team is competitive
+        if (this.getTeamName().contains("Competitive")) {
+            for (Person swimmer : allSwimmers) {
+                if (swimmer instanceof CompetitiveSwimmer) {
+                    teamMembersTemp.add((CompetitiveSwimmer) swimmer);
+                }
+            }
+        }
+
+        return teamMembersTemp;
+    }
+
+
+    /*min code
+    public ArrayList<CompetitiveSwimmer> getTeamMembersComp(){
+        ArrayList<CompetitiveSwimmer> teamMembersTemp = new ArrayList<>();
+        if (this.getTeamName().contains("Competitive")){
+            teamMembersTemp.add(allSwimmers);
+        }
+        return teamMembersTemp;
+    }
+
+     */
+
 
     public String displayAllMembers(){
         String string = "";

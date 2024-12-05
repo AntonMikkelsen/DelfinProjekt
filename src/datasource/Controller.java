@@ -14,10 +14,11 @@ public class Controller {
     private FileHandler fileHandler;
     private Team team;
 
+
     public Controller() {
         this.persons = new ArrayList<>();
         this.fileHandler = new FileHandler();
-         /*this.teams = new ArrayList<Team>(); */
+         // this.teams = new ArrayList<Team>();
     }
 
     public void saveMembers(String fileName) {
@@ -54,17 +55,16 @@ public class Controller {
         public void addMemberToTeam(Member member) {
              // Sørg for, at Controller har denne metode
             team.addSwimmersToTeam(member);
+
         }
 
         public void displayAllMembers(){
         team.displayAllMembers();
         }
 
-
         public void removeMembers(Member members) {
             removePerson(members);
         }
-
 
 
         public List<CompetitiveSwimmer> getTeamMembers(Team team) {

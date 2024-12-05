@@ -13,10 +13,12 @@ import java.util.Scanner;
 
 
 public class UserInterface {
-   Controller controller = new Controller();
-   Scanner scanner = new Scanner(System.in);
+    private Scanner scanner;
+    Controller controller = new Controller();
 
-
+    public UserInterface() {
+        this.scanner = new Scanner(System.in);
+    }
 
     // Startmenu der gør brugeren kan komme ind på andre menuer bla administrivemenu osv.
     public void startMenu() {
