@@ -34,9 +34,24 @@ public class Cashier {
         return costOfNormalSeniorMembership; //Den normale seniorpris over 18, under 60 år.
     }
 
+    public void addMember(Member member){
+    }
+
+    public void removeMember(){
+
+    }
 
 
+    public ArrayList<Member> membersInArrears(){
+        ArrayList<Member> membersIsInArrears = new ArrayList<>();
 
+        for (Member member : allMembers){
+            if(member.isInArrears()) {
+                membersIsInArrears.add(member);
+            }
+        }
+        return membersIsInArrears;
+    }
 
 
 

@@ -8,7 +8,6 @@ import java.util.Random;
 public class Member extends Person{
     private String memberID;
     private Enum<MembershipStatus> membershipStatus;
-    // ArrayList<Member> membersList = new ArrayList<>(); Skal prob slettes
     private double membershipFee;
     private boolean isInArrears;
     private SwimmerType swimmerType;
@@ -67,16 +66,6 @@ public class Member extends Person{
         isInArrears = inArrears;
     }
 
-    /* Skal prob slettes
-    public void addMember(Member members){
-        membersList.add(members);
-    }
-
-    public void removeMembers(Member members){
-        membersList.remove(members);
-    }
-
-     */
 
     public void setMemberID(String memberID) {
         this.memberID = memberID;
