@@ -27,9 +27,8 @@ public class UserInterface {
 
             switch (userResponse) {
                 case 1 -> administrativeMenu();
-                case 2 -> bookingAndTrainingMenu();
-                case 3 -> membershipMenu();
-                case 4 -> {
+                case 2 -> membershipMenu();
+                case 3 -> {
                     System.out.println("Exiting program...");
                     menuRunning = false;
                 }
@@ -74,28 +73,6 @@ public class UserInterface {
         }
     }
 
-    // BookingAndTrainingMenu
-    public void bookingAndTrainingMenu() {
-        boolean bookingAndTrainingMenuRunning = true;
-        while (bookingAndTrainingMenuRunning) {
-            System.out.println("\n=== Booking and Training Menu ===");
-            System.out.println("1. See schedule of the day");
-            System.out.println("2. Edit schedule as a trainer");
-            System.out.println("3. Cancellation of training or booking");
-            System.out.println("4. Exit menu");
-
-            int userResponse = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (userResponse) {
-                case 1 -> System.out.println("See schedule of the day");
-                case 2 -> System.out.println("Edit schedule as a trainer");
-                case 3 -> System.out.println("Cancelation of training or booking");
-                case 4 -> bookingAndTrainingMenuRunning = false;
-                default -> System.out.println("Invalid option. Please try again.");
-            }
-        }
-    }
 
     public void membershipMenu() {
         boolean membershipMenuRunning = true;
@@ -208,9 +185,8 @@ public class UserInterface {
     private void greetingsMSG() {
         System.out.println("\n=== Welcome To Your Swimming Park System ===");
         System.out.println("1. Administrative data");
-        System.out.println("2. Booking and training");
-        System.out.println("3. Membership management");
-        System.out.println("4. Exit");
+        System.out.println("2. Membership management");
+        System.out.println("3. Exit");
         System.out.print("Enter your choice: ");
     }
 

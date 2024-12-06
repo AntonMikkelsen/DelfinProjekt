@@ -16,6 +16,8 @@ public class Main {
 
         UserInterface ui = new UserInterface();
         FileHandler fileHandler = new FileHandler();
+        ArrayList<Member> members = new ArrayList<>();
+        Cashier cashier = new Cashier(members);
 
 
         Member member1 = new Member("Rikke", "Hansen1", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006", MembershipStatus.PASSIVE);
@@ -29,6 +31,9 @@ public class Main {
         CompetitiveSwimmer swimmer4 = new CompetitiveSwimmer("Lars", "HansenComp", LocalDate.of(1955, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.PASSIVE, null, null);
         CompetitiveSwimmer swimmer5 = new CompetitiveSwimmer("Kaus", "KOOO", LocalDate.of(1933, 06, 05), "PetLauk", "50503333", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
         CompetitiveSwimmer swimmer6 = new CompetitiveSwimmer("NBROOO", "narar", LocalDate.of(2001, 12, 04), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.ACTIVE, null, null);
+
+
+        System.out.println(cashier.calculateMembershipFee(swimmer5));
 
         // Created results for each swimmer
         swimmer1.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 50.3, LocalDate.now(), swimmer1));
@@ -112,8 +117,20 @@ public class Main {
         System.out.println(regularTeam.getTeamMembersRegular());
         System.out.println(regularTeam.getTeamMembersComp());
 
+        ArrayList<Member> regularSwimmerArrayList = regularTeam.getTeamMembersRegular();
 
-        // System.out.println(regularTeam.displayAllMembers());
+        for(Member member : regularSwimmerArrayList) {
+            System.out.println(member.getFirstName());
+        }
+
+        String fileName = "members.txt";
+        fileHandler.saveMembersToFile(members, fileName);
+
+        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);
+
+        for (Member member : loadedMembers){
+            System.out.println(member);
+        }
 
         ui.startMenu();
 

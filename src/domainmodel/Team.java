@@ -126,29 +126,15 @@ public class Team {
                 '}';
     }
 
-
-
-
-
-    /*min code
-    public ArrayList<CompetitiveSwimmer> getTeamMembersComp(){
-        ArrayList<CompetitiveSwimmer> teamMembersTemp = new ArrayList<>();
-        if (this.getTeamName().contains("Competitive")){
-            teamMembersTemp.add(allSwimmers);
+    public String getCompTeamCategory(){
+        String result = "";
+        if (this.getTeamName().contains("Competitive") && this.allSwimmers.get(0).calculateAge() < 18){
+            result = "Competitive Junior team";
+        } else if (this.getTeamName().contains("Competitive") && this.allSwimmers.get(0).calculateAge() >= 18){
+            result = "Competitive Senior Team";
         }
-        return teamMembersTemp;
+        return result;
     }
-
-     */
-
-//    public String displayAllMembers(){
-//        String string = "";
-//        for(Person person : allSwimmers){
-//            string += person.toString() + "\n";
-//
-//        }
-//        return string;
-//    }
 
     public void printAllSwimmers() {
         System.out.println("Team: " + teamName);
@@ -161,46 +147,4 @@ public class Team {
 
 
 
-
-    /* Dette skal højst sandsynligt  slettes pga gamle arraylister
-
-        public void addToTeam(Person person) {
-        if (!allSwimmers.contains(person)) {
-            allSwimmers.add(person);
-            if (isJunior(person)) {
-                juniorTeam.add(person);
-            } else {
-                seniorTeam.add(person);
-            }
-        } else {
-            System.out.println(person.getFirstName() + person.getLastName() + " is already in the team.");
-        }
-    }
-    public void removeFromTeam(Person person) {
-        allSwimmers.remove(person);
-        juniorTeam.remove(person);
-        seniorTeam.remove(person);
-        juniorTeamCompetitive.remove(person);
-        seniorTeamCompetitive.remove(person);
-        casualSwimmers.remove(person);
-        competitiveSwimmers.remove(person);
-    }
-
-
-    public void addtoTeamCasualSwimmers(Person person){
-        casualSwimmers.add(person);
-    }
-
-    public void addtoTeamCompetitiveSwimmers(Person person){
-        competitiveSwimmers.add(person);
-    }
-
-    public void removeTeamCasualSwimmers(Person person){
-        casualSwimmers.remove(person);
-    }
-
-    public void removeTeamCompetetiveSwimmers(Person person){
-        competitiveSwimmers.remove(person);
-    }
-*/
 }
