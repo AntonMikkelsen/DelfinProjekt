@@ -66,9 +66,10 @@ public class Cashier {
     public double getTotalGeneratedIncome(){
         double totalMoney = 0;
         //Remove all members in arrears from the total sum/all members
-        for(Member member : membersInArrears()){
+        /*for(Member member : membersInArrears()){
             allMembers.remove(member);
         }
+         */
 
         //Calculates all money generated from paid members
         for(Member member : allMembers){
@@ -78,11 +79,13 @@ public class Cashier {
     }
 
 
-
+/*
     public ArrayList listOfMissingPayment(){
 
     }
 
+
+ */
 
 
 }

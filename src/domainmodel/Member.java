@@ -50,10 +50,7 @@ public class Member extends Person{
 
 
     // Bruges til at udregne rabatter, hvis medlemmer fx er over 60 år gammel eller under 18.
-           // isPassive er hvis deres medlemskab er passiv, der for koster det 500
-
-
-
+    // isPassive er hvis deres medlemskab er passiv, der for koster det 500
     public double getMembershipFee(){
         return membershipFee;
     }
@@ -66,6 +63,9 @@ public class Member extends Person{
         isInArrears = inArrears;
     }
 
+    public void setMembershipFee(double fee){
+        membershipFee = fee;
+    }
 
     public void setMemberID(String memberID) {
         this.memberID = memberID;

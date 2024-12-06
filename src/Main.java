@@ -80,6 +80,7 @@ public class Main {
 
         CompetitiveSwimmer.printTop5SwimmersByDiscipline(swimmers);
 
+
         System.out.println();
 
 
@@ -131,6 +132,16 @@ public class Main {
         for (Member member : loadedMembers){
             System.out.println(member);
         }
+        cashier.addMember(swimmer1);
+        cashier.addMember(swimmer2);
+        cashier.addMember(swimmer3);
+        cashier.addMember(swimmer4);
+        cashier.calculateMembershipFee(swimmer1);
+        cashier.calculateMembershipFee(swimmer2);
+        cashier.calculateMembershipFee(swimmer3);
+        cashier.calculateMembershipFee(swimmer4);
+        System.out.println(cashier.getTotalGeneratedIncome());
+        System.out.println(cashier.getTotalOfDebt());
 
         ui.startMenu();
 
@@ -165,6 +176,7 @@ public class Main {
         System.out.println(member1);
         System.out.println(member2);
         System.out.println(member3);
+
 
 
 
