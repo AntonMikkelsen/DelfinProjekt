@@ -14,10 +14,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Controller controller = new Controller();
         UserInterface ui = new UserInterface();
         FileHandler fileHandler = new FileHandler();
-        ArrayList<Member> members = new ArrayList<>();
 
 
         Member member1 = new Member("Rikke", "Hansen1", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006", MembershipStatus.PASSIVE);
@@ -84,13 +82,13 @@ public class Main {
         Team regularTeam = new Team("Casual Swimmers");
 
 
-        regularTeam.addSwimmersToTeam(member1);
-        regularTeam.addSwimmersToTeam(member2);
-        regularTeam.addSwimmersToTeam(member3);
+        regularTeam.addSwimmersToTeam(swimmer1);
+        regularTeam.addSwimmersToTeam(swimmer2);
+        regularTeam.addSwimmersToTeam(swimmer3);
 
 
 
-        competitveTeamJunior.addSwimmersToTeam(member3);
+        competitveTeamJunior.addSwimmersToTeam(swimmer4);
 
 
         competitveTeamJunior.addSwimmersToTeam(swimmer1);
@@ -116,16 +114,6 @@ public class Main {
 
 
         // System.out.println(regularTeam.displayAllMembers());
-
-
-        String fileName = "members.txt";
-        fileHandler.saveMembersToFile(members, fileName);
-
-        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);
-
-        for (Member member : loadedMembers){
-            System.out.println(member);
-        }
 
         ui.startMenu();
 

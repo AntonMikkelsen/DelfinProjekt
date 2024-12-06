@@ -6,10 +6,7 @@ import domainmodel.AgeCategory;
 import domainmodel.MembershipStatus;
 
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class UserInterface {
@@ -143,7 +140,7 @@ public class UserInterface {
             scanner.nextLine();
 
             switch (choice) {
-                 case 1 -> controller.displayAllMembers();
+                case 1 -> controller.getMembers();
                 case 2 -> displayAllTeamMembers();
                 // case 3 - > view all comp members by team
                 // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
@@ -172,7 +169,7 @@ public class UserInterface {
 
 
         if (selectedTeam != null) {
-            List<CompetitiveSwimmer> teamMembers = controller.getTeamMembers(selectedTeam);
+            ArrayList<CompetitiveSwimmer> teamMembers = controller.getCompSwimmers();
             System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
             printHeaderLine();
 
@@ -253,7 +250,7 @@ public class UserInterface {
 
         System.out.println("enter the a membersID to remove the member");
 
-        List<Person> members = controller.getAllMembers();
+        ArrayList<Member> members = controller.getMembers();
         Member toRemove = null;
 
         for (Person person : members) {
@@ -322,11 +319,11 @@ public class UserInterface {
         }
 
 
-        String memberId = "ID" + (controller.getAllMembers().size() + 1);
+        String memberId = "ID" + (controller.getMembers().size() + 1);
 
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
         // Ændre til nye add metode
-         controller.addMemberToTeam(newMember);
+        controller.addMemberToTeam(newMember);
 
         System.out.println("Member added successfully: " + newMember.getFirstName() + " " + newMember.getLastName());
 
@@ -338,7 +335,7 @@ public class UserInterface {
     }
 
     public Member showMemberInfo(String memberID) {
-        List<Person> Members = controller.getAllMembers();
+        ArrayList<Member> Members = controller.getMembers();
         Member toSearch = null;
         for (Person person : Members) {
             if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;{
@@ -359,7 +356,7 @@ public class UserInterface {
         System.out.println("Enter member ID to edit: ");
         String memberID = scanner.nextLine();
 
-        List<Person> members = controller.getAllMembers();
+        ArrayList<Member> members = controller.getMembers();
         Member memberToEdit = null;
 
         // Find the member
@@ -490,7 +487,7 @@ public class UserInterface {
         System.out.println("Enter member ID to edit: ");
         String memberID = scanner.nextLine();
 
-        List<Person> members = controller.getAllMembers();
+        ArrayList<Member> members = controller.getMembers();
         Member memberToEdit = null;
 
         // Find the member
