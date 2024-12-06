@@ -119,6 +119,17 @@ public class Team {
         return teamMembersTemp;
     }
 
+
+    public String getCompTeamCategory(){
+        String result = "";
+        if (this.getTeamName().contains("Competitive") && this.allSwimmers.get(0).calculateAge() < 18){
+            result = "Competitive Junior team";
+        } else if (this.getTeamName().contains("Competitive") && this.allSwimmers.get(0).calculateAge() >= 18){
+            result = "Competitive Senior Team";
+        }
+        return result;
+    }
+
     public String displayAllMembers(){
         String string = "";
         for(Person person : allSwimmers){
@@ -127,4 +138,8 @@ public class Team {
         }
         return string;
     }
+
+
+
+
 }

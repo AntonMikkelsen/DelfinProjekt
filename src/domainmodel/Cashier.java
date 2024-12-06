@@ -35,10 +35,11 @@ public class Cashier {
     }
 
     public void addMember(Member member){
+        allMembers.add(member);
     }
 
-    public void removeMember(){
-
+    public void removeMember(Member member){
+        allMembers.remove(member);
     }
 
 
@@ -52,6 +53,10 @@ public class Cashier {
         }
         return membersIsInArrears;
     }
+
+
+
+
 
 
 
