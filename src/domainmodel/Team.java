@@ -3,7 +3,7 @@ package domainmodel;
 import java.util.ArrayList;
 
 public class Team {
-    private String teamName;
+    private final String teamName;
     private AgeCategory ageCategory;
     private ArrayList<Person> allSwimmers = new ArrayList<>();
 
@@ -11,7 +11,6 @@ public class Team {
     public Team(String teamName, AgeCategory ageCategory) {
         this.teamName = teamName;
         this.ageCategory = ageCategory;
-        this.allSwimmers = new ArrayList<>();
     }
 
     public Team(String teamName) {
@@ -36,15 +35,13 @@ public class Team {
         return false; // For casual teams, this check is bypassed
     }
 
-
-
     public String getTeamName() {
         return teamName;
     }
 
 
-    public void addSwimmersToTeam(Member member) {
-
+    //Alle svømmere kommer på et hold, men Konkurrence svømmere ved at de er.
+    public void addSwimmersToTeam(CompetitiveSwimmer member) {
         // Check if the swimmer is already on the team
         if (!allSwimmers.contains(member)) {
             // Casual teams accept all swimmers regardless of age
@@ -80,6 +77,7 @@ public class Team {
                 }
             }
         }
+        // Skal stadig fixes
         if (this.getTeamName().contains("Casual")) {
             System.out.println("Method cannot be used on casual swimmer team");
 
@@ -119,6 +117,14 @@ public class Team {
         return teamMembersTemp;
     }
 
+    @Override
+    public String toString() {
+        return "Team{" +
+                "teamName='" + teamName + '\'' +
+                ", ageCategory=" + (ageCategory != null ? ageCategory : "CASUAL") +
+                ", swimmerCount=" + allSwimmers.size() +
+                '}';
+    }
 
     public String getCompTeamCategory(){
         String result = "";
@@ -130,13 +136,12 @@ public class Team {
         return result;
     }
 
-    public String displayAllMembers(){
-        String string = "";
-        for(Person person : allSwimmers){
-            string += person.toString() + "\n";
-
+    public void printAllSwimmers() {
+        System.out.println("Team: " + teamName);
+        System.out.println("Team: " + teamName);
+        for (Person swimmer : allSwimmers) {
+            System.out.println("- " + swimmer.getFirstName() + " " + swimmer.getLastName());
         }
-        return string;
     }
 
 
