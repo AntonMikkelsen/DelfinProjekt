@@ -137,7 +137,7 @@ public class Main {
 
 
 
-       /* //Test til member / ændring af medlemskabsaktivitet osv.
+       /* //Test til registrering af ny medlem / ændring af members status
             Member member = new Member(
                     "Hussain",
                     "Ali",
