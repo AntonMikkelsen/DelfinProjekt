@@ -16,9 +16,17 @@ public enum AgeCategory {
         this.displayName = displayName;
     }
 
-    public int getMinAge() { return minAge; }
-    public int getMaxAge() { return maxAge; }
-    public String getDisplayName() { return displayName; }
+    public int getMinAge() {
+        return minAge;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
 
     public static AgeCategory fromAge(int age) {
         if (age >= JUNIOR.minAge && age <= JUNIOR.maxAge) return JUNIOR;

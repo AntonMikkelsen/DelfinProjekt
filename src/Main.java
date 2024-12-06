@@ -89,7 +89,6 @@ public class Main {
         regularTeam.addSwimmersToTeam(member3);
 
 
-
         competitveTeamJunior.addSwimmersToTeam(member3);
 
 
@@ -114,9 +113,11 @@ public class Main {
         System.out.println(regularTeam.getTeamMembersRegular());
         System.out.println(regularTeam.getTeamMembersComp());
 
+        ArrayList<Member> regularSwimmerArrayList = regularTeam.getTeamMembersRegular();
 
-        // System.out.println(regularTeam.displayAllMembers());
-
+        for(Member member : regularSwimmerArrayList) {
+            System.out.println(member.getFirstName());
+        }
 
         String fileName = "members.txt";
         fileHandler.saveMembersToFile(members, fileName);
