@@ -109,6 +109,11 @@ public class Main {
 
         System.out.println(competitveTeamSenior.getTeamMembersComp());
 
+        System.out.println(competitveTeamSenior.getTeamMembersRegular());
+
+        System.out.println(regularTeam.getTeamMembersRegular());
+        System.out.println(regularTeam.getTeamMembersComp());
+
 
         // System.out.println(regularTeam.displayAllMembers());
 

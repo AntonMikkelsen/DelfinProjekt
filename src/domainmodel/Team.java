@@ -1,7 +1,6 @@
 package domainmodel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Team {
     private String teamName;
@@ -80,8 +79,49 @@ public class Team {
                 }
             }
         }
+        // Skal stadig fixes
+        if (this.getTeamName().contains("Casual")) {
+            System.out.println("Method cannot be used on casual swimmer team");
+
+        } else if (teamMembersTemp.isEmpty()) {
+            System.out.println("No Swimmers found");
+
+        } else {
+            return teamMembersTemp;
+        }
         return teamMembersTemp;
     }
+
+
+    // taget koden ovenfra men lavet om på den
+    //Tjekker det samme som getTeamMembersComp men lavet til casual svømmere
+    public ArrayList<Member> getTeamMembersRegular() {
+        ArrayList<Member> teamMembersTemp = new ArrayList<>();
+
+        //Checks if team is competitive
+        if (this.getTeamName().contains("Casual")) {
+            for (Person swimmer : allSwimmers) {
+                if (swimmer instanceof Member) {
+                    teamMembersTemp.add((Member) swimmer);
+                }
+            }
+        }
+        // Skal stadig fixes
+        if (this.getTeamName().contains("Competitive")) {
+            System.out.println("Method cannot be used on competitive swimmer team");
+
+        } else if (teamMembersTemp.isEmpty()) {
+            System.out.println("No Swimmers found");
+
+        } else {
+            return teamMembersTemp;
+        }
+        return teamMembersTemp;
+    }
+
+
+
+
 
 
     /*min code
