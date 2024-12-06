@@ -1,7 +1,6 @@
 package domainmodel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Team {
     private String teamName;
@@ -67,6 +66,74 @@ public class Team {
             System.out.println(member.getFirstName() + " is already a part of the " + getTeamName() + " team.");
         }
     }
+
+    //Chatgpt's bedre version af min egen kode
+    public ArrayList<CompetitiveSwimmer> getTeamMembersComp() {
+        ArrayList<CompetitiveSwimmer> teamMembersTemp = new ArrayList<>();
+
+        //Checks if team is competitive
+        if (this.getTeamName().contains("Competitive")) {
+            for (Person swimmer : allSwimmers) {
+                if (swimmer instanceof CompetitiveSwimmer) {
+                    teamMembersTemp.add((CompetitiveSwimmer) swimmer);
+                }
+            }
+        }
+        // Skal stadig fixes
+        if (this.getTeamName().contains("Casual")) {
+            System.out.println("Method cannot be used on casual swimmer team");
+
+        } else if (teamMembersTemp.isEmpty()) {
+            System.out.println("No Swimmers found");
+
+        } else {
+            return teamMembersTemp;
+        }
+        return teamMembersTemp;
+    }
+
+
+    // taget koden ovenfra men lavet om på den
+    //Tjekker det samme som getTeamMembersComp men lavet til casual svømmere
+    public ArrayList<Member> getTeamMembersRegular() {
+        ArrayList<Member> teamMembersTemp = new ArrayList<>();
+
+        //Checks if team is competitive
+        if (this.getTeamName().contains("Casual")) {
+            for (Person swimmer : allSwimmers) {
+                if (swimmer instanceof Member) {
+                    teamMembersTemp.add((Member) swimmer);
+                }
+            }
+        }
+        // Skal stadig fixes
+        if (this.getTeamName().contains("Competitive")) {
+            System.out.println("Method cannot be used on competitive swimmer team");
+
+        } else if (teamMembersTemp.isEmpty()) {
+            System.out.println("No Swimmers found");
+
+        } else {
+            return teamMembersTemp;
+        }
+        return teamMembersTemp;
+    }
+
+
+
+
+
+
+    /*min code
+    public ArrayList<CompetitiveSwimmer> getTeamMembersComp(){
+        ArrayList<CompetitiveSwimmer> teamMembersTemp = new ArrayList<>();
+        if (this.getTeamName().contains("Competitive")){
+            teamMembersTemp.add(allSwimmers);
+        }
+        return teamMembersTemp;
+    }
+
+     */
 
 
     public String displayAllMembers(){

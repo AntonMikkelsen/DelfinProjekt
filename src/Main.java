@@ -14,6 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Controller controller = new Controller();
         UserInterface ui = new UserInterface();
         FileHandler fileHandler = new FileHandler();
         ArrayList<Member> members = new ArrayList<>();
@@ -80,7 +81,6 @@ public class Main {
 
         Team competitveTeamSenior = new Team("Competitive Team Senior", AgeCategory.SENIOR);
         Team competitveTeamJunior = new Team("Competitive Team Junior", AgeCategory.JUNIOR);
-
         Team regularTeam = new Team("Casual Swimmers");
 
 
@@ -107,9 +107,15 @@ public class Main {
         competitveTeamSenior.addSwimmersToTeam(swimmer3);
 
 
+        System.out.println(competitveTeamSenior.getTeamMembersComp());
+
+        System.out.println(competitveTeamSenior.getTeamMembersRegular());
+
+        System.out.println(regularTeam.getTeamMembersRegular());
+        System.out.println(regularTeam.getTeamMembersComp());
 
 
-        System.out.println(regularTeam.displayAllMembers());
+        // System.out.println(regularTeam.displayAllMembers());
 
 
         String fileName = "members.txt";
