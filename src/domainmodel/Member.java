@@ -19,8 +19,12 @@ public class Member extends Person{
         this.memberID = memberID;
         this.membershipStatus = membershipStatus;
         setSwimmerType(SwimmerType.CASUAL);
-        this.membershipFee = calculateMembershipFee(calculateAge());
         this.isInArrears = false;
+    }
+
+
+    public double getMembershipFee(Cashier cashier){
+        return cashier.calculateMembershipFee(this);
     }
 
     private String generateMemberIDRandom(String firstName, String lastName) {
@@ -48,29 +52,6 @@ public class Member extends Person{
 
     // Bruges til at udregne rabatter, hvis medlemmer fx er over 60 år gammel eller under 18.
            // isPassive er hvis deres medlemskab er passiv, der for koster det 500
-    public double calculateMembershipFee(int age){
-
-        // Costs of all different membership
-        final int costOfNormalSeniorMembership = 1600;
-        final int costOfJuniorMembership = 1000;
-        final int costOfPassiveMembership = 500;
-        int costOfAbove60Membership;
-
-        if (this.getMembershipStatus() == MembershipStatus.PASSIVE) {
-            return costOfPassiveMembership;
-        }
-
-        if(age < 18) {
-            return costOfJuniorMembership;
-        }
-
-        if (age >= 60) {
-            costOfAbove60Membership = (int) (1600 * 0.75);
-            return costOfAbove60Membership;
-        }
-
-        return costOfNormalSeniorMembership; //Den normale seniorpris over 18, under 60 år.
-    }
 
 
 
