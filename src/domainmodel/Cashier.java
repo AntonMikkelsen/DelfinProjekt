@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class Cashier {
     ArrayList<Member> allMembers;
+    ArrayList<Member> allMembersInArrears;
 
 
     public Cashier(ArrayList<Member> allMembers){
         this.allMembers = allMembers;
+        this.allMembersInArrears = membersInArrears();
     }
 
 
@@ -38,6 +40,14 @@ public class Cashier {
         allMembers.add(member);
     }
 
+    public void addMemberInArrear(Member member){
+        allMembersInArrears.add(member);
+    }
+
+    public void removeMemberInArrear(Member member){
+        allMembersInArrears.remove(member);
+    }
+
     public void removeMember(Member member){
         allMembers.remove(member);
     }
@@ -55,13 +65,28 @@ public class Cashier {
     }
 
 
+    //Denne metode virker pga. den bruger den anden membershipFee metode der tager cashieren som holder fast på alle de medlemmer der findes. uden denne metode vil det altid returnerer nul da den ikke holder på nogen mennesker
     public double getTotalOfDebt(){
         double totalDebt = 0;
-        for (Member member : membersInArrears()){
+
+        for (Member member : allMembersInArrears){
+            totalDebt += member.getMembershipFee1(this);
+        }
+        return totalDebt;
+    }
+
+    /* Denne metode virker ikke da den kun udregner membershipFee for hvert person uden rigitg at tilføje det nogen stedet
+    public double getTotalOfDebt(){
+        double totalDebt = 0;
+
+        for (Member member : allMembersInArrears){
             totalDebt += member.getMembershipFee();
         }
         return totalDebt;
     }
+
+     */
+
 
     public double getTotalGeneratedIncome(){
         double totalMoney = 0;

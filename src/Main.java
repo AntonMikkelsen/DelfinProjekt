@@ -140,17 +140,26 @@ public class Main {
         cashier.addMember(swimmer3);
         cashier.addMember(swimmer4);
 
+        // Members der er i restance skal tilføjes via addMemberInArrear og IKKE addMember -
+        // swimmer5.setInArrears(true) behøves ikke da den ikke rigtig bliver brugt til noget, man kan direkte tilføje memebersne til arraylisten i cashier og den vile tælle deres totale debt
+        swimmer5.setInArrears(true);
+        cashier.addMemberInArrear(swimmer5);
+        cashier.addMemberInArrear(swimmer6);
+
         //Udregner de individiuelle svømmere's kontigent baseret på metoden calculatememebershipfee - det er baseret på alder, rabat og passive/active - man kan også vælge at printe den ud
-        System.out.println(swimmer1.getFirstName() + " membership fee: " +cashier.calculateMembershipFee(swimmer1));
-        System.out.println(swimmer2.getFirstName() + " membership fee: " +cashier.calculateMembershipFee(swimmer2));
-        System.out.println(swimmer3.getFirstName() + " membership fee: " +cashier.calculateMembershipFee(swimmer3));
-        System.out.println(swimmer4.getFirstName() + " membership fee: " +cashier.calculateMembershipFee(swimmer4));
+        System.out.println(swimmer1.getFirstName() + " membership fee: " + cashier.calculateMembershipFee(swimmer1));
+        System.out.println(swimmer2.getFirstName() + " membership fee: " + cashier.calculateMembershipFee(swimmer2));
+        System.out.println(swimmer3.getFirstName() + " membership fee: " + cashier.calculateMembershipFee(swimmer3));
+        System.out.println(swimmer4.getFirstName() + " membership fee: " + cashier.calculateMembershipFee(swimmer4));
+        System.out.println(swimmer5.getFirstName() + " membership fee: " + cashier.calculateMembershipFee(swimmer5));
+
+
 
 
 
         //Denne metode tager fat i alle medlemmernes kontigent og tilføjer dem til en total pris som så returneres via metoden.
         System.out.println("\nTotal money generated: " + cashier.getTotalGeneratedIncome());
-        System.out.println(cashier.getTotalOfDebt());
+        System.out.println("\nTotal debt from members " + cashier.getTotalOfDebt());
 
         ui.startMenu();
 
