@@ -101,7 +101,6 @@ public class UserInterface {
         }
     }
 
-
     private void showMemberOverviewMenu() {
         boolean overviewMenuRunning = true;
         while (overviewMenuRunning) {
@@ -144,7 +143,6 @@ public class UserInterface {
             }
         };
 
-
         if (selectedTeam != null) {
             ArrayList<CompetitiveSwimmer> teamMembers = controller.getCompSwimmers();
             System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
@@ -177,9 +175,6 @@ public class UserInterface {
         }
     }
  */
-
-
-
 
     // Method to greet the user, and save sout's.
     private void greetingsMSG() {
@@ -298,6 +293,7 @@ public class UserInterface {
         String memberId = "ID" + (controller.getMembers().size() + 1);
 
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
+
         // Ændre til nye add metode
         //controller.addMemberToTeam(newMember);
 

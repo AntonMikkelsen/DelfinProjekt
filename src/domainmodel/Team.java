@@ -41,7 +41,7 @@ public class Team {
 
 
     //Alle svømmere kommer på et hold, men Konkurrence svømmere ved at de er.
-    public void addSwimmersToTeam(CompetitiveSwimmer member) {
+    public void addSwimmersToTeam(CompetitiveSwimmer member) { // Måske skal CompetitiveSwimmer ændres til Member - ikke sikker endnu
         // Check if the swimmer is already on the team
         if (!allSwimmers.contains(member)) {
             // Casual teams accept all swimmers regardless of age
@@ -77,7 +77,7 @@ public class Team {
                 }
             }
         }
-        // Skal stadig fixes
+        // Skal stadig fixes??
         if (this.getTeamName().contains("Casual")) {
             System.out.println("Method cannot be used on casual swimmer team");
 
