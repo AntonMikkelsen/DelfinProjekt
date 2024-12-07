@@ -17,6 +17,8 @@ public class Main {
         UserInterface ui = new UserInterface();
         FileHandler fileHandler = new FileHandler();
         ArrayList<Member> members = new ArrayList<>();
+
+        // Laver en cashier/person der udregner medlemmerne - med en "members" tilsat altså alle de medlemmer
         Cashier cashier = new Cashier(members);
 
 
@@ -160,6 +162,7 @@ public class Main {
         //Denne metode tager fat i alle medlemmernes kontigent og tilføjer dem til en total pris som så returneres via metoden.
         System.out.println("\nTotal money generated: " + cashier.getTotalGeneratedIncome());
         System.out.println("\nTotal debt from members " + cashier.getTotalOfDebt());
+
 
         ui.startMenu();
 

@@ -120,7 +120,7 @@ public class UserInterface {
                 case 1 -> controller.getMembers();
                 case 2 -> displayAllTeamMembers();
                 // case 3 - > view all comp members by team
-                // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
+                // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(); -- Ydligere valg om de vil sorterer de 5 bedste svømmere udfra disciplin
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
             }
