@@ -30,7 +30,10 @@ public class Controller {
         return Memberships.getListOfCompetitiveSwimmers();
     }
 
+    /*
     public void addMemberToTeam(Member newMember) {
-        Memberships.addMemberToTeam(newMember, );
+        Memberships.addMemberToTeam(newMember,  );
     }
+
+     */
 }

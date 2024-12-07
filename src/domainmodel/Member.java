@@ -22,9 +22,12 @@ public class Member extends Person{
     }
 
 
-    public double getMembershipFee(Cashier cashier){
+
+    public double getMembershipFee1(Cashier cashier){
         return cashier.calculateMembershipFee(this);
     }
+
+
 
     private String generateMemberIDRandom(String firstName, String lastName) {
         Random random = new Random();

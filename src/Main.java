@@ -132,15 +132,24 @@ public class Main {
         for (Member member : loadedMembers){
             System.out.println(member);
         }
+
+
+        //Denne metode tilføjer hvert member til cashierens arrayliste - så cashieren kan få fat i den totale mængde af penge som alle medlemmerne betaler
         cashier.addMember(swimmer1);
         cashier.addMember(swimmer2);
         cashier.addMember(swimmer3);
         cashier.addMember(swimmer4);
-        cashier.calculateMembershipFee(swimmer1);
-        cashier.calculateMembershipFee(swimmer2);
-        cashier.calculateMembershipFee(swimmer3);
-        cashier.calculateMembershipFee(swimmer4);
-        System.out.println(cashier.getTotalGeneratedIncome());
+
+        //Udregner de individiuelle svømmere's kontigent baseret på metoden calculatememebershipfee - det er baseret på alder, rabat og passive/active - man kan også vælge at printe den ud
+        System.out.println(swimmer1.getFirstName() + " membership fee: " +cashier.calculateMembershipFee(swimmer1));
+        System.out.println(swimmer2.getFirstName() + " membership fee: " +cashier.calculateMembershipFee(swimmer2));
+        System.out.println(swimmer3.getFirstName() + " membership fee: " +cashier.calculateMembershipFee(swimmer3));
+        System.out.println(swimmer4.getFirstName() + " membership fee: " +cashier.calculateMembershipFee(swimmer4));
+
+
+
+        //Denne metode tager fat i alle medlemmernes kontigent og tilføjer dem til en total pris som så returneres via metoden.
+        System.out.println("\nTotal money generated: " + cashier.getTotalGeneratedIncome());
         System.out.println(cashier.getTotalOfDebt());
 
         ui.startMenu();

@@ -299,7 +299,7 @@ public class UserInterface {
 
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
         // Ændre til nye add metode
-        controller.addMemberToTeam(newMember);
+        //controller.addMemberToTeam(newMember);
 
         System.out.println("Member added successfully: " + newMember.getFirstName() + " " + newMember.getLastName());
 
