@@ -5,13 +5,13 @@ import datasource.FileHandler;
 import java.util.ArrayList;
 
 public class MembershipRegistration {
-    private ArrayList<Member> membersList;
-    private ArrayList<Team> teams;
-    private FileHandler fileHandler;
+    private final ArrayList<Member> membersList;
+    private final ArrayList<Team> teams;
+    private final FileHandler fileHandler;
 
     public MembershipRegistration() {
         this.fileHandler = new FileHandler();
-        this.membersList = fileHandler.loadMembersFromFile("members.csv");
+        this.membersList = fileHandler.loadMembersFromFile();
         this.teams = new ArrayList<>();
     }
 
@@ -24,7 +24,7 @@ public class MembershipRegistration {
     public boolean addMember(Member member) {
         if (!membersList.contains(member)) {
             membersList.add(member);
-            fileHandler.saveMembersToFile(membersList, "members.csv");
+            fileHandler.saveMembersToFile(membersList);
             return true;
         }
         return false; // Return false, hvis medlemmet allerede findes
@@ -33,7 +33,7 @@ public class MembershipRegistration {
     // Fjern medlem
     public boolean removeMember(Member member) {
         if (membersList.remove(member)) {
-            fileHandler.saveMembersToFile(membersList, "members.csv");
+            fileHandler.saveMembersToFile(membersList);
             return true;
         }
         return false; // Return false, hvis medlemmet ikke findes

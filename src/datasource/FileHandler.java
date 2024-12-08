@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 public class FileHandler {
 
-    public void saveMembersToFile (ArrayList<Member> membersArrayList, String fileName) {
+    private String fileName = "members.csv";
+
+    public void saveMembersToFile (ArrayList<Member> membersArrayList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))){
             for (Member members : membersArrayList){
                 writer.write(members.getFirstName() + ", " + members.getLastName() + ", " + members.getMemberID() + ", "
@@ -21,7 +23,7 @@ public class FileHandler {
             System.err.println("Input fejl ved indskrivning i fil" + e.getMessage());
         }
     }
-    public ArrayList<Member> loadMembersFromFile(String fileName) {
+    public ArrayList<Member> loadMembersFromFile() {
         ArrayList<Member> membersArrayList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;

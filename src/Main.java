@@ -126,10 +126,10 @@ public class Main {
             System.out.println(member.getFirstName());
         }
 
-        String fileName = "members.txt";
-        fileHandler.saveMembersToFile(members, fileName);
 
-        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);
+        fileHandler.saveMembersToFile(members);
+
+        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile();
 
         for (Member member : loadedMembers){
             System.out.println(member);
