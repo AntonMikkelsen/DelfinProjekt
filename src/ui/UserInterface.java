@@ -80,7 +80,8 @@ public class UserInterface {
             System.out.println("\n=== Membership Menu ===");
             System.out.println("1. See membership details");
             System.out.println("2. Edit membership details and status");
-            System.out.println("3. Exit menu");
+            System.out.println("3. Financial Overview");
+            System.out.println("4. Exit menu");
 
             int userResponse = scanner.nextInt();
             scanner.nextLine();
@@ -96,6 +97,9 @@ public class UserInterface {
                     editMember();
                 }
                 case 3 -> membershipMenuRunning = false;
+                case 4 -> {
+                    System.out.println("");
+                }
                 default -> System.out.println("Invalid option. Please try again.");
             }
         }

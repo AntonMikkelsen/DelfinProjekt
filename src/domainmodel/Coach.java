@@ -12,13 +12,6 @@ public class Coach extends Person{
         this.assignedTeam = assignedTeam;
     }
 
-    // Tilføj addResults metode
-
-
-
-
-
-
         @Override
         public String toString() {
             return "Name: " + firstName + " " + lastName +
