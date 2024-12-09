@@ -120,7 +120,7 @@ public class UserInterface {
             scanner.nextLine();
 
             switch (choice) {
-                case 1 -> controller.getMembers();
+                case 1 -> controller.displayMembers();
                 case 2 -> displayAllTeamMembers();
                 // case 3 - > view all comp members by team
                 // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(); -- Ydligere valg om de vil sorterer de 5 bedste svømmere udfra disciplin
@@ -299,7 +299,8 @@ public class UserInterface {
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
 
         // Ændre til nye add metode
-        //controller.addMemberToTeam(newMember);
+        controller.addMember(firstName, lastName, dob, email, phone, address, memberId, status);
+        controller.displayMembers();
 
         System.out.println("Member added successfully: " + newMember.getFirstName() + " " + newMember.getLastName());
 

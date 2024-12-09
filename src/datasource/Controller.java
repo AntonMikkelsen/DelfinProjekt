@@ -3,6 +3,7 @@ package datasource;
 import domainmodel.*;
 import ui.UserInterface;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -10,12 +11,17 @@ public class Controller {
     private MembershipRegistration Memberships = new MembershipRegistration();
 
 
-    public void addMember(Member member) {
-        Memberships.addMember(member);
+    public Member addMember(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address, String memberID, MembershipStatus membershipStatus) {
+        Memberships.addMember(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberID, membershipStatus);
+        return null;
     }
 
     public ArrayList<CompetitiveSwimmer> getCompSwimmers() {
         return Memberships.getAllCompetitiveSwimmers();
+    }
+
+    public void displayMembers(){
+        Memberships.displayMembers();
     }
 
     public ArrayList<Member> getMembers() {

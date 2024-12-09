@@ -2,38 +2,41 @@ package domainmodel;
 
 import datasource.FileHandler;
 
+import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MembershipRegistration {
     private final ArrayList<Member> membersList;
     private final ArrayList<Team> teams;
-    private final FileHandler fileHandler;
 
     public MembershipRegistration() {
-        this.fileHandler = new FileHandler();
-        this.membersList = fileHandler.loadMembersFromFile();
+        this.membersList = new ArrayList<>();
         this.teams = new ArrayList<>();
     }
 
     // Hent alle medlemmer
     public ArrayList<Member> getAllMembers() {
-        return new ArrayList<>(membersList); // Returner en kopi for at beskytte listen
+    for (Member member : membersList){
+        System.out.println(member);
+        }
+    return membersList;
+    }
+
+    public void displayMembers(){
+        new FileHandler().loadMembersFromFile();
     }
 
     // Tilføj nyt medlem
-    public boolean addMember(Member member) {
-        if (!membersList.contains(member)) {
-            membersList.add(member);
-            fileHandler.saveMembersToFile(membersList);
-            return true;
-        }
-        return false; // Return false, hvis medlemmet allerede findes
+    public void addMember(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address, String memberID, MembershipStatus membershipStatus) {
+        Member member = new Member(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberID, membershipStatus);
+        membersList.add(member);
+        FileHandler.saveMembersToFile(membersList);
     }
 
     // Fjern medlem
     public boolean removeMember(Member member) {
         if (membersList.remove(member)) {
-            fileHandler.saveMembersToFile(membersList);
             return true;
         }
         return false; // Return false, hvis medlemmet ikke findes
