@@ -1,0 +1,158 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import datasource.Controller;\nimport datasource.FileHandler;\nimport domainmodel.*;\n\n\nimport java.time.LocalDate;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n\nimport ui.UserInterface;\n\npublic class Main {\n\n    public static void main(String[] args) {\n\n        UserInterface ui = new UserInterface();\n        FileHandler fileHandler = new FileHandler();\n        ArrayList<Member> members = new ArrayList<>();\n\n\n        Member member1 = new Member(\"Rikke\", \"Hansen1\", LocalDate.of(1967, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"thha0006\", MembershipStatus.PASSIVE);\n        Member member2 = new Member(\"Rikke\", \"Hansen2\", LocalDate.of(1930, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"55\", MembershipStatus.ACTIVE);\n        Member member3 = new Member(\"Rikke\", \"Hansen3\", LocalDate.of(1999, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"55\", MembershipStatus.ACTIVE);\n\n        // Competitive swimmers:\n        CompetitiveSwimmer swimmer1 = new CompetitiveSwimmer(\"RikkeComp\", \"HansenComp\", LocalDate.of(1967, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"thha0006\",MembershipStatus.PASSIVE, null, null);\n        CompetitiveSwimmer swimmer2 = new CompetitiveSwimmer(\"Peter\", \"Lausen\", LocalDate.of(2019, 06, 05), \"PetLauk\", \"50503333\", \"Vægterparken\", \"thha0006\",MembershipStatus.ACTIVE, null, null);\n        CompetitiveSwimmer swimmer3 = new CompetitiveSwimmer(\"Rikmp\", \"narar\", LocalDate.of(1967, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"thha0006\",MembershipStatus.ACTIVE, null, null);\n        CompetitiveSwimmer swimmer4 = new CompetitiveSwimmer(\"Lars\", \"HansenComp\", LocalDate.of(1955, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"thha0006\",MembershipStatus.PASSIVE, null, null);\n        CompetitiveSwimmer swimmer5 = new CompetitiveSwimmer(\"Kaus\", \"KOOO\", LocalDate.of(1933, 06, 05), \"PetLauk\", \"50503333\", \"Vægterparken\", \"thha0006\",MembershipStatus.ACTIVE, null, null);\n        CompetitiveSwimmer swimmer6 = new CompetitiveSwimmer(\"NBROOO\", \"narar\", LocalDate.of(2001, 12, 04), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"thha0006\",MembershipStatus.ACTIVE, null, null);\n\n        // Created results for each swimmer\n        swimmer1.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 50.3, LocalDate.now(), swimmer1));\n        swimmer1.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 50.4, LocalDate.now(), swimmer1));\n\n        swimmer2.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 20.3, LocalDate.now(), swimmer2));\n        swimmer2.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 54.3, LocalDate.now(), swimmer2));\n\n        swimmer3.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 51.4 , LocalDate.now(), swimmer3));\n        swimmer3.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 140.6, LocalDate.now(), swimmer3));\n        swimmer3.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 25.4 , LocalDate.now(), swimmer3));\n\n        swimmer4.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 1.4 , LocalDate.now(), swimmer3));\n        swimmer4.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 14.6, LocalDate.now(), swimmer3));\n        swimmer4.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 26.4 , LocalDate.now(), swimmer3));\n\n\n        swimmer5.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 50.4 , LocalDate.now(), swimmer3));\n        swimmer5.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 111.6, LocalDate.now(), swimmer3));\n        swimmer5.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 21.4 , LocalDate.now(), swimmer3));\n\n\n        swimmer6.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 512.4 , LocalDate.now(), swimmer3));\n        swimmer6.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 10.6, LocalDate.now(), swimmer3));\n        swimmer6.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 200.4 , LocalDate.now(), swimmer3));\n\n\n        swimmer3.sortDisciplinesByPerformance();\n\n        System.out.println(swimmer3.getDisciplinesArray());\n\n\n        System.out.println(swimmer3.getDisciplinesArray().get(0).getShortName());\n\n        System.out.println(swimmer3);\n\n        List<CompetitiveSwimmer> swimmers = Arrays.asList(swimmer1,swimmer2,swimmer3, swimmer4, swimmer5, swimmer6);\n\n\n        CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(swimmers);\n\n        System.out.println();\n\n        CompetitiveSwimmer.printTop5SwimmersByDiscipline(swimmers);\n\n        System.out.println();\n\n\n        Team competitveTeamSenior = new Team(\"Competitive Team Senior\", AgeCategory.SENIOR);\n        Team competitveTeamJunior = new Team(\"Competitive Team Junior\", AgeCategory.JUNIOR);\n\n        Team regularTeam = new Team(\"Casual Swimmers\");\n\n\n        regularTeam.addSwimmersToTeam(member1);\n        regularTeam.addSwimmersToTeam(member2);\n        regularTeam.addSwimmersToTeam(member3);\n\n\n\n        competitveTeamJunior.addSwimmersToTeam(member3);\n\n\n        competitveTeamJunior.addSwimmersToTeam(swimmer1);\n\n\n        competitveTeamJunior.addSwimmersToTeam(swimmer2);\n\n\n        competitveTeamSenior.addSwimmersToTeam(swimmer1);\n\n\n        competitveTeamSenior.addSwimmersToTeam(swimmer2);\n\n        competitveTeamSenior.addSwimmersToTeam(swimmer3);\n\n\n\n\n        System.out.println(regularTeam.displayAllMembers());\n\n\n        String fileName = \"members.txt\";\n        fileHandler.saveMembersToFile(members, fileName);\n\n        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);\n\n        for (Member member : loadedMembers){\n            System.out.println(member);\n        }\n\n        ui.startMenu();\n\n\n\n\n\n\n\n\n       /* //Test til member / ændring af medlemskabsaktivitet osv.\n            Member member = new Member(\n                    \"Hussain\",\n                    \"Ali\",\n                    LocalDate.of(2000, 12, 7),\n                    \"hussain.ali@example.com\",\n                    \"12345678\",\n                    \"Main Street 123\",\n                    \"M123\",\n                    MembershipStatus.ACTIVE\n            );\n\n            System.out.println(member.getMemberID());\n            System.out.println(member.getMembershipStatus());\n            member.changeMembershipToPassive();\n            System.out.println(member.getMembershipStatus());\n            System.out.println(member.getFirstName());\n            System.out.println(member.getDateOfBirth());\n            System.out.println(member.calculateAge()); */\n\n\n        System.out.println(member1);\n        System.out.println(member2);\n        System.out.println(member3);\n\n\n\n\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision dc75669d40969fd145def0aff920e2329d25fc6b)
++++ b/src/Main.java	(date 1733406251372)
+@@ -68,7 +68,6 @@
+ 
+         List<CompetitiveSwimmer> swimmers = Arrays.asList(swimmer1,swimmer2,swimmer3, swimmer4, swimmer5, swimmer6);
+ 
+-
+         CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(swimmers);
+ 
+         System.out.println();
+@@ -78,38 +77,38 @@
+         System.out.println();
+ 
+ 
+-        Team competitveTeamSenior = new Team("Competitive Team Senior", AgeCategory.SENIOR);
+-        Team competitveTeamJunior = new Team("Competitive Team Junior", AgeCategory.JUNIOR);
+-
+-        Team regularTeam = new Team("Casual Swimmers");
+-
+-
+-        regularTeam.addSwimmersToTeam(member1);
+-        regularTeam.addSwimmersToTeam(member2);
+-        regularTeam.addSwimmersToTeam(member3);
+-
+-
+-
+-        competitveTeamJunior.addSwimmersToTeam(member3);
+-
+-
+-        competitveTeamJunior.addSwimmersToTeam(swimmer1);
+-
+-
+-        competitveTeamJunior.addSwimmersToTeam(swimmer2);
+-
+-
+-        competitveTeamSenior.addSwimmersToTeam(swimmer1);
+-
+-
+-        competitveTeamSenior.addSwimmersToTeam(swimmer2);
+-
+-        competitveTeamSenior.addSwimmersToTeam(swimmer3);
+-
+-
+-
+-
+-        System.out.println(regularTeam.displayAllMembers());
++//        Team competitveTeamSenior = new Team("Competitive Team Senior", AgeCategory.SENIOR);
++//        Team competitveTeamJunior = new Team("Competitive Team Junior", AgeCategory.JUNIOR);
++//
++//        Team regularTeam = new Team("Casual Swimmers");
++//
++//
++//        regularTeam.addSwimmersToTeam(member1);
++//        regularTeam.addSwimmersToTeam(member2);
++//        regularTeam.addSwimmersToTeam(member3);
++//
++//
++//
++//        competitveTeamJunior.addSwimmersToTeam(member3);
++//
++//
++//        competitveTeamJunior.addSwimmersToTeam(swimmer1);
++//
++//
++//        competitveTeamJunior.addSwimmersToTeam(swimmer2);
++//
++//
++//        competitveTeamSenior.addSwimmersToTeam(swimmer1);
++//
++//
++//        competitveTeamSenior.addSwimmersToTeam(swimmer2);
++//
++//        competitveTeamSenior.addSwimmersToTeam(swimmer3);
++//
++//
++//
++//
++//        System.out.println(regularTeam.displayAllMembers());
+ 
+ 
+         String fileName = "members.txt";
+Index: src/datasource/Controller.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package datasource;\n\nimport domainmodel.CompetitiveSwimmer;\nimport domainmodel.Member;\nimport domainmodel.Person;\nimport domainmodel.Team;\nimport ui.UserInterface;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class Controller {\n    private List<Person> persons;\n    private FileHandler fileHandler;\n    private Team team;\n\n    public Controller() {\n        this.persons = new ArrayList<>();\n        this.fileHandler = new FileHandler();\n         /*this.teams = new ArrayList<Team>(); */\n    }\n\n    public void saveMembers(String fileName) {\n        ArrayList<Member> members = new ArrayList<>();\n        for (Person person : persons) {\n            if (person instanceof Member) {\n                members.add((Member) person);\n            }\n        }\n        fileHandler.saveMembersToFile(members, fileName);\n    }\n\n    public void loadMembers(String fileName) {\n        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);\n        persons.addAll(loadedMembers);\n    }\n\n    public List<Person> getAllPersons() {\n        return persons;\n    }\n\n    public void addPerson(Person person) {\n        persons.add(person);\n    }\n\n    public void removePerson(Person person) {\n        persons.remove(person);\n    }\n\n        public List<Person> getAllMembers() {\n            return getAllPersons();\n        }\n\n        public void addMemberToTeam(Member member) {\n             // Sørg for, at Controller har denne metode\n            team.addSwimmersToTeam(member);\n        }\n\n        public void displayAllMembers(){\n        team.displayAllMembers();\n        }\n\n\n        public void removeMembers(Member members) {\n            removePerson(members);\n        }\n\n\n\n        public List<CompetitiveSwimmer> getTeamMembers(Team team) {\n            List<Person> allPersons = getAllPersons();\n            List<CompetitiveSwimmer> teamMembers = new ArrayList<>();\n\n            for (Person person : allPersons) {\n                if (person instanceof CompetitiveSwimmer) {\n                    CompetitiveSwimmer swimmer = (CompetitiveSwimmer) person;\n                    if (swimmer.getTeam() == team) {\n                        teamMembers.add(swimmer);\n                    }\n                }\n\n            }\n            return teamMembers;\n        }\n\n\n    public List<Person> getAllMembers1() {\n        return getAllPersons();\n    }\n\n\n    private void printHeaderLine() {\n        System.out.printf(\"%-10s %-15s %-15s %-5s %-10s %-15s%n\",\n                \"ID\", \"First Name\", \"Last Name\", \"Age\", \"Status\", \"Team\");\n        System.out.println(\"=\".repeat(70));\n    }\n\n  /*  public void displayAllMembers() {\n        List<Person> members = getAllMembers1();\n\n        System.out.println(\"\\n=== All Members Overview ===\");\n        printHeaderLine();\n\n        for (Person person : members) {\n            if (person instanceof CompetitiveSwimmer) {\n                ui.printSwimmerInfo((CompetitiveSwimmer) person);\n            } else if (person instanceof Member) {\n                ui.printMemberInfo((Member) person);\n            }\n        }\n    } */\n\n\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/datasource/Controller.java b/src/datasource/Controller.java
+--- a/src/datasource/Controller.java	(revision dc75669d40969fd145def0aff920e2329d25fc6b)
++++ b/src/datasource/Controller.java	(date 1733435536733)
+@@ -1,10 +1,6 @@
+ package datasource;
+ 
+-import domainmodel.CompetitiveSwimmer;
+-import domainmodel.Member;
+-import domainmodel.Person;
+-import domainmodel.Team;
+-import ui.UserInterface;
++import domainmodel.*;
+ 
+ import java.util.ArrayList;
+ import java.util.List;
+@@ -12,11 +8,17 @@
+ public class Controller {
+     private List<Person> persons;
+     private FileHandler fileHandler;
+-    private Team team;
++    private List<Team> teams;
++
++    //Skal ikke have lister
+ 
+     public Controller() {
+         this.persons = new ArrayList<>();
++        this.teams = new ArrayList<>();
+         this.fileHandler = new FileHandler();
++
++        teams.add(new Team("Junior", AgeCategory.JUNIOR));
++        teams.add(new Team("Senior", AgeCategory.SENIOR));
+          /*this.teams = new ArrayList<Team>(); */
+     }
+ 
+@@ -57,7 +59,7 @@
+         }
+ 
+         public void displayAllMembers(){
+-        team.displayAllMembers();
++        team.printAllSwimmers();
+         }
+ 
+ 
+Index: src/domainmodel/MembershipRegistration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/domainmodel/MembershipRegistration.java b/src/domainmodel/MembershipRegistration.java
+new file mode 100644
+--- /dev/null	(date 1733435536750)
++++ b/src/domainmodel/MembershipRegistration.java	(date 1733435536750)
+@@ -0,0 +1,7 @@
++package domainmodel;
++
++public class MembershipRegistration {
++
++
++
++}
+diff --git a/members.txt b/members.txt
+deleted file mode 100644

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="56fbd3d6-8d8d-4361-b361-784d3a053765" name="Changes" comment="Fikset FileHandler" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Kontingent" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AntonMikkelsen&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AntonMikkelsen/DelfinProjekt.git&quot;,
+    &quot;accountId&quot;: &quot;d397fe5b-eafc-4641-b055-bacfcc291a37&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2pL08lobyKR6Ztp1n3A9HSjlO4z" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="DelfinProjekt" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="56fbd3d6-8d8d-4361-b361-784d3a053765" name="Changes" comment="" />
+      <created>1732529891102</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732529891102</updated>
+      <workItem from="1732529892558" duration="4759000" />
+      <workItem from="1732619202511" duration="69994000" />
+      <workItem from="1733688078453" duration="10179000" />
+    </task>
+    <task id="LOCAL-00001" summary="Første commit - tester">
+      <option name="closed" value="true" />
+      <created>1732529934577</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1732529934577</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added addTeam and isJunior methods in Teams.java">
+      <option name="closed" value="true" />
+      <created>1732535108977</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732535108977</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added manager class, to make it possible for manager to add members to a/the list">
+      <option name="closed" value="true" />
+      <created>1732623892117</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1732623892117</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added manager class, to make it possible for manager to add members to a/the list">
+      <option name="closed" value="true" />
+      <created>1732627396866</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1732627396866</updated>
+    </task>
+    <task id="LOCAL-00005" summary="MembershipFee added">
+      <option name="closed" value="true" />
+      <created>1732628032633</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1732628032633</updated>
+    </task>
+    <task id="LOCAL-00006" summary="FileHandler added">
+      <option name="closed" value="true" />
+      <created>1732707918487</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1732707918487</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added ToString in Person class">
+      <option name="closed" value="true" />
+      <created>1732708143294</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1732708143294</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Added calculateAge method, to calculate age from LocalDate">
+      <option name="closed" value="true" />
+      <created>1732708477560</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1732708477560</updated>
+    </task>
+    <task id="LOCAL-00009" summary="test commit, før push">
+      <option name="closed" value="true" />
+      <created>1732792586899</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1732792586899</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added addNewMember">
+      <option name="closed" value="true" />
+      <created>1732796154499</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1732796154499</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added addNewMember">
+      <option name="closed" value="true" />
+      <created>1732796865373</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1732796865373</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added addNewMember til AdministrativeMenu">
+      <option name="closed" value="true" />
+      <created>1732802230556</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1732802230556</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Added addNewMember til AdministrativeMenu">
+      <option name="closed" value="true" />
+      <created>1732805726584</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732805726584</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added Remove feature in UI, and added to case">
+      <option name="closed" value="true" />
+      <created>1732806037660</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1732806037660</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Safety commit">
+      <option name="closed" value="true" />
+      <created>1732809376124</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1732809376125</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Ændret EditMember og lavet AdministratorEdit">
+      <option name="closed" value="true" />
+      <created>1733142770685</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1733142770685</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Tjek og fiks på AdminEdit">
+      <option name="closed" value="true" />
+      <created>1733143249332</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1733143249332</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added methods to Team class, and controller class">
+      <option name="closed" value="true" />
+      <created>1733225205157</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1733225205157</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Added &quot;members.csv&quot; og ændret FileHandler så den gemmer indtastede personer i &quot;members.csv&quot;.">
+      <option name="closed" value="true" />
+      <created>1733235959081</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1733235959081</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Added MembershipRegistration and methods within it.&#10;&#10;also added new controller methods">
+      <option name="closed" value="true" />
+      <created>1733488439700</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1733488439700</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Added MembershipRegistration and methods within it.&#10;&#10;also added new controller methods">
+      <option name="closed" value="true" />
+      <created>1733488644216</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1733488644216</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Added MembershipRegistration and methods within it.&#10;&#10;also added new controller methods">
+      <option name="closed" value="true" />
+      <created>1733691399788</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1733691399788</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Fikset FileHandler">
+      <option name="closed" value="true" />
+      <created>1733750362709</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1733750362710</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Manager" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Første commit - tester" />
+    <MESSAGE value="Added addTeam and isJunior methods in Teams.java" />
+    <MESSAGE value="Added manager class, to make it possible for manager to add members to a/the list" />
+    <MESSAGE value="MembershipFee added" />
+    <MESSAGE value="FileHandler added" />
+    <MESSAGE value="added ToString in Person class" />
+    <MESSAGE value="Added calculateAge method, to calculate age from LocalDate" />
+    <MESSAGE value="test commit, før push" />
+    <MESSAGE value="Added addNewMember" />
+    <MESSAGE value="Added addNewMember til AdministrativeMenu" />
+    <MESSAGE value="Added Remove feature in UI, and added to case" />
+    <MESSAGE value="Safety commit" />
+    <MESSAGE value="Ændret EditMember og lavet AdministratorEdit" />
+    <MESSAGE value="Tjek og fiks på AdminEdit" />
+    <MESSAGE value="Added methods to Team class, and controller class" />
+    <MESSAGE value="Added &quot;members.csv&quot; og ændret FileHandler så den gemmer indtastede personer i &quot;members.csv&quot;." />
+    <MESSAGE value="Added MembershipRegistration and methods within it.&#10;&#10;also added new controller methods" />
+    <MESSAGE value="Fikset FileHandler" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fikset FileHandler" />
+  </component>
+</project>
