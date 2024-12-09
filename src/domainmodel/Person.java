@@ -93,6 +93,9 @@ public abstract class Person {
                 ", Address: " + address;
     }
 
+    public SwimmerType getSwimmerType() {
+        return null;
+    }
 }
 
 

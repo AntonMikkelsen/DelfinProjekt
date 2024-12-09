@@ -144,6 +144,9 @@ public class Team {
         }
     }
 
+    public void setCoach(Coach coach1) {
+    }
+
 
 
 
