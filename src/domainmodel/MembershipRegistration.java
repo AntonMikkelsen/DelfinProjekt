@@ -16,27 +16,27 @@ public class MembershipRegistration {
         this.membersList = new ArrayList<>();
         this.teams = new ArrayList<>();
         this.cashier = new Cashier(membersList); // Initialize the cashier with the members list
+        fileHandler = new FileHandler();
     }
-
 
 
     // Hent alle medlemmer
     public ArrayList<Member> getAllMembers() {
-    for (Member member : membersList){
-        // System.out.println(member);
+        for (Member member : membersList) {
+            System.out.println(member);
         }
-    return membersList;
+        return membersList;
     }
 
-    public void displayMembers(){
-        new FileHandler().loadMembersFromFile();
+    public void displayMembers() {
+        fileHandler.loadMembersFromFile();
     }
 
     // Tilføj nyt medlem
     public void addMember(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address, String memberID, MembershipStatus membershipStatus) {
         Member member = new Member(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberID, membershipStatus);
         membersList.add(member);
-        FileHandler.saveMembersToFile(membersList);
+        fileHandler.saveMembersToFile(membersList);
     }
 
     // Fjern medlem

@@ -1,13 +1,3 @@
-import datasource.Controller;
-import datasource.FileHandler;
-import domainmodel.*;
-
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import ui.UserInterface;
 
 public class Main {
