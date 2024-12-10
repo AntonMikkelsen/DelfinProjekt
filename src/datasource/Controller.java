@@ -16,6 +16,7 @@ public class Controller {
         return null;
     }
 
+
     public ArrayList<CompetitiveSwimmer> getCompSwimmers() {
         return Memberships.getAllCompetitiveSwimmers();
     }
@@ -38,6 +39,18 @@ public class Controller {
 
     public void cashierTotalIncomeGenerated(){
         Memberships.cashierTotalIncomeGenerated();
+    }
+
+    public void addMembersToArrearsController(Member member, boolean boolean1){
+        Memberships.addMemberToArrears(member, boolean1);
+    }
+
+    public void cashierTotalDebtFromArrears(){
+        Memberships.cashierTotalDebtFromArrears();
+    }
+
+    public void cashierNetIncomeNoArrears(){
+        Memberships.netIncomeWithoutArrearsMoney();
     }
 
 
