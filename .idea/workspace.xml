@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56fbd3d6-8d8d-4361-b361-784d3a053765" name="Changes" comment="- Added tests of calculateMembershipFee">
+    <list default="true" id="56fbd3d6-8d8d-4361-b361-784d3a053765" name="Changes" comment="- Added extra options to financial overview">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/members.csv" beforeDir="false" afterPath="$PROJECT_DIR$/members.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/datasource/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasource/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domainmodel/Cashier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domainmodel/Cashier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domainmodel/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domainmodel/Member.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domainmodel/MembershipRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domainmodel/MembershipRegistration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domainmodel/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domainmodel/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/UserInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -316,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733829573031</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="- Added extra options to financial overview">
+      <option name="closed" value="true" />
+      <created>1733834910246</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1733834910246</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +369,8 @@
     <MESSAGE value="Fikset FileHandler" />
     <MESSAGE value="- Added some comments" />
     <MESSAGE value="- Added tests of calculateMembershipFee" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Added tests of calculateMembershipFee" />
+    <MESSAGE value="- Added extra options to financial overview" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Added extra options to financial overview" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

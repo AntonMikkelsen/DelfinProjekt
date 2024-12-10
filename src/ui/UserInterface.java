@@ -30,6 +30,10 @@ public class UserInterface {
                 case 2 -> membershipMenu();
                 case 3 -> displayFinancialOverview();
                 case 4 -> {
+                    createNewTestMembers();
+                    createTestCompSwimmers();
+                }
+                case 5 -> {
                     System.out.println("Exiting program...");
                     menuRunning = false;
                 }
@@ -112,10 +116,8 @@ public class UserInterface {
         while (overviewMenuRunning) {
             System.out.println("\n=== Member Overview ===");
             System.out.println("1. View all members");
-            System.out.println("2. View team members");
-            System.out.println("3. Create test members for the program");
-            System.out.println("5. View competitive team members"); // nyt implementering
-            System.out.println("6. View competitive swimmers sorted by discipline"); // nyt implementering
+            System.out.println("2. View team members - Junior/Senior");
+            System.out.println("3. View best competitive swimmers sorted by discipline"); // New
             System.out.println("0. Back to main menu");
             System.out.print("Enter your choice: ");
 
@@ -125,9 +127,7 @@ public class UserInterface {
             switch (choice) {
                 case 1 -> controller.displayMembers();
                 case 2 -> displayAllTeamMembers();
-                // case 3 - > view all comp members by team
-                // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(); -- Ydligere valg om de vil sorterer de 5 bedste svømmere udfra disciplin
-                case 3 -> createNewTestMembers();
+                case 3 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(controller.getCompSwimmers()); // New
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -180,33 +180,14 @@ public class UserInterface {
         waitForEnter();
     }
 
-
-/*
-    // Displays competitive members by team
-    private void displayAllCompetitiveTeamMembers() {
-        System.out.println("\n1. Junior Team");
-        System.out.println("2. Senior Team");
-        System.out.print("Select team: ");
-
-        int choice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-
-        String teamName = null;
-
-
-        if (choice == 1){
-            teamName == "Junior Team";
-        }
-    }
- */
-
     // Method to greet the user, and save sout's.
     private void greetingsMSG() {
         System.out.println("\n=== Welcome To Your Swimming Park System ===");
         System.out.println("1. Administrative data");
         System.out.println("2. Membership management");
         System.out.println("3. Financial Overview");
-        System.out.println("4. Exit");
+        System.out.println("4. Create 4 already pre-existing members to test the program ");
+        System.out.println("5. Exit");
         System.out.print("Enter your choice: ");
     }
 
@@ -348,6 +329,20 @@ public class UserInterface {
         controller.addMembersToArrearsController(member4, true);
         controller.addMember(member5.getFirstName(), member5.getLastName(), birthdate, member5.getEmail(), member5.getPhoneNumber(), member5.getAddress(), member5.getMemberID(), MembershipStatus.PASSIVE);
 
+    }
+
+    public void createTestCompSwimmers(){
+        LocalDate birthdate = LocalDate.of(2000,07,12);
+        LocalDate birthdate1 = LocalDate.of(2020,07,12);
+
+        Member member1 = new Member("HussainComp", "MahmoudCOMP", birthdate, "hus.@", "27282728", "husdus", "id4", MembershipStatus.ACTIVE);
+        Member member2 = new Member("MuzafferCOMP", "MikkelsenCOMP", birthdate1, "muz.@", "27282728", "husdus", "id5", MembershipStatus.ACTIVE);
+
+        member1.setSwimmerType(SwimmerType.COMPETITIVE);
+        member2.setSwimmerType(SwimmerType.COMPETITIVE);
+
+        controller.addMember(member1.getFirstName(), member1.getLastName(), birthdate, member1.getEmail(), member1.getPhoneNumber(), member1.getAddress(), member1.getMemberID(), MembershipStatus.ACTIVE);
+        controller.addMember(member2.getFirstName(), member2.getLastName(), birthdate, member2.getEmail(), member2.getPhoneNumber(), member2.getAddress(), member2.getMemberID(), MembershipStatus.ACTIVE);
     }
 
     private void waitForEnter() {
