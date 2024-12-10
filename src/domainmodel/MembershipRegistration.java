@@ -23,7 +23,7 @@ public class MembershipRegistration {
     // Hent alle medlemmer
     public ArrayList<Member> getAllMembers() {
     for (Member member : membersList){
-        System.out.println(member);
+        // System.out.println(member);
         }
     return membersList;
     }

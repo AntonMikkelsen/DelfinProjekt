@@ -116,8 +116,9 @@ public class UserInterface {
         while (overviewMenuRunning) {
             System.out.println("\n=== Member Overview ===");
             System.out.println("1. View all members");
-            System.out.println("2. View team members - Junior/Senior");
-            System.out.println("3. View best competitive swimmers sorted by discipline"); // New
+            System.out.println("2. View all team members Competitive swimmers");
+            System.out.println("3. View all team members casual swimmers");
+            // System.out.println("4. View best competitive swimmers sorted by discipline"); // New
             System.out.println("0. Back to main menu");
             System.out.print("Enter your choice: ");
 
@@ -126,8 +127,8 @@ public class UserInterface {
 
             switch (choice) {
                 case 1 -> controller.displayMembers();
-                case 2 -> displayAllTeamMembers();
-                case 3 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(controller.getCompSwimmers()); // New
+                case 2 -> displayAllTeamCompMembers();
+                case 3 ->  displayAllTeamMembersRegularNew();// CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(controller.getCompSwimmers()); // New
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
             }
@@ -150,7 +151,65 @@ public class UserInterface {
         }
     }
 
-    private void displayAllTeamMembers() {
+    //Ny display members huss arbejder på
+    public void displayAllTeamMembersRegularNew(){
+
+        System.out.println("\n--1. Add casual swimmers to casual team--");
+        System.out.println("--2. View casual team members--\n");
+        int choice = scanner.nextInt();
+
+        Team casualTeam = new Team("Casual Team");
+
+
+        casualTeam.addSwimmersToTeam(controller.getMembers().get(0));
+        casualTeam.addSwimmersToTeam(controller.getMembers().get(1));
+        casualTeam.addSwimmersToTeam(controller.getMembers().get(2));
+        casualTeam.addSwimmersToTeam(controller.getMembers().get(controller.getMembers().size() -1));
+
+        switch (choice) {
+            case 1 -> {
+                casualTeam.addSwimmersToTeam(controller.getMembers().get(0));
+                casualTeam.addSwimmersToTeam(controller.getMembers().get(1));
+                casualTeam.addSwimmersToTeam(controller.getMembers().get(2));
+                casualTeam.addSwimmersToTeam(controller.getMembers().get(controller.getMembers().size() -1));
+            }
+            case 2 -> {
+                System.out.println("\n=== Casual Team Members ===");
+                for (Member member : casualTeam.getTeamMembersRegular()) {
+                    System.out.println(member.getFirstName());
+                }
+            }
+        }
+    }
+
+    private void displayAllTeamCompMembers() {
+        // Create the teams first
+        Team juniorTeam = new Team("Junior Team", AgeCategory.JUNIOR);
+        Team seniorTeam = new Team("Senior Team", AgeCategory.SENIOR);
+
+        // Create the coaches for each team
+        Coach juniorCoach = new Coach(
+                "Michael",
+                "Williams",
+                LocalDate.of(1985, 7, 20), // Corrected the date (Year, Month, Day)
+                "michael.williams@example.com",
+                "12345678",
+                "123 Junior Street, Cityville", // Example address
+                "JC123", // Coach ID for Junior Coach
+                juniorTeam // Assign to Junior Team
+        );
+
+        Coach seniorCoach = new Coach(
+                "Sarah",
+                "Taylor",
+                LocalDate.of(1980, 1, 1), // Corrected the date (Year, Month, Day)
+                "sarah.taylor@example.com",
+                "12345678",
+                "456 Senior Avenue, Townsville", // Example address
+                "SC456", // Coach ID for Senior Coach
+                seniorTeam // Assign to Senior Team
+        );
+
         System.out.println("\n1. Junior Team");
         System.out.println("2. Senior Team");
         System.out.print("Select team: ");
@@ -159,8 +218,8 @@ public class UserInterface {
         scanner.nextLine(); // Consume newline
 
         Team selectedTeam = switch (choice) {
-            case 1 -> new Team("Junior Team", AgeCategory.JUNIOR);
-            case 2 -> new Team("Senior Team", AgeCategory.SENIOR);
+            case 1 -> juniorTeam;
+            case 2 -> seniorTeam;
             default -> {
                 System.out.println("Invalid team selection");
                 yield null;
@@ -168,17 +227,62 @@ public class UserInterface {
         };
 
         if (selectedTeam != null) {
-            ArrayList<CompetitiveSwimmer> teamMembers = controller.getCompSwimmers();
-            System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
-            printHeaderLine();
+            // ArrayList to hold the competitive swimmers for the selected team
+            ArrayList<CompetitiveSwimmer> teamMembers = new ArrayList<>();
 
-            for (CompetitiveSwimmer swimmer : teamMembers) {
-                printSwimmerInfo(swimmer);
+            // Hardcoding Junior Team Members if the selected team is Junior
+            if (selectedTeam.getTeamName().equals("Junior Team")) {
+                CompetitiveSwimmer swimmer1 = new CompetitiveSwimmer(
+                        "John", "Doe", LocalDate.of(2005, 6, 15),
+                        "john.doe@example.com", "12345678", "123 Main St", "id001", MembershipStatus.ACTIVE, juniorTeam, juniorCoach);
+                swimmer1.setSwimmerType(SwimmerType.COMPETITIVE);
+
+                CompetitiveSwimmer swimmer2 = new CompetitiveSwimmer(
+                        "Jane", "Smith", LocalDate.of(2006, 8, 22),
+                        "jane.smith@example.com", "12345678", "456 Elm St", "id002", MembershipStatus.ACTIVE, juniorTeam, juniorCoach);
+                swimmer2.setSwimmerType(SwimmerType.COMPETITIVE);
+
+                teamMembers.add(swimmer1);
+                teamMembers.add(swimmer2);
             }
-            System.out.println("Total Team Members: " + teamMembers.size());
+
+            // Hardcoding Senior Team Members if the selected team is Senior
+            if (selectedTeam.getTeamName().equals("Senior Team")) {
+                CompetitiveSwimmer swimmer3 = new CompetitiveSwimmer(
+                        "Emily", "Johnson", LocalDate.of(1995, 4, 10),
+                        "emily.johnson@example.com", "12345678", "789 Oak St", "id003", MembershipStatus.ACTIVE, seniorTeam, seniorCoach);
+                swimmer3.setSwimmerType(SwimmerType.COMPETITIVE);
+
+                CompetitiveSwimmer swimmer4 = new CompetitiveSwimmer(
+                        "Chris", "Lee", LocalDate.of(1994, 2, 5),
+                        "chris.lee@example.com", "12345678", "101 Pine St", "id004", MembershipStatus.ACTIVE, seniorTeam, seniorCoach);
+                swimmer4.setSwimmerType(SwimmerType.COMPETITIVE);
+
+                teamMembers.add(swimmer3);
+                teamMembers.add(swimmer4);
+            }
+
+            // Display the swimmers in the selected team
+            if (!teamMembers.isEmpty()) {
+                System.out.println("\n=== " + selectedTeam.getTeamName() + " Competitive Swimmers ===");
+                printHeaderLine();
+
+                for (CompetitiveSwimmer swimmer : teamMembers) {
+                    printSwimmerInfo(swimmer);
+                }
+                System.out.println("Total Team Members: " + teamMembers.size());
+            } else {
+                System.out.println("No competitive swimmers found in the selected team.");
+            }
         }
+
         waitForEnter();
     }
+
+
+
+
+
 
     // Method to greet the user, and save sout's.
     private void greetingsMSG() {
@@ -193,12 +297,12 @@ public class UserInterface {
 
 
 
-    //
     private void printHeaderLine() {
-        System.out.printf("%-10s %-15s %-15s %-5s %-10s %-15s%n",
-                "ID", "First Name", "Last Name", "Age", "Status", "Team");
-        System.out.println("=".repeat(70));
+        System.out.printf("%-10s %-15s %-15s %-5s %-10s %-15s %-25s%n",
+                "ID", "First Name", "Last Name", "Age", "Status", "Team", "Active Disciplines");
+        System.out.println("=".repeat(130)); // Adjust the separator to match the width of the header line.
     }
+
 
     public void printSwimmerInfo(CompetitiveSwimmer swimmer) {
         System.out.printf("%-10s %-15s %-15s %-5d %-10s %-15s %s%n",
@@ -208,7 +312,7 @@ public class UserInterface {
                 swimmer.calculateAge(),
                 swimmer.getMembershipStatus(),
                 swimmer.getTeam().getTeamName(),
-                String.join(", ", swimmer.getDisciplines()));
+                String.join(", ", swimmer.getDisciplinesString()));
     }
 
     public Member printMemberInfo(Member member) {
@@ -323,11 +427,12 @@ public class UserInterface {
 
 
         controller.addMember(member1.getFirstName(), member1.getLastName(), birthdate, member1.getEmail(), member1.getPhoneNumber(), member1.getAddress(), member1.getMemberID(), MembershipStatus.ACTIVE);
-        controller.addMember(member2.getFirstName(), member2.getLastName(), birthdate, member2.getEmail(), member2.getPhoneNumber(), member2.getAddress(), member2.getMemberID(), MembershipStatus.ACTIVE);
-        controller.addMember(member3.getFirstName(), member3.getLastName(), birthdate, member3.getEmail(), member3.getPhoneNumber(), member3.getAddress(), member3.getMemberID(), MembershipStatus.ACTIVE);
-        controller.addMember(member4.getFirstName(), member4.getLastName(), birthdate, member4.getEmail(), member4.getPhoneNumber(), member4.getAddress(), member4.getMemberID(), MembershipStatus.ACTIVE);
+        controller.addMember(member2.getFirstName(), member2.getLastName(), birthdate1, member2.getEmail(), member2.getPhoneNumber(), member2.getAddress(), member2.getMemberID(), MembershipStatus.ACTIVE);
+        controller.addMember(member3.getFirstName(), member3.getLastName(), birthdate2, member3.getEmail(), member3.getPhoneNumber(), member3.getAddress(), member3.getMemberID(), MembershipStatus.ACTIVE);
+        controller.addMember(member4.getFirstName(), member4.getLastName(), birthdate3, member4.getEmail(), member4.getPhoneNumber(), member4.getAddress(), member4.getMemberID(), MembershipStatus.ACTIVE);
         controller.addMembersToArrearsController(member4, true);
-        controller.addMember(member5.getFirstName(), member5.getLastName(), birthdate, member5.getEmail(), member5.getPhoneNumber(), member5.getAddress(), member5.getMemberID(), MembershipStatus.PASSIVE);
+        controller.addMember(member5.getFirstName(), member5.getLastName(), birthdate4, member5.getEmail(), member5.getPhoneNumber(), member5.getAddress(), member5.getMemberID(), MembershipStatus.PASSIVE);
+
 
     }
 
@@ -342,7 +447,10 @@ public class UserInterface {
         member2.setSwimmerType(SwimmerType.COMPETITIVE);
 
         controller.addMember(member1.getFirstName(), member1.getLastName(), birthdate, member1.getEmail(), member1.getPhoneNumber(), member1.getAddress(), member1.getMemberID(), MembershipStatus.ACTIVE);
-        controller.addMember(member2.getFirstName(), member2.getLastName(), birthdate, member2.getEmail(), member2.getPhoneNumber(), member2.getAddress(), member2.getMemberID(), MembershipStatus.ACTIVE);
+        controller.addMember(member2.getFirstName(), member2.getLastName(), birthdate1, member2.getEmail(), member2.getPhoneNumber(), member2.getAddress(), member2.getMemberID(), MembershipStatus.ACTIVE);
+
+
+
     }
 
     private void waitForEnter() {

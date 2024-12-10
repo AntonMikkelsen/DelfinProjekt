@@ -56,6 +56,12 @@ public class CompetitiveSwimmer extends Member {
         return (CharSequence) new ArrayList<>(disciplines);
     }
 
+    public String getDisciplinesString() {
+        // Convert the disciplines list to a comma-separated string
+        return String.join(", ", disciplines.stream().map(SwimmingDiscipline::getFullName).toArray(String[]::new));
+    }
+
+
 
     // Returns as normal array
     public ArrayList<SwimmingDiscipline> getDisciplinesArray() {

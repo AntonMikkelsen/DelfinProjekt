@@ -40,8 +40,7 @@ public class Team {
     }
 
 
-    //Alle svømmere kommer på et hold, men Konkurrence svømmere ved at de er.
-    public void addSwimmersToTeam(CompetitiveSwimmer member) { // Måske skal CompetitiveSwimmer ændres til Member - ikke sikker endnu
+    public void addSwimmersToTeam(Person member) {
         // Check if the swimmer is already on the team
         if (!allSwimmers.contains(member)) {
             // Casual teams accept all swimmers regardless of age
@@ -61,9 +60,11 @@ public class Team {
             }
         } else {
             // Error: swimmer is already on the team
-            System.out.println(member.getFirstName() + " is already a part of the " + getTeamName() + " team.");
+            member.getLastName();
         }
     }
+
+
 
     //Chatgpt's bedre version af min egen kode
     public ArrayList<CompetitiveSwimmer> getTeamMembersComp() {
@@ -137,7 +138,6 @@ public class Team {
     }
 
     public void printAllSwimmers() {
-        System.out.println("Team: " + teamName);
         System.out.println("Team: " + teamName);
         for (Person swimmer : allSwimmers) {
             System.out.println("- " + swimmer.getFirstName() + " " + swimmer.getLastName());
