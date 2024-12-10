@@ -1,0 +1,293 @@
+Index: src/domainmodel/Coach.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domainmodel;\n\nimport java.time.LocalDate;\n\npublic class Coach extends Person{\n    private String CoachID;\n    private Team assignedTeam;\n\n    public Coach(String firstName, String lastName, LocalDate dateOfBirth, String email, String phoneNumber, String address, String coachID, Team assignedTeam) {\n        super(firstName, lastName, dateOfBirth, email, phoneNumber, address);\n        this.CoachID = coachID;\n        this.assignedTeam = assignedTeam;\n    }\n\n\n\n\n\n        @Override\n        public String toString() {\n            return \"Name: \" + firstName + \" \" + lastName +\n                    \", Date of Birth: \" + dateOfBirth +\n                    \", Email: \" + email +\n                    \", Phone: \" + phoneNumber +\n                    \", Address: \" + address +\n                    \", Coach ID: \" + CoachID +\n                    \", Assigned Team: \" + assignedTeam;\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/domainmodel/Coach.java b/src/domainmodel/Coach.java
+--- a/src/domainmodel/Coach.java	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/src/domainmodel/Coach.java	(date 1733309954682)
+@@ -15,7 +15,6 @@
+ 
+ 
+ 
+-
+         @Override
+         public String toString() {
+             return "Name: " + firstName + " " + lastName +
+Index: src/domainmodel/CompetitiveSwimmer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domainmodel;\n\nimport java.time.LocalDate;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n\n\npublic class CompetitiveSwimmer extends Member {\n\n    //Variables\n    private Team team;\n    private Coach assignedCoach;\n    private List<Result> results;\n    private ArrayList<SwimmingDiscipline> disciplines;\n    private SwimmerType swimmerType;\n\n    //Competitive\n    public CompetitiveSwimmer(String firstName, String lastName, LocalDate dateOfBirth,\n                              String email, String phoneNumber, String address,\n                              String memberId, MembershipStatus membershipStatus, Team team, Coach assignedCoach) {\n        super(firstName, lastName, dateOfBirth, email, phoneNumber, address, memberId, membershipStatus);\n        this.results = new ArrayList<>();\n        this.disciplines = new ArrayList<>(Arrays.asList(\n                SwimmingDiscipline.BACK_CRAWL,\n                SwimmingDiscipline.BREAST_STROKE,\n                SwimmingDiscipline.BUTTERFLY,\n                SwimmingDiscipline.CRAWL)\n        );\n        this.team = team;\n        this.assignedCoach = assignedCoach;\n        setSwimmerType(SwimmerType.COMPETITIVE);\n    }\n\n\n    public void setSwimmerType(SwimmerType swimmerType) {\n        this.swimmerType = swimmerType;\n    }\n\n    // Getters\n    public Team getTeam() {\n        return team;\n    }\n\n    public Coach getAssignedCoach() {\n        return assignedCoach;\n    }\n\n    public List<Result> getResults() {\n        return new ArrayList<>(results);\n    }\n\n    //Returns as char sequence\n    public CharSequence getDisciplines() {\n        return (CharSequence) new ArrayList<>(disciplines);\n    }\n\n\n    // Returns as normal array\n    public ArrayList<SwimmingDiscipline> getDisciplinesArray() {\n        return disciplines;\n    }\n\n\n    public SwimmerType getSwimmerType() {\n        return swimmerType;\n    }\n\n    // Setters\n    public void setTeam(Team team) {\n        this.team = team;\n    }\n\n    public void setAssignedCoach(Coach assignedCoach) {\n        this.assignedCoach = assignedCoach;\n    }\n\n    public void setResults(List<Result> results) {\n        this.results = new ArrayList<>(results);\n    }\n\n    public void setDisciplines(List<SwimmingDiscipline> disciplines) {\n        this.disciplines = new ArrayList<>(disciplines);\n    }\n\n\n\n    @Override\n    public String toString() {\n        String teamName;\n        if (team != null) {\n            teamName = team.getTeamName();\n        } else {\n            teamName = \"No Team\";\n        }\n\n        String coachName;\n        if (assignedCoach != null) {\n            coachName = assignedCoach.getFirstName();\n        } else {\n            coachName = \"No Coach\";\n        }\n        return String.format(\"CompetitiveSwimmer{id=%s, name='%s %s', team=%s, coach=%s, disciplines=%d}\",\n                getMemberID(),\n                getFirstName(),\n                getLastName(),\n                teamName,\n                coachName,\n                disciplines.size());\n    }\n\n\n    public static void printAllCompSwimmersBestDiscipline(List<CompetitiveSwimmer> swimmers) {\n        for (CompetitiveSwimmer swimmer : swimmers) {\n            List<SwimmingDiscipline> sortedDisciplines = new ArrayList<>(swimmer.getDisciplinesArray());\n\n            // Sorter disciplinerne efter bedste tid\n            sortedDisciplines.sort((discipline1, discipline2) -> {\n                double time1 = swimmer.getBestTimeForEachDiscipline(discipline1);\n                double time2 = swimmer.getBestTimeForEachDiscipline(discipline2);\n                return Double.compare(time1, time2);\n            });\n\n\n            // Udskriv information om svømmeren og de bedste tider\n            System.out.println(\"\\n Swimmers name: \" + swimmer.getFirstName() + \" \" + swimmer.getLastName());\n\n            for (int i = 0; i < sortedDisciplines.size(); i++) {\n                double time = swimmer.getBestTimeForEachDiscipline(sortedDisciplines.get(i));\n                String timeString = (time == Double.MAX_VALUE) ? \"N/A\" : String.valueOf(time);\n\n                // Best, second best, third best, etc.\n                if (i == 0) {\n                    System.out.println(\" - Best Discipline: \" + sortedDisciplines.get(i).getFullName() + \" - Time: \" + timeString);\n                } else if (i == 1) {\n                    System.out.println(\" - Second Best Discipline: \" + sortedDisciplines.get(i).getFullName() + \" - Time: \" + timeString);\n                } else if (i == 2) {\n                    System.out.println(\" - Third Best Discipline: \" + sortedDisciplines.get(i).getFullName() + \" - Time: \" + timeString);\n                }\n            }\n\n            // Værste disciplin\n            double worstTime = swimmer.getBestTimeForEachDiscipline(sortedDisciplines.get(sortedDisciplines.size() - 1));\n            String worstTimeString = (worstTime == Double.MAX_VALUE) ? \"N/A\" : String.valueOf(worstTime);\n            System.out.println(\" - Worst Discipline: \" + sortedDisciplines.get(sortedDisciplines.size() - 1).getFullName() + \" - Time: \" + worstTimeString);\n        }\n    }\n\n\n\n\n\n    public void sortDisciplinesByPerformance() {\n        for (int i = 0; i < disciplines.size() - 1; i++) {\n            for (int j = 0; j < disciplines.size() - 1 - i; j++) {\n                double time1 = getBestTimeForEachDiscipline(disciplines.get(j));\n                double time2 = getBestTimeForEachDiscipline(disciplines.get(j + 1));\n\n                // Swap if time1 is greater than time2\n                if (time1 < time2) {\n                    SwimmingDiscipline temp = disciplines.get(j);\n                    disciplines.set(j, disciplines.get(j + 1));\n                    disciplines.set(j + 1, temp);\n                }\n            }\n        }\n    }\n\n\n    public double getBestTimeForEachDiscipline(SwimmingDiscipline discipline) {\n        double bestTime = Double.MAX_VALUE;\n\n        for (Result result : results) {\n            if (result.getDiscipline() == discipline) {\n                if (result.getTime() < bestTime) {\n                    bestTime = result.getTime();\n                }\n            }\n        }\n        return bestTime;\n    }\n\n\n    public void addResult(Result result) {\n        if (result != null) {\n            this.results.add(result);\n        }\n    }\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/domainmodel/CompetitiveSwimmer.java b/src/domainmodel/CompetitiveSwimmer.java
+--- a/src/domainmodel/CompetitiveSwimmer.java	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/src/domainmodel/CompetitiveSwimmer.java	(date 1733309250763)
+@@ -139,6 +139,7 @@
+                 }
+             }
+ 
++
+             // Værste disciplin
+             double worstTime = swimmer.getBestTimeForEachDiscipline(sortedDisciplines.get(sortedDisciplines.size() - 1));
+             String worstTimeString = (worstTime == Double.MAX_VALUE) ? "N/A" : String.valueOf(worstTime);
+@@ -147,9 +148,6 @@
+     }
+ 
+ 
+-
+-
+-
+     public void sortDisciplinesByPerformance() {
+         for (int i = 0; i < disciplines.size() - 1; i++) {
+             for (int j = 0; j < disciplines.size() - 1 - i; j++) {
+@@ -166,7 +164,6 @@
+         }
+     }
+ 
+-
+     public double getBestTimeForEachDiscipline(SwimmingDiscipline discipline) {
+         double bestTime = Double.MAX_VALUE;
+ 
+@@ -180,7 +177,6 @@
+         return bestTime;
+     }
+ 
+-
+     public void addResult(Result result) {
+         if (result != null) {
+             this.results.add(result);
+Index: src/ui/UserInterface.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\n\nimport datasource.Controller;\nimport domainmodel.*;\nimport domainmodel.AgeCategory;\nimport domainmodel.MembershipStatus;\n\nimport java.time.LocalDate;\nimport java.util.Comparator;\nimport java.util.InputMismatchException;\nimport java.util.List;\nimport java.util.Scanner;\n\n\npublic class UserInterface {\n    private Scanner scanner;\n    private Controller.MembershipRegistrationService membershipService;\n    Controller controller = new Controller();\n\n    public UserInterface(Controller.MembershipRegistrationService membershipService) {\n        this.membershipService = membershipService;\n        this.scanner = new Scanner(System.in);\n    }\n\n    // Startmenu der gør brugeren kan komme ind på andre menuer bla administrivemenu osv.\n    public void startMenu() {\n        boolean menuRunning = true;\n        while (menuRunning) {\n            greetingsMSG();\n            int userResponse = scanner.nextInt();\n            scanner.nextLine(); // Consume newline\n\n            switch (userResponse) {\n                case 1 -> administrativeMenu();\n                case 2 -> bookingAndTrainingMenu();\n                case 3 -> membershipMenu();\n                case 4 -> {\n                    System.out.println(\"Exiting program...\");\n                    menuRunning = false;\n                }\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n\n    // Administrive menu, with administrive abilities\n    public void administrativeMenu() {\n        boolean administrativeMenuRunning = true;\n        while (administrativeMenuRunning) {\n            System.out.println(\"\\n=== Administrative Menu ===\");\n            System.out.println(\"1. Add members from existing teams\");\n            System.out.println(\"2. Remove existing members\");\n            System.out.println(\"3. Edit info on members\");\n            System.out.println(\"4. Show member overview\");\n            System.out.println(\"5. Exit menu\");\n\n            int userResponse = scanner.nextInt();\n            scanner.nextLine(); // Consume newline\n\n            switch (userResponse) {\n                case 1 -> {\n                    System.out.println(\"Add members from existing teams\");\n                    addNewMember();\n                }\n                case 2 -> {\n                    System.out.println(\"Remove existing members\");\n                    String memberId = scanner.nextLine(); // Indhent ID fra brugeren\n                    removeMember(memberId); // Kald metoden til at fjerne medlemmet\n                }\n                case 3 -> {\n                    System.out.println(\"What is the users member ID\");\n                    String memberID = scanner.nextLine();\n                    administatorEditInfo();\n                }\n                case 4 -> showMemberOverviewMenu();\n                case 5 -> administrativeMenuRunning = false;\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n\n    // BookingAndTrainingMenu\n    public void bookingAndTrainingMenu() {\n        boolean bookingAndTrainingMenuRunning = true;\n        while (bookingAndTrainingMenuRunning) {\n            System.out.println(\"\\n=== Booking and Training Menu ===\");\n            System.out.println(\"1. See schedule of the day\");\n            System.out.println(\"2. Edit schedule as a trainer\");\n            System.out.println(\"3. Cancellation of training or booking\");\n            System.out.println(\"4. Exit menu\");\n\n            int userResponse = scanner.nextInt();\n            scanner.nextLine();\n\n            switch (userResponse) {\n                case 1 -> System.out.println(\"See schedule of the day\");\n                case 2 -> System.out.println(\"Edit schedule as a trainer\");\n                case 3 -> System.out.println(\"Cancelation of training or booking\");\n                case 4 -> bookingAndTrainingMenuRunning = false;\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n\n    public void membershipMenu() {\n        boolean membershipMenuRunning = true;\n        while (membershipMenuRunning) {\n            System.out.println(\"\\n=== Membership Menu ===\");\n            System.out.println(\"1. See membership details\");\n            System.out.println(\"2. Edit membership details and status\");\n            System.out.println(\"3. Exit menu\");\n\n            int userResponse = scanner.nextInt();\n            scanner.nextLine();\n\n            switch (userResponse) {\n                case 1 -> {\n                    System.out.println(\"Write your member id\");\n                    String userMemberID = scanner.nextLine();\n                    showMemberInfo(userMemberID);\n                }\n                case 2 -> {\n                    System.out.println(\"Edit membership details and status\");\n                    editMember();\n                }\n                case 3 -> membershipMenuRunning = false;\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n\n\n\n    private void showMemberOverviewMenu() {\n        boolean overviewMenuRunning = true;\n        while (overviewMenuRunning) {\n            System.out.println(\"\\n=== Member Overview ===\");\n            System.out.println(\"1. View all members\");\n            System.out.println(\"2. View team members\");\n            System.out.println(\"3. View competitive swimmers sorted by discipline\");\n            System.out.println(\"0. Back to main menu\");\n            System.out.print(\"Enter your choice: \");\n\n            int choice = scanner.nextInt();\n            scanner.nextLine();\n\n            switch (choice) {\n                case 1 -> displayAllMembers();\n                case 2 -> displayAllTeamMembers();\n               // case 3 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();\n                case 0 -> overviewMenuRunning = false;\n                default -> System.out.println(\"Invalid choice. Please try again.\");\n            }\n        }\n    }\n\n    // Method to show all members,\n    private void displayAllMembers() {\n        List<Person> members = membershipService.getAllMembers();\n\n        System.out.println(\"\\n=== All Members Overview ===\");\n        printHeaderLine();\n\n\n        for (Person person : members) {\n            if (person instanceof CompetitiveSwimmer) {\n                printSwimmerInfo((CompetitiveSwimmer) person);\n            } else if (person instanceof Member) {\n                printMemberInfo((Member) person);\n\n            }\n        }\n        System.out.println(\"Total Members: \" + members.size());\n        waitForEnter();\n    }\n\n    private void displayAllTeamMembers() {\n        System.out.println(\"\\n1. Junior Team\");\n        System.out.println(\"2. Senior Team\");\n        System.out.print(\"Select team: \");\n\n        int choice = scanner.nextInt();\n        scanner.nextLine(); // Consume newline\n\n        Team selectedTeam = switch (choice) {\n            case 1 -> new Team(\"Junior Team\", AgeCategory.JUNIOR);\n            case 2 -> new Team(\"Senior Team\", AgeCategory.SENIOR);\n            default -> {\n                System.out.println(\"Invalid team selection\");\n                yield null;\n            }\n        };\n\n        if (selectedTeam != null) {\n            List<CompetitiveSwimmer> teamMembers = membershipService.getTeamMembers(selectedTeam);\n            System.out.println(\"\\n=== Team \" + selectedTeam.getTeamName() + \" Members ===\");\n            printHeaderLine();\n\n            for (CompetitiveSwimmer swimmer : teamMembers) {\n                printSwimmerInfo(swimmer);\n            }\n            System.out.println(\"Total Team Members: \" + teamMembers.size());\n        }\n        waitForEnter();\n    }\n\n    // Method to greet the user, and save sout's.\n    private void greetingsMSG() {\n        System.out.println(\"\\n=== Welcome To Your Swimming Park System ===\");\n        System.out.println(\"1. Administrative data\");\n        System.out.println(\"2. Booking and training\");\n        System.out.println(\"3. Membership management\");\n        System.out.println(\"4. Exit\");\n        System.out.print(\"Enter your choice: \");\n    }\n\n\n\n    //\n    private void printHeaderLine() {\n        System.out.printf(\"%-10s %-15s %-15s %-5s %-10s %-15s%n\",\n                \"ID\", \"First Name\", \"Last Name\", \"Age\", \"Status\", \"Team\");\n        System.out.println(\"=\".repeat(70));\n    }\n\n    private void printSwimmerInfo(CompetitiveSwimmer swimmer) {\n        System.out.printf(\"%-10s %-15s %-15s %-5d %-10s %-15s %s%n\",\n                swimmer.getMemberID(),\n                swimmer.getFirstName(),\n                swimmer.getLastName(),\n                swimmer.calculateAge(),\n                swimmer.getMembershipStatus(),\n                swimmer.getTeam().getTeamName(),\n                String.join(\", \", swimmer.getDisciplines()));\n    }\n\n    private Member printMemberInfo(Member member) {\n        System.out.printf(\"%-10s %-15s %-15s %-5d %-10s %-15s%n\",\n                member.getMemberID(),\n                member.getFirstName(),\n                member.getLastName(),\n                member.calculateAge(),\n                member.getMembershipStatus(),\n                \"No Team\");\n        return member;\n    }\n\n\n    private void removeMember(String memberID) {\n\n        System.out.println(\"enter the a membersID to remove the member\");\n\n        List<Person> members = membershipService.getAllMembers();\n        Member toRemove = null;\n\n        for (Person person : members) {\n            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {\n                toRemove = (Member) person;\n                break;\n            }\n        }\n        if (toRemove != null && members.remove(toRemove)) {\n            members.remove(memberID);\n            System.out.println(\"Member removed successfully: \" + toRemove.getFirstName() + \" \" + toRemove.getLastName());\n        } else {\n            System.out.println(\"Member does not exist\");\n        }\n    }\n\n    private void addNewMember() {\n        System.out.println(\"------------------------\");\n        System.out.println(\"\\nEnter first name: \");\n        String firstName = scanner.nextLine();\n        System.out.println(\"First name: \" + firstName);\n\n        System.out.println(\"\\nEnter last name: \");\n        String lastName = scanner.nextLine();\n        System.out.println(\"Last name: \" + lastName);\n\n        LocalDate dob = null;\n        while (dob == null) {\n            System.out.println(\"\\nEnter date of birth (YYYY-MM-DD): \");\n            try {\n                dob = LocalDate.parse(scanner.nextLine());\n                System.out.println(\"Date of birth: \" + dob);\n            } catch (Exception e) {\n                System.out.println(\"An error has occured: \" + e.getMessage() + \" - Please try again\");\n            }\n        }\n\n        System.out.println(\"\\nEnter email: \");\n        String email = scanner.nextLine();\n        while (!email.contains(\"@\") && !email.contains(\".\")) {\n            if (email.contains(\"@\")) {\n                System.out.println(\"Email: \" + email);\n            } else {\n                System.out.println(\"Please enter a valid email\");\n                email = scanner.nextLine();\n            }\n        }\n\n        System.out.println(\"\\nEnter phone number: \");\n        String phone = scanner.nextLine();\n        System.out.println(\"Phone number: \" + phone);\n\n        System.out.println(\"\\nEnter address: \");\n        String address = scanner.nextLine();\n        System.out.println(\"address: \" + address);\n\n        MembershipStatus status = null;\n        while (status == null) {\n            try {\n                System.out.println(\"\\nEnter membership status *Enter Passive/Active*: \");\n                status = MembershipStatus.valueOf(scanner.nextLine().toUpperCase());\n                System.out.println(\"membership stauts: \" + status);\n            } catch (IllegalArgumentException e) {\n                System.out.println(\"An error has occured: \" + e.getMessage() + \" - Please try again\");\n            }\n        }\n\n\n        String memberId = \"ID\" + (membershipService.getAllMembers().size() + 1);\n\n        Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);\n        membershipService.addMember(newMember);\n\n        System.out.println(\"Member added successfully: \" + newMember.getFirstName() + \" \" + newMember.getLastName());\n\n    }\n\n    private void waitForEnter() {\n        System.out.println(\"\\nPress Enter to continue...\");\n        scanner.nextLine();\n    }\n\n    public Member showMemberInfo(String memberID) {\n        List<Person> Members = membershipService.getAllMembers();\n        Member toSearch = null;\n        for (Person person : Members) {\n            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;\n            {\n                toSearch = (Member) person;\n                break;\n            }\n        }\n        if (toSearch != null) {\n            System.out.println(printMemberInfo(toSearch));\n        } else {\n            System.out.println(\"Member does not exist\");\n        }\n        return null;\n    }\n\n    public Member administatorEditInfo() {\n        System.out.println(\"\\n=== Edit Member Information ===\");\n        System.out.println(\"Enter member ID to edit: \");\n        String memberID = scanner.nextLine();\n\n        List<Person> members = membershipService.getAllMembers();\n        Member memberToEdit = null;\n\n        // Find the member\n        for (Person person : members) {\n            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {\n                memberToEdit = (Member) person;\n                break;\n            }\n        }\n\n        if (memberToEdit == null) {\n            System.out.println(\"Member not found.\");\n            return null;\n        }\n\n        boolean editing = true;\n        while (editing) {\n            System.out.println(\"\\nCurrent Member Information:\");\n            printMemberInfo(memberToEdit);\n\n            System.out.println(\"\\nWhat would you like to edit?\");\n            System.out.println(\"1. First Name (Current: \" + memberToEdit.getFirstName() + \")\");\n            System.out.println(\"2. Last Name (Current: \" + memberToEdit.getLastName() + \")\");\n            System.out.println(\"3. Email (Current: \" + memberToEdit.getEmail() + \")\");\n            System.out.println(\"4. Phone Number (Current: \" + memberToEdit.getPhoneNumber() + \")\");\n            System.out.println(\"5. Address (Current: \" + memberToEdit.getAddress() + \")\");\n            System.out.println(\"6. MemberID(Current: \" + memberToEdit.getMemberID() + \")\");\n            System.out.println(\"7. Membership Status (Current: \" + memberToEdit.getMembershipStatus() + \")\");\n            System.out.println(\"8. Save and Exit\");\n\n            int choice = scanner.nextInt();\n            scanner.nextLine(); // Consume newline\n\n            switch (choice) {\n\n                case 1 -> {\n                    System.out.println(\"Enter new first name: \");\n                    String firstName = scanner.nextLine();\n                    memberToEdit.setFirstName(firstName);\n                    System.out.println(\"First name updated successfully.\");\n                }\n                case 2 -> {\n                    System.out.println(\"Enter new last name: \");\n                    String lastName = scanner.nextLine();\n                    memberToEdit.setLastName(lastName);\n                    System.out.println(\"Last name updated successfully.\");\n                }\n                case 3 -> {\n                    System.out.println(\"Enter new email: \");\n                    String email = scanner.nextLine();\n                    while (!email.contains(\"@\") || !email.contains(\".\")) {\n                        System.out.println(\"Please enter a valid email address: \");\n                        email = scanner.nextLine();\n                    }\n                    memberToEdit.setEmail(email);\n                    System.out.println(\"Email updated successfully.\");\n                }\n                case 4 -> {\n                    System.out.println(\"Enter new phone number: \");\n                    String phone = scanner.nextLine();\n                    memberToEdit.setPhoneNumber(phone);\n                    System.out.println(\"Phone number updated successfully.\");\n                }\n                case 5 -> {\n                    System.out.println(\"Enter new address: \");\n                    String address = scanner.nextLine();\n                    memberToEdit.setAddress(address);\n                    System.out.println(\"Address updated successfully.\");\n                }\n                case 6 -> {\n                    MembershipStatus newStatus = null;\n                    while (newStatus == null) {\n                        try {\n                            System.out.println(\"Enter new membership status (ACTIVE/PASSIVE): \");\n                            String statusInput = scanner.nextLine().toUpperCase();\n                            newStatus = MembershipStatus.valueOf(statusInput);\n                            memberToEdit.setMembershipStatus(newStatus);\n                            System.out.println(\"Membership status updated successfully.\");\n                        } catch (IllegalArgumentException e) {\n                            System.out.println(\"Invalid status. Please enter either ACTIVE or PASSIVE.\");\n                        }\n                    }\n                }\n                case 7 -> {\n                    System.out.println(\"Enter new MemberID: \");\n                    String newMemberID = scanner.nextLine();\n\n                    // Check if the new MemberID is already in use\n                    boolean idExists = false;\n                    for (Person person : members) {\n                        if (person instanceof Member && ((Member) person).getMemberID().equals(newMemberID)) {\n                            idExists = true;\n                            break;\n                        }\n                    }\n                    if (!idExists) {\n                        memberToEdit.setMemberID(newMemberID);\n                        System.out.println(\"MemberID updated successfully.\");\n                    } else {\n                        System.out.println(\"The MemberID is already in use. Please try a different one.\");\n                    }\n                }\n                case 8 -> {\n                    System.out.println(\"Changes saved successfully.\");\n                    editing = false;\n                }\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n        return null;\n    }\n\n    private int validateInt(){\n        while(true){\n            try {\n                return scanner.nextInt();\n            }\n            catch (InputMismatchException e)\n            {\n                System.out.println(\"Please enter a valid number\");\n                scanner.nextLine();\n            }\n        }\n    }\n\n    private void editMember() {\n        System.out.println(\"\\n=== Edit Member Information ===\");\n        System.out.println(\"Enter member ID to edit: \");\n        String memberID = scanner.nextLine();\n\n        List<Person> members = membershipService.getAllMembers();\n        Member memberToEdit = null;\n\n        // Find the member\n        for (Person person : members) {\n            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {\n                memberToEdit = (Member) person;\n                break;\n            }\n        }\n\n        if (memberToEdit == null) {\n            System.out.println(\"Member not found.\");\n            return;\n        }\n\n        boolean editing = true;\n        while (editing) {\n            System.out.println(\"\\nCurrent Member Information:\");\n            printMemberInfo(memberToEdit);\n\n            System.out.println(\"\\nWhat would you like to edit?\");\n            System.out.println(\"1. First Name (Current: \" + memberToEdit.getFirstName() + \")\");\n            System.out.println(\"2. Last Name (Current: \" + memberToEdit.getLastName() + \")\");\n            System.out.println(\"3. Email (Current: \" + memberToEdit.getEmail() + \")\");\n            System.out.println(\"4. Phone Number (Current: \" + memberToEdit.getPhoneNumber() + \")\");\n            System.out.println(\"5. Address (Current: \" + memberToEdit.getAddress() + \")\");\n            System.out.println(\"6. Membership Status (Current: \" + memberToEdit.getMembershipStatus() + \")\");\n            System.out.println(\"7. Save and Exit\");\n\n            int choice = scanner.nextInt();\n            scanner.nextLine(); // Consume newline\n\n            switch (choice) {\n                case 1 -> {\n                    System.out.println(\"Enter new email: \");\n                    String email = scanner.nextLine();\n                    while (!email.contains(\"@\") || !email.contains(\".\")) {\n                        System.out.println(\"Please enter a valid email address: \");\n                        email = scanner.nextLine();\n                    }\n                    memberToEdit.setEmail(email);\n                    System.out.println(\"Email updated successfully.\");\n                }\n                case 2 -> {\n                    System.out.println(\"Enter new phone number: \");\n                    String phone = scanner.nextLine();\n                    memberToEdit.setPhoneNumber(phone);\n                    System.out.println(\"Phone number updated successfully.\");\n                }\n                case 3 -> {\n                    System.out.println(\"Enter new address: \");\n                    String address = scanner.nextLine();\n                    memberToEdit.setAddress(address);\n                    System.out.println(\"Address updated successfully.\");\n                }\n                case 4 -> {\n                    System.out.println(\"Changes saved successfully.\");\n                    editing = false;\n                }\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ui/UserInterface.java b/src/ui/UserInterface.java
+--- a/src/ui/UserInterface.java	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/src/ui/UserInterface.java	(date 1733309482852)
+@@ -53,10 +53,10 @@
+             System.out.println("3. Edit info on members");
+             System.out.println("4. Show member overview");
+             System.out.println("5. Exit menu");
+-
+             int userResponse = scanner.nextInt();
+             scanner.nextLine(); // Consume newline
+ 
++
+             switch (userResponse) {
+                 case 1 -> {
+                     System.out.println("Add members from existing teams");
+@@ -130,14 +130,14 @@
+     }
+ 
+ 
+-
+     private void showMemberOverviewMenu() {
+         boolean overviewMenuRunning = true;
+         while (overviewMenuRunning) {
+             System.out.println("\n=== Member Overview ===");
+             System.out.println("1. View all members");
+             System.out.println("2. View team members");
+-            System.out.println("3. View competitive swimmers sorted by discipline");
++            System.out.println("3. View competitive team members"); // nyt implementering
++            System.out.println("4. View competitive swimmers sorted by discipline"); // nyt implementering
+             System.out.println("0. Back to main menu");
+             System.out.print("Enter your choice: ");
+ 
+@@ -147,7 +147,8 @@
+             switch (choice) {
+                 case 1 -> displayAllMembers();
+                 case 2 -> displayAllTeamMembers();
+-               // case 3 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
++                // case 3 - >
++                // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline();
+                 case 0 -> overviewMenuRunning = false;
+                 default -> System.out.println("Invalid choice. Please try again.");
+             }
+@@ -174,6 +175,7 @@
+         waitForEnter();
+     }
+ 
++
+     private void displayAllTeamMembers() {
+         System.out.println("\n1. Junior Team");
+         System.out.println("2. Senior Team");
+@@ -191,6 +193,7 @@
+             }
+         };
+ 
++
+         if (selectedTeam != null) {
+             List<CompetitiveSwimmer> teamMembers = membershipService.getTeamMembers(selectedTeam);
+             System.out.println("\n=== Team " + selectedTeam.getTeamName() + " Members ===");
+@@ -204,6 +207,31 @@
+         waitForEnter();
+     }
+ 
++
++/*
++    // Displays competitive members by team
++    private void displayAllCompetitiveTeamMembers() {
++        System.out.println("\n1. Junior Team");
++        System.out.println("2. Senior Team");
++        System.out.print("Select team: ");
++
++        int choice = scanner.nextInt();
++        scanner.nextLine(); // Consume newline
++
++        String teamName = null;
++
++
++        if (choice == 1){
++            teamName == "Junior Team";
++        }
++
++    }
++
++ */
++
++
++
++
+     // Method to greet the user, and save sout's.
+     private void greetingsMSG() {
+         System.out.println("\n=== Welcome To Your Swimming Park System ===");
+Index: src/datasource/FileHandler.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package datasource;\nimport domainmodel.Member;\nimport domainmodel.MembershipStatus;\nimport java.io.*;\nimport java.time.LocalDate;\nimport java.util.ArrayList;\n\npublic class FileHandler {\n\n    public void saveMembersToFile (ArrayList<Member> membersArrayList, String fileName) {\n        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))){\n            for (Member members : membersArrayList){\n                writer.write(members.getFirstName() + \", \" + members.getLastName() + \", \" + members.getMemberID() + \", \"\n                        + members.getMembershipStatus() + \", \" + members.getPhoneNumber() + \", \" + members.getEmail()\n                        + \", \" + members.getDateOfBirth());\n                writer.newLine();\n            }\n            System.out.println(\"Members have been added to\" + fileName);\n\n    } catch (IOException e){\n            System.err.println(\"Input fejl ved indskrivning i fil\" + e.getMessage());\n        }\n    }\n    public ArrayList<Member> loadMembersFromFile(String fileName) {\n        ArrayList<Member> membersArrayList = new ArrayList<>();\n        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {\n            String line;\n            while ((line = reader.readLine()) != null) {\n                String[] data = line.split(\", \");\n                if (data.length == 10) {\n                    String firstName = data[0].trim();\n                    String lastName = data[1].trim();\n                    String memberId = data[2].trim();\n                    MembershipStatus memberShipStatus = MembershipStatus.valueOf(data[3].trim());\n                    String phoneNumber = data[4].trim();\n                    String address = data[5].trim();\n                    String memberEmail = data[6].trim();\n                    LocalDate dateOfBirth = LocalDate.parse((data[7].trim()));\n                    boolean isActive = Boolean.parseBoolean(data[7].trim());\n                    boolean isPassive = Boolean.parseBoolean(data[8].trim());\n\n                    Member members = new Member(firstName, lastName, dateOfBirth,\n                            memberEmail, phoneNumber, address, memberId, memberShipStatus);\n\n                    membersArrayList.add(members);\n                } else {\n                    System.out.println(\"Datatype not accepted in line: \" + line);\n                }\n            }\n            System.out.println(\"Members have been loaded from \" + fileName);\n        } catch (IOException e) {\n            System.err.println(\"fejl ved læsning af fil\" + e.getMessage());\n        }\n\n        return membersArrayList;\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/datasource/FileHandler.java b/src/datasource/FileHandler.java
+--- a/src/datasource/FileHandler.java	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/src/datasource/FileHandler.java	(date 1733307992958)
+@@ -27,6 +27,7 @@
+             String line;
+             while ((line = reader.readLine()) != null) {
+                 String[] data = line.split(", ");
++
+                 if (data.length == 10) {
+                     String firstName = data[0].trim();
+                     String lastName = data[1].trim();
+@@ -41,7 +42,6 @@
+ 
+                     Member members = new Member(firstName, lastName, dateOfBirth,
+                             memberEmail, phoneNumber, address, memberId, memberShipStatus);
+-
+                     membersArrayList.add(members);
+                 } else {
+                     System.out.println("Datatype not accepted in line: " + line);
+Index: src/datasource/Controller.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package datasource;\n\nimport domainmodel.CompetitiveSwimmer;\nimport domainmodel.Member;\nimport domainmodel.Person;\nimport domainmodel.Team;\n\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class Controller {\n    private List<Person> persons;\n    private FileHandler fileHandler;\n    private ArrayList<Team> teams;\n\n\n    public Controller() {\n        this.persons = new ArrayList<>();\n        this.fileHandler = new FileHandler();\n        this.teams = new ArrayList();\n    }\n\n    public void saveMembers (String fileName){\n        ArrayList<Member> members = new ArrayList<>();\n        for (Person person : persons){\n            if (person instanceof Member){\n                members.add((Member) person);\n            }\n        }\n        fileHandler.saveMembersToFile(members, fileName);\n    }\n\n    public void loadMembers(String fileName){\n        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);\n        persons.addAll(loadedMembers);\n    }\n\n    public List<Person> getAllPersons(){\n        return persons;\n    }\n\n    public void addPerson(Person person){\n        persons.add(person);\n    }\n\n    public void removePerson(Person person){\n        persons.remove(person);\n    }\n\n    public ArrayList<Team> getTeams(){\n        return teams;\n    }\n\n    public void removeTeamCompetetiveSwimmers(Team team, Person person){\n        team.removeTeamCompetetiveSwimmers(person);\n    }\n\n    public void removeTeamCasualSwimmers(Team team, Person person){\n        team.removeTeamCasualSwimmers(person);\n    }\n\n    public void addTeamCompetitiveSwimmers(Team team, Person person){\n        team.addtoTeamCompetitiveSwimmers(person);\n    }\n\n    public void addTeamCasualSwimmers(Team team, Person person){\n        team.addtoTeamCasualSwimmers(person);\n    }\n\n    public static class MembershipRegistrationService {\n        private final Controller controller;\n\n        public MembershipRegistrationService(Controller controller) {\n            this.controller = controller;\n        }\n\n        public List<Person> getAllMembers() {\n            return controller.getAllPersons();\n        }\n\n        public void addMember(Member member) {\n            controller.addPerson(member); // Sørg for, at Controller har denne metode\n        }\n\n        public void addTeam(Team team) {\n            controller.teams.add(team);\n        }\n\n        public void removeTeam(Team team) {\n            controller.teams.remove(team);\n        }\n\n\n        public void removeMembers(Member members){\n            controller.removePerson(members);\n        }\n\n        public void addToTeam(Team team, Person person, boolean isCompetitive) {\n            if (isCompetitive) {\n                team.addtoTeamCompetitiveSwimmers(person);\n            } else {\n                team.addtoTeamCasualSwimmers(person);\n            }\n        }\n\n        public void removeFromTeam(Team team, Person person, boolean isCompetitive) {\n            if (isCompetitive) {\n                team.removeTeamCompetetiveSwimmers(person);\n            } else {\n                team.removeTeamCasualSwimmers(person);\n            }\n        }\n\n        public List<CompetitiveSwimmer> getTeamMembers(Team team) {\n            List<Person> allPersons = controller.getAllPersons();\n            List<CompetitiveSwimmer> teamMembers = new ArrayList<>();\n\n            for (Person person : allPersons) {\n                if (person instanceof CompetitiveSwimmer) {\n                    CompetitiveSwimmer swimmer = (CompetitiveSwimmer) person;\n                    if (swimmer.getTeam() == team) {\n                        teamMembers.add(swimmer);\n                    }\n                }\n\n            }\n            return teamMembers;\n        }\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/datasource/Controller.java b/src/datasource/Controller.java
+--- a/src/datasource/Controller.java	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/src/datasource/Controller.java	(date 1733307528741)
+@@ -95,6 +95,7 @@
+             controller.removePerson(members);
+         }
+ 
++
+         public void addToTeam(Team team, Person person, boolean isCompetitive) {
+             if (isCompetitive) {
+                 team.addtoTeamCompetitiveSwimmers(person);
+Index: src/domainmodel/SwimmingDiscipline.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domainmodel;\n\npublic enum SwimmingDiscipline {\n    BACK_CRAWL(\"Back Crawl\", \"Backstroke\"),\n    BREAST_STROKE(\"Breast Stroke\", \"Breaststroke\"),\n    BUTTERFLY(\"Butterfly\", \"Fly\"),\n    CRAWL(\"Crawl\", \"Freestyle\");\n\n    private final String fullName;\n    private final String shortName;\n\n    SwimmingDiscipline(String fullName, String shortName) {\n        this.fullName = fullName;\n        this.shortName = shortName;\n    }\n\n    public String getFullName() { return fullName; }\n    public String getShortName() { return shortName; }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/domainmodel/SwimmingDiscipline.java b/src/domainmodel/SwimmingDiscipline.java
+--- a/src/domainmodel/SwimmingDiscipline.java	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/src/domainmodel/SwimmingDiscipline.java	(date 1733307101507)
+@@ -14,6 +14,11 @@
+         this.shortName = shortName;
+     }
+ 
+-    public String getFullName() { return fullName; }
+-    public String getShortName() { return shortName; }
++    public String getFullName() {
++        return fullName;
++    }
++
++    public String getShortName() {
++        return shortName;
++    }
+ }
+Index: src/domainmodel/Team.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domainmodel;\n\nimport java.util.ArrayList;\n\npublic class Team {\n    private String teamName;\n    private AgeCategory ageCategory;\n    private ArrayList<Person> juniorTeam = new ArrayList<>();\n    private ArrayList<Person> seniorTeam = new ArrayList<>();\n    private ArrayList<Person> casualSwimmers = new ArrayList<>();\n    private ArrayList<Person> competitiveSwimmers = new ArrayList<>();\n    private ArrayList<Person> allSwimmers = new ArrayList<>();\n\n\n    public Team(String teamName, AgeCategory ageCategory) {\n        this.teamName = teamName;\n        this.ageCategory = ageCategory;\n    }\n\n    public Boolean isSenior(Person person) {\n        return person.calculateAge() >= 18;\n    }\n\n    public Boolean isJunior(Person person) {\n        return person.calculateAge() < 18;\n    }\n\n    public boolean isAgeCategoryValid(Person person) {\n        if (ageCategory == AgeCategory.JUNIOR) {\n            return isJunior(person);\n        } else if (ageCategory == AgeCategory.SENIOR) {\n            return isSenior(person);\n        }\n        return false;\n    }\n\n    public String getTeamName() {\n        return teamName;\n    }\n\n    public void addToTeam(Person person) {\n        if (!allSwimmers.contains(person)) {\n            allSwimmers.add(person);\n            if (isJunior(person)) {\n                juniorTeam.add(person);\n            } else {\n                seniorTeam.add(person);\n            }\n        } else {\n            System.out.println(person.getFirstName() + person.getLastName() + \" is already in the team.\");\n        }\n    }\n\n    public void removeFromTeam(Person person) {\n        allSwimmers.remove(person);\n        juniorTeam.remove(person);\n        seniorTeam.remove(person);\n        casualSwimmers.remove(person);\n        competitiveSwimmers.remove(person);\n    }\n\n\n    public void addtoTeamCasualSwimmers(Person person){\n        casualSwimmers.add(person);\n    }\n\n    public void addtoTeamCompetitiveSwimmers(Person person){\n        competitiveSwimmers.add(person);\n    }\n\n    public void removeTeamCasualSwimmers(Person person){\n        casualSwimmers.remove(person);\n    }\n\n    public void removeTeamCompetetiveSwimmers(Person person){\n        competitiveSwimmers.remove(person);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/domainmodel/Team.java b/src/domainmodel/Team.java
+--- a/src/domainmodel/Team.java	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/src/domainmodel/Team.java	(date 1733308345800)
+@@ -7,6 +7,8 @@
+     private AgeCategory ageCategory;
+     private ArrayList<Person> juniorTeam = new ArrayList<>();
+     private ArrayList<Person> seniorTeam = new ArrayList<>();
++    private ArrayList<Person> juniorTeamCompetitive = new ArrayList<>();
++    private ArrayList<Person> seniorTeamCompetitive = new ArrayList<>();
+     private ArrayList<Person> casualSwimmers = new ArrayList<>();
+     private ArrayList<Person> competitiveSwimmers = new ArrayList<>();
+     private ArrayList<Person> allSwimmers = new ArrayList<>();
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_X\" default=\"true\" project-jdk-name=\"21\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/.idea/misc.xml	(date 1733259062810)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="21" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import datasource.Controller;\nimport datasource.FileHandler;\nimport domainmodel.*;\n\n\nimport java.time.LocalDate;\nimport java.util.ArrayList;\nimport java.util.Arrays;\nimport java.util.List;\n\nimport ui.UserInterface;\n\npublic class Main {\n\n    public static void main(String[] args) {\n\n        Controller controller = new Controller();\n        Controller.MembershipRegistrationService hgg = new Controller.MembershipRegistrationService(controller);\n        UserInterface ui = new UserInterface(hgg);\n        FileHandler fileHandler = new FileHandler();\n        ArrayList<Member> members = new ArrayList<>();\n\n\n        Member member1 = new Member(\"Rikke\", \"Hansen\", LocalDate.of(1967, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"thha0006\",MembershipStatus.PASSIVE);\n        Member member2 = new Member(\"Rikke\", \"Hansen\", LocalDate.of(1930, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"55\",MembershipStatus.ACTIVE);\n        Member member3 = new Member(\"Rikke\", \"Hansen\", LocalDate.of(2020, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"55\",MembershipStatus.ACTIVE);\n\n\n        // Competitive swimmers:\n        CompetitiveSwimmer swimmer1 = new CompetitiveSwimmer(\"RikkeComp\", \"HansenComp\", LocalDate.of(1967, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"thha0006\",MembershipStatus.PASSIVE, null, null);\n        CompetitiveSwimmer swimmer2 = new CompetitiveSwimmer(\"Peter\", \"Lausen\", LocalDate.of(1955, 06, 05), \"PetLauk\", \"50503333\", \"Vægterparken\", \"thha0006\",MembershipStatus.ACTIVE, null, null);\n        CompetitiveSwimmer swimmer3 = new CompetitiveSwimmer(\"Rikmp\", \"narar\", LocalDate.of(1967, 06, 05), \"RikkeSnabelA\", \"50505050\", \"Vægterparken\", \"thha0006\",MembershipStatus.ACTIVE, null, null);\n\n        // Created results for each swimmer\n        swimmer1.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 50.3, LocalDate.now()));\n        swimmer1.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 50.4, LocalDate.now()));\n\n        swimmer2.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 20.3, LocalDate.now()));\n        swimmer2.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 54.3, LocalDate.now()));\n\n        swimmer3.addResult(new Result(SwimmingDiscipline.BREAST_STROKE, 51.4 , LocalDate.now()));\n        swimmer3.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 100.6, LocalDate.now()));\n        swimmer3.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 25.4 , LocalDate.now()));\n\n        List<CompetitiveSwimmer> swimmers = Arrays.asList(swimmer1);\n\n\n        CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(swimmers);\n\n        System.out.println();\n\n\n        String fileName = \"members.txt\";\n        fileHandler.saveMembersToFile(members, fileName);\n\n        ArrayList<Member> loadedMembers = fileHandler.loadMembersFromFile(fileName);\n\n        for (Member member : loadedMembers){\n            System.out.println(member);\n        }\n\n        hgg.addMember(member1);\n        hgg.addMember(member2);\n        hgg.addMember(member3);\n\n        ui.startMenu();\n\n\n\n\n\n\n       /* //Test til member / ændring af medlemskabsaktivitet osv.\n            Member member = new Member(\n                    \"Hussain\",\n                    \"Ali\",\n                    LocalDate.of(2000, 12, 7),\n                    \"hussain.ali@example.com\",\n                    \"12345678\",\n                    \"Main Street 123\",\n                    \"M123\",\n                    MembershipStatus.ACTIVE\n            );\n\n            System.out.println(member.getMemberID());\n            System.out.println(member.getMembershipStatus());\n            member.changeMembershipToPassive();\n            System.out.println(member.getMembershipStatus());\n            System.out.println(member.getFirstName());\n            System.out.println(member.getDateOfBirth());\n            System.out.println(member.calculateAge()); */\n\n\n        System.out.println(member1);\n        System.out.println(member2);\n        System.out.println(member3);\n\n\n\n\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision 998c30afadd78cc5f744ba824f40e0cc805c89e6)
++++ b/src/Main.java	(date 1733307992973)
+@@ -21,9 +21,9 @@
+         ArrayList<Member> members = new ArrayList<>();
+ 
+ 
+-        Member member1 = new Member("Rikke", "Hansen", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006",MembershipStatus.PASSIVE);
+-        Member member2 = new Member("Rikke", "Hansen", LocalDate.of(1930, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55",MembershipStatus.ACTIVE);
+-        Member member3 = new Member("Rikke", "Hansen", LocalDate.of(2020, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55",MembershipStatus.ACTIVE);
++        Member member1 = new Member("Rikke", "Hansen", LocalDate.of(1967, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "thha0006", MembershipStatus.PASSIVE);
++        Member member2 = new Member("Rikke", "Hansen", LocalDate.of(1930, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55", MembershipStatus.ACTIVE);
++        Member member3 = new Member("Rikke", "Hansen", LocalDate.of(2020, 06, 05), "RikkeSnabelA", "50505050", "Vægterparken", "55", MembershipStatus.ACTIVE);
+ 
+ 
+         // Competitive swimmers:
+@@ -42,6 +42,8 @@
+         swimmer3.addResult(new Result(SwimmingDiscipline.BACK_CRAWL, 100.6, LocalDate.now()));
+         swimmer3.addResult(new Result(SwimmingDiscipline.BUTTERFLY, 25.4 , LocalDate.now()));
+ 
++        System.out.println(swimmer3);
++
+         List<CompetitiveSwimmer> swimmers = Arrays.asList(swimmer1);
+ 
+ 

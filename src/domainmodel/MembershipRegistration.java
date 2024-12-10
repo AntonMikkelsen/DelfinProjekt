@@ -7,13 +7,18 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class MembershipRegistration {
-    private final ArrayList<Member> membersList;
-    private final ArrayList<Team> teams;
+    private ArrayList<Member> membersList;
+    private ArrayList<Team> teams;
+    private FileHandler fileHandler;
+    private Cashier cashier;
 
     public MembershipRegistration() {
         this.membersList = new ArrayList<>();
         this.teams = new ArrayList<>();
+        this.cashier = new Cashier(membersList); // Initialize the cashier with the members list
     }
+
+
 
     // Hent alle medlemmer
     public ArrayList<Member> getAllMembers() {
@@ -72,6 +77,11 @@ public class MembershipRegistration {
         if (teams.contains(team)) {
             team.addSwimmersToTeam((CompetitiveSwimmer) member);
         }
+    }
+
+    public void cashierTotalIncomeGenerated(){
+        cashier.getTotalGeneratedIncome();
+        System.out.printf("Total money generated: %.2f%n", cashier.getTotalGeneratedIncome());
     }
 
     // Liste over medlemmer

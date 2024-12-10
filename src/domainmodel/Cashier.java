@@ -3,8 +3,8 @@ package domainmodel;
 import java.util.ArrayList;
 
 public class Cashier {
-    ArrayList<Member> allMembers;
-    ArrayList<Member> allMembersInArrears;
+    private ArrayList<Member> allMembers;
+    private ArrayList<Member> allMembersInArrears;
 
 
     public Cashier(ArrayList<Member> allMembers){
@@ -74,18 +74,6 @@ public class Cashier {
         }
         return totalDebt;
     }
-
-    /* Denne metode virker ikke da den kun udregner membershipFee for hvert person uden rigitg at tilføje det nogen stedet
-    public double getTotalOfDebt(){
-        double totalDebt = 0;
-
-        for (Member member : allMembersInArrears){
-            totalDebt += member.getMembershipFee();
-        }
-        return totalDebt;
-    }
-
-     */
 
 
     public double getTotalGeneratedIncome(){

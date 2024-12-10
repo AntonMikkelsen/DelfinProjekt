@@ -11,7 +11,7 @@ import java.util.*;
 
 public class UserInterface {
     private Scanner scanner;
-    Controller controller = new Controller();
+    private Controller controller = new Controller();
 
     public UserInterface() {
         this.scanner = new Scanner(System.in);
@@ -28,7 +28,8 @@ public class UserInterface {
             switch (userResponse) {
                 case 1 -> administrativeMenu();
                 case 2 -> membershipMenu();
-                case 3 -> {
+                case 3 -> displayFinancialOverview();
+                case 4 -> {
                     System.out.println("Exiting program...");
                     menuRunning = false;
                 }
@@ -80,7 +81,6 @@ public class UserInterface {
             System.out.println("\n=== Membership Menu ===");
             System.out.println("1. See membership details");
             System.out.println("2. Edit membership details and status");
-            System.out.println("3. Financial Overview");
             System.out.println("4. Exit menu");
 
             int userResponse = scanner.nextInt();
@@ -96,10 +96,12 @@ public class UserInterface {
                     System.out.println("Edit membership details and status");
                     editMember();
                 }
-                case 3 -> membershipMenuRunning = false;
-                case 4 -> {
-                    System.out.println("");
+                case 3 -> {
+                    System.out.println("\n=== Financial Overview Menu ===");
+
                 }
+                case 4 -> membershipMenuRunning = false;
+
                 default -> System.out.println("Invalid option. Please try again.");
             }
         }
@@ -126,6 +128,20 @@ public class UserInterface {
                 // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(); -- Ydligere valg om de vil sorterer de 5 bedste svømmere udfra disciplin
                 case 0 -> overviewMenuRunning = false;
                 default -> System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+
+    private void displayFinancialOverview(){
+        System.out.println("1. View total income generated from all current members");
+        System.out.println("2. View total debt from all members in arrears");
+
+        int choice = validateInt();
+
+        switch(choice){
+            case 1 -> {
+                controller.cashierTotalIncomeGenerated();
             }
         }
     }
@@ -185,7 +201,8 @@ public class UserInterface {
         System.out.println("\n=== Welcome To Your Swimming Park System ===");
         System.out.println("1. Administrative data");
         System.out.println("2. Membership management");
-        System.out.println("3. Exit");
+        System.out.println("3. Financial Overview");
+        System.out.println("4. Exit");
         System.out.print("Enter your choice: ");
     }
 

@@ -1,0 +1,259 @@
+Index: DelfinProjekt.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<module type=\"JAVA_MODULE\" version=\"4\">\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\n    <exclude-output />\n    <content url=\"file://$MODULE_DIR$\">\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\n    </content>\n    <orderEntry type=\"inheritedJdk\" />\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\n  </component>\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/DelfinProjekt.iml b/DelfinProjekt.iml
+--- a/DelfinProjekt.iml	(revision a3390fba33299e238f611f6c21054f7b10850135)
++++ b/DelfinProjekt.iml	(date 1733755123875)
+@@ -3,9 +3,11 @@
+   <component name="NewModuleRootManager" inherit-compiler-output="true">
+     <exclude-output />
+     <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/Test" isTestSource="true" />
+       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+     </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="junit.jupiter" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: Test/domainmodel/CashierTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Test/domainmodel/CashierTest.java b/Test/domainmodel/CashierTest.java
+new file mode 100644
+--- /dev/null	(date 1733755123663)
++++ b/Test/domainmodel/CashierTest.java	(date 1733755123663)
+@@ -0,0 +1,34 @@
++package domainmodel;
++
++import org.junit.jupiter.api.Test;
++
++import static org.junit.jupiter.api.Assertions.*;
++
++class CashierTest {
++
++    @Test
++    void calculateMembershipFeeActiveSenior(Member member) {
++        Member member1 = new Member("Hussain", "Mahmoud", 2000-07-12)
++        double ActualCost = 0;
++    }
++
++    @Test
++    void calculateMembershipFeePassive(Member member) {
++        double ActualCost = 0;
++
++    }
++
++
++
++    @Test
++    void calculateMembershipFeeJunior(Member member) {
++        double ActualCost = 0;
++
++    }
++
++    @Test
++    void calculateMembershipFeeSeniorDiscount(Member member) {
++        double ActualCost = 0;
++
++    }
++}
+\ No newline at end of file
+Index: src/ui/UserInterface.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ui;\n\nimport datasource.Controller;\nimport domainmodel.*;\nimport domainmodel.AgeCategory;\nimport domainmodel.MembershipStatus;\n\nimport java.time.LocalDate;\nimport java.util.*;\n\n\npublic class UserInterface {\n    private Scanner scanner;\n    Controller controller = new Controller();\n\n    public UserInterface() {\n        this.scanner = new Scanner(System.in);\n    }\n\n    // Startmenu der gør brugeren kan komme ind på andre menuer bla administrivemenu osv.\n    public void startMenu() {\n        boolean menuRunning = true;\n        while (menuRunning) {\n            greetingsMSG();\n            int userResponse = scanner.nextInt();\n            scanner.nextLine(); // Consume newline\n\n            switch (userResponse) {\n                case 1 -> administrativeMenu();\n                case 2 -> membershipMenu();\n                case 3 -> {\n                    System.out.println(\"Exiting program...\");\n                    menuRunning = false;\n                }\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n\n    // Administrive menu, with administrive abilities\n    public void administrativeMenu() {\n        boolean administrativeMenuRunning = true;\n        while (administrativeMenuRunning) {\n            System.out.println(\"\\n=== Administrative Menu ===\");\n            System.out.println(\"1. Add members from existing teams\");\n            System.out.println(\"2. Remove existing members\");\n            System.out.println(\"3. Edit info on members\");\n            System.out.println(\"4. Show member overview\");\n            System.out.println(\"5. Exit menu\");\n            int userResponse = scanner.nextInt();\n            scanner.nextLine(); // Consume newline\n\n\n            switch (userResponse) {\n                case 1 -> {\n                    System.out.println(\"Add members from existing teams\");\n                    addNewMember();\n                }\n                case 2 -> {\n                    System.out.println(\"Remove existing members\");\n                    String memberId = scanner.nextLine(); // Indhent ID fra brugeren\n                    removeMember(memberId); // Kald metoden til at fjerne medlemmet\n                }\n                case 3 -> {\n                    System.out.println(\"What is the users member ID\");\n                    String memberID = scanner.nextLine();\n                    administatorEditInfo();\n                }\n                case 4 -> showMemberOverviewMenu();\n                case 5 -> administrativeMenuRunning = false;\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n\n\n    public void membershipMenu() {\n        boolean membershipMenuRunning = true;\n        while (membershipMenuRunning) {\n            System.out.println(\"\\n=== Membership Menu ===\");\n            System.out.println(\"1. See membership details\");\n            System.out.println(\"2. Edit membership details and status\");\n            System.out.println(\"3. Financial Overview\");\n            System.out.println(\"4. Exit menu\");\n\n            int userResponse = scanner.nextInt();\n            scanner.nextLine();\n\n            switch (userResponse) {\n                case 1 -> {\n                    System.out.println(\"Write your member id\");\n                    String userMemberID = scanner.nextLine();\n                    showMemberInfo(userMemberID);\n                }\n                case 2 -> {\n                    System.out.println(\"Edit membership details and status\");\n                    editMember();\n                }\n                case 3 -> membershipMenuRunning = false;\n                case 4 -> {\n                    System.out.println(\"\");\n                }\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n\n    private void showMemberOverviewMenu() {\n        boolean overviewMenuRunning = true;\n        while (overviewMenuRunning) {\n            System.out.println(\"\\n=== Member Overview ===\");\n            System.out.println(\"1. View all members\");\n            System.out.println(\"2. View team members\");\n            System.out.println(\"3. View competitive team members\"); // nyt implementering\n            System.out.println(\"4. View competitive swimmers sorted by discipline\"); // nyt implementering\n            System.out.println(\"0. Back to main menu\");\n            System.out.print(\"Enter your choice: \");\n\n            int choice = scanner.nextInt();\n            scanner.nextLine();\n\n            switch (choice) {\n                case 1 -> controller.getMembers();\n                case 2 -> displayAllTeamMembers();\n                // case 3 - > view all comp members by team\n                // case 4 ->  CompetitiveSwimmer.printAllCompSwimmersBestDiscipline(); -- Ydligere valg om de vil sorterer de 5 bedste svømmere udfra disciplin\n                case 0 -> overviewMenuRunning = false;\n                default -> System.out.println(\"Invalid choice. Please try again.\");\n            }\n        }\n    }\n\n    private void displayAllTeamMembers() {\n        System.out.println(\"\\n1. Junior Team\");\n        System.out.println(\"2. Senior Team\");\n        System.out.print(\"Select team: \");\n\n        int choice = scanner.nextInt();\n        scanner.nextLine(); // Consume newline\n\n        Team selectedTeam = switch (choice) {\n            case 1 -> new Team(\"Junior Team\", AgeCategory.JUNIOR);\n            case 2 -> new Team(\"Senior Team\", AgeCategory.SENIOR);\n            default -> {\n                System.out.println(\"Invalid team selection\");\n                yield null;\n            }\n        };\n\n        if (selectedTeam != null) {\n            ArrayList<CompetitiveSwimmer> teamMembers = controller.getCompSwimmers();\n            System.out.println(\"\\n=== Team \" + selectedTeam.getTeamName() + \" Members ===\");\n            printHeaderLine();\n\n            for (CompetitiveSwimmer swimmer : teamMembers) {\n                printSwimmerInfo(swimmer);\n            }\n            System.out.println(\"Total Team Members: \" + teamMembers.size());\n        }\n        waitForEnter();\n    }\n\n\n/*\n    // Displays competitive members by team\n    private void displayAllCompetitiveTeamMembers() {\n        System.out.println(\"\\n1. Junior Team\");\n        System.out.println(\"2. Senior Team\");\n        System.out.print(\"Select team: \");\n\n        int choice = scanner.nextInt();\n        scanner.nextLine(); // Consume newline\n\n        String teamName = null;\n\n\n        if (choice == 1){\n            teamName == \"Junior Team\";\n        }\n    }\n */\n\n    // Method to greet the user, and save sout's.\n    private void greetingsMSG() {\n        System.out.println(\"\\n=== Welcome To Your Swimming Park System ===\");\n        System.out.println(\"1. Administrative data\");\n        System.out.println(\"2. Membership management\");\n        System.out.println(\"3. Exit\");\n        System.out.print(\"Enter your choice: \");\n    }\n\n\n\n    //\n    private void printHeaderLine() {\n        System.out.printf(\"%-10s %-15s %-15s %-5s %-10s %-15s%n\",\n                \"ID\", \"First Name\", \"Last Name\", \"Age\", \"Status\", \"Team\");\n        System.out.println(\"=\".repeat(70));\n    }\n\n    public void printSwimmerInfo(CompetitiveSwimmer swimmer) {\n        System.out.printf(\"%-10s %-15s %-15s %-5d %-10s %-15s %s%n\",\n                swimmer.getMemberID(),\n                swimmer.getFirstName(),\n                swimmer.getLastName(),\n                swimmer.calculateAge(),\n                swimmer.getMembershipStatus(),\n                swimmer.getTeam().getTeamName(),\n                String.join(\", \", swimmer.getDisciplines()));\n    }\n\n    public Member printMemberInfo(Member member) {\n        System.out.printf(\"%-10s %-15s %-15s %-5d %-10s %-15s%n\",\n                member.getMemberID(),\n                member.getFirstName(),\n                member.getLastName(),\n                member.calculateAge(),\n                member.getMembershipStatus(),\n                \"No Team\");\n        return member;\n    }\n\n\n    private void removeMember(String memberID) {\n\n        System.out.println(\"enter the a membersID to remove the member\");\n\n        ArrayList<Member> members = controller.getMembers();\n        Member toRemove = null;\n\n        for (Person person : members) {\n            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {\n                toRemove = (Member) person;\n                break;\n            }\n        }\n        if (toRemove != null && members.remove(toRemove)) {\n            members.remove(memberID);\n            System.out.println(\"Member removed successfully: \" + toRemove.getFirstName() + \" \" + toRemove.getLastName());\n        } else {\n            System.out.println(\"Member does not exist\");\n        }\n    }\n\n    private void addNewMember() {\n        System.out.println(\"------------------------\");\n        System.out.println(\"\\nEnter first name: \");\n        String firstName = scanner.nextLine();\n        System.out.println(\"First name: \" + firstName);\n\n        System.out.println(\"\\nEnter last name: \");\n        String lastName = scanner.nextLine();\n        System.out.println(\"Last name: \" + lastName);\n\n        LocalDate dob = null;\n        while (dob == null) {\n            System.out.println(\"\\nEnter date of birth (YYYY-MM-DD): \");\n            try {\n                dob = LocalDate.parse(scanner.nextLine());\n                System.out.println(\"Date of birth: \" + dob);\n            } catch (Exception e) {\n                System.out.println(\"An error has occured: \" + e.getMessage() + \" - Please try again\");\n            }\n        }\n\n        System.out.println(\"\\nEnter email: \");\n        String email = scanner.nextLine();\n        while (!email.contains(\"@\") && !email.contains(\".\")) {\n            if (email.contains(\"@\")) {\n                System.out.println(\"Email: \" + email);\n            } else {\n                System.out.println(\"Please enter a valid email\");\n                email = scanner.nextLine();\n            }\n        }\n\n        System.out.println(\"\\nEnter phone number: \");\n        String phone = scanner.nextLine();\n        System.out.println(\"Phone number: \" + phone);\n\n        System.out.println(\"\\nEnter address: \");\n        String address = scanner.nextLine();\n        System.out.println(\"address: \" + address);\n\n        MembershipStatus status = null;\n        while (status == null) {\n            try {\n                System.out.println(\"\\nEnter membership status *Enter Passive/Active*: \");\n                status = MembershipStatus.valueOf(scanner.nextLine().toUpperCase());\n                System.out.println(\"membership stauts: \" + status);\n            } catch (IllegalArgumentException e) {\n                System.out.println(\"An error has occured: \" + e.getMessage() + \" - Please try again\");\n            }\n        }\n\n\n        String memberId = \"ID\" + (controller.getMembers().size() + 1);\n\n        Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);\n\n        // Ændre til nye add metode\n        //controller.addMemberToTeam(newMember);\n\n        System.out.println(\"Member added successfully: \" + newMember.getFirstName() + \" \" + newMember.getLastName());\n\n    }\n\n    private void waitForEnter() {\n        System.out.println(\"\\nPress Enter to continue...\");\n        scanner.nextLine();\n    }\n\n    public Member showMemberInfo(String memberID) {\n        ArrayList<Member> Members = controller.getMembers();\n        Member toSearch = null;\n        for (Person person : Members) {\n            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) ;{\n                toSearch = (Member) person;\n                break;\n            }\n        }\n        if (toSearch != null) {\n            System.out.println(printMemberInfo(toSearch));\n        } else {\n            System.out.println(\"Member does not exist\");\n        }\n        return null;\n    }\n\n    public Member administatorEditInfo() {\n        System.out.println(\"\\n=== Edit Member Information ===\");\n        System.out.println(\"Enter member ID to edit: \");\n        String memberID = scanner.nextLine();\n\n        ArrayList<Member> members = controller.getMembers();\n        Member memberToEdit = null;\n\n        // Find the member\n        for (Person person : members) {\n            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {\n                memberToEdit = (Member) person;\n                break;\n            }\n        }\n\n        if (memberToEdit == null) {\n            System.out.println(\"Member not found.\");\n            return null;\n        }\n\n        boolean editing = true;\n        while (editing) {\n            System.out.println(\"\\nCurrent Member Information:\");\n            printMemberInfo(memberToEdit);\n\n            System.out.println(\"\\nWhat would you like to edit?\");\n            System.out.println(\"1. First Name (Current: \" + memberToEdit.getFirstName() + \")\");\n            System.out.println(\"2. Last Name (Current: \" + memberToEdit.getLastName() + \")\");\n            System.out.println(\"3. Email (Current: \" + memberToEdit.getEmail() + \")\");\n            System.out.println(\"4. Phone Number (Current: \" + memberToEdit.getPhoneNumber() + \")\");\n            System.out.println(\"5. Address (Current: \" + memberToEdit.getAddress() + \")\");\n            System.out.println(\"6. MemberID(Current: \" + memberToEdit.getMemberID() + \")\");\n            System.out.println(\"7. Membership Status (Current: \" + memberToEdit.getMembershipStatus() + \")\");\n            System.out.println(\"8. Save and Exit\");\n\n            int choice = scanner.nextInt();\n            scanner.nextLine(); // Consume newline\n\n            switch (choice) {\n\n                case 1 -> {\n                    System.out.println(\"Enter new first name: \");\n                    String firstName = scanner.nextLine();\n                    memberToEdit.setFirstName(firstName);\n                    System.out.println(\"First name updated successfully.\");\n                }\n                case 2 -> {\n                    System.out.println(\"Enter new last name: \");\n                    String lastName = scanner.nextLine();\n                    memberToEdit.setLastName(lastName);\n                    System.out.println(\"Last name updated successfully.\");\n                }\n                case 3 -> {\n                    System.out.println(\"Enter new email: \");\n                    String email = scanner.nextLine();\n                    while (!email.contains(\"@\") || !email.contains(\".\")) {\n                        System.out.println(\"Please enter a valid email address: \");\n                        email = scanner.nextLine();\n                    }\n                    memberToEdit.setEmail(email);\n                    System.out.println(\"Email updated successfully.\");\n                }\n                case 4 -> {\n                    System.out.println(\"Enter new phone number: \");\n                    String phone = scanner.nextLine();\n                    memberToEdit.setPhoneNumber(phone);\n                    System.out.println(\"Phone number updated successfully.\");\n                }\n                case 5 -> {\n                    System.out.println(\"Enter new address: \");\n                    String address = scanner.nextLine();\n                    memberToEdit.setAddress(address);\n                    System.out.println(\"Address updated successfully.\");\n                }\n                case 6 -> {\n                    MembershipStatus newStatus = null;\n                    while (newStatus == null) {\n                        try {\n                            System.out.println(\"Enter new membership status (ACTIVE/PASSIVE): \");\n                            String statusInput = scanner.nextLine().toUpperCase();\n                            newStatus = MembershipStatus.valueOf(statusInput);\n                            memberToEdit.setMembershipStatus(newStatus);\n                            System.out.println(\"Membership status updated successfully.\");\n                        } catch (IllegalArgumentException e) {\n                            System.out.println(\"Invalid status. Please enter either ACTIVE or PASSIVE.\");\n                        }\n                    }\n                }\n                case 7 -> {\n                    System.out.println(\"Enter new MemberID: \");\n                    String newMemberID = scanner.nextLine();\n\n                    // Check if the new MemberID is already in use\n                    boolean idExists = false;\n                    for (Person person : members) {\n                        if (person instanceof Member && ((Member) person).getMemberID().equals(newMemberID)) {\n                            idExists = true;\n                            break;\n                        }\n                    }\n                    if (!idExists) {\n                        memberToEdit.setMemberID(newMemberID);\n                        System.out.println(\"MemberID updated successfully.\");\n                    } else {\n                        System.out.println(\"The MemberID is already in use. Please try a different one.\");\n                    }\n                }\n                case 8 -> {\n                    System.out.println(\"Changes saved successfully.\");\n                    editing = false;\n                }\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n        return null;\n    }\n\n    private int validateInt(){\n        while(true){\n            try {\n                return scanner.nextInt();\n            }\n            catch (InputMismatchException e)\n            {\n                System.out.println(\"Please enter a valid number\");\n                scanner.nextLine();\n            }\n        }\n    }\n\n    private void editMember() {\n        System.out.println(\"\\n=== Edit Member Information ===\");\n        System.out.println(\"Enter member ID to edit: \");\n        String memberID = scanner.nextLine();\n\n        ArrayList<Member> members = controller.getMembers();\n        Member memberToEdit = null;\n\n        // Find the member\n        for (Person person : members) {\n            if (person instanceof Member && ((Member) person).getMemberID().equals(memberID)) {\n                memberToEdit = (Member) person;\n                break;\n            }\n        }\n\n        if (memberToEdit == null) {\n            System.out.println(\"Member not found.\");\n            return;\n        }\n\n        boolean editing = true;\n        while (editing) {\n            System.out.println(\"\\nCurrent Member Information:\");\n            printMemberInfo(memberToEdit);\n\n            System.out.println(\"\\nWhat would you like to edit?\");\n            System.out.println(\"1. First Name (Current: \" + memberToEdit.getFirstName() + \")\");\n            System.out.println(\"2. Last Name (Current: \" + memberToEdit.getLastName() + \")\");\n            System.out.println(\"3. Email (Current: \" + memberToEdit.getEmail() + \")\");\n            System.out.println(\"4. Phone Number (Current: \" + memberToEdit.getPhoneNumber() + \")\");\n            System.out.println(\"5. Address (Current: \" + memberToEdit.getAddress() + \")\");\n            System.out.println(\"6. Membership Status (Current: \" + memberToEdit.getMembershipStatus() + \")\");\n            System.out.println(\"7. Save and Exit\");\n\n            int choice = scanner.nextInt();\n            scanner.nextLine(); // Consume newline\n\n            switch (choice) {\n                case 1 -> {\n                    System.out.println(\"Enter new email: \");\n                    String email = scanner.nextLine();\n                    while (!email.contains(\"@\") || !email.contains(\".\")) {\n                        System.out.println(\"Please enter a valid email address: \");\n                        email = scanner.nextLine();\n                    }\n                    memberToEdit.setEmail(email);\n                    System.out.println(\"Email updated successfully.\");\n                }\n                case 2 -> {\n                    System.out.println(\"Enter new phone number: \");\n                    String phone = scanner.nextLine();\n                    memberToEdit.setPhoneNumber(phone);\n                    System.out.println(\"Phone number updated successfully.\");\n                }\n                case 3 -> {\n                    System.out.println(\"Enter new address: \");\n                    String address = scanner.nextLine();\n                    memberToEdit.setAddress(address);\n                    System.out.println(\"Address updated successfully.\");\n                }\n                case 4 -> {\n                    System.out.println(\"Changes saved successfully.\");\n                    editing = false;\n                }\n                default -> System.out.println(\"Invalid option. Please try again.\");\n            }\n        }\n    }\n    public void printMSG(String msg){\n        System.out.println(msg);\n    }\n\n\n\n\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ui/UserInterface.java b/src/ui/UserInterface.java
+--- a/src/ui/UserInterface.java	(revision a3390fba33299e238f611f6c21054f7b10850135)
++++ b/src/ui/UserInterface.java	(date 1733747372236)
+@@ -11,7 +11,7 @@
+ 
+ public class UserInterface {
+     private Scanner scanner;
+-    Controller controller = new Controller();
++    private Controller controller = new Controller();
+ 
+     public UserInterface() {
+         this.scanner = new Scanner(System.in);
+@@ -28,7 +28,8 @@
+             switch (userResponse) {
+                 case 1 -> administrativeMenu();
+                 case 2 -> membershipMenu();
+-                case 3 -> {
++                case 3 -> displayFinancialOverview();
++                case 4 -> {
+                     System.out.println("Exiting program...");
+                     menuRunning = false;
+                 }
+@@ -80,7 +81,6 @@
+             System.out.println("\n=== Membership Menu ===");
+             System.out.println("1. See membership details");
+             System.out.println("2. Edit membership details and status");
+-            System.out.println("3. Financial Overview");
+             System.out.println("4. Exit menu");
+ 
+             int userResponse = scanner.nextInt();
+@@ -96,10 +96,12 @@
+                     System.out.println("Edit membership details and status");
+                     editMember();
+                 }
+-                case 3 -> membershipMenuRunning = false;
+-                case 4 -> {
+-                    System.out.println("");
++                case 3 -> {
++                    System.out.println("\n=== Financial Overview Menu ===");
++
+                 }
++                case 4 -> membershipMenuRunning = false;
++
+                 default -> System.out.println("Invalid option. Please try again.");
+             }
+         }
+@@ -130,6 +132,20 @@
+         }
+     }
+ 
++
++    private void displayFinancialOverview(){
++        System.out.println("1. View total income generated from all current members");
++        System.out.println("2. View total debt from all members in arrears");
++
++        int choice = validateInt();
++
++        switch(choice){
++            case 1 -> {
++                controller.cashierTotalIncomeGenerated();
++            }
++        }
++    }
++
+     private void displayAllTeamMembers() {
+         System.out.println("\n1. Junior Team");
+         System.out.println("2. Senior Team");
+@@ -185,7 +201,8 @@
+         System.out.println("\n=== Welcome To Your Swimming Park System ===");
+         System.out.println("1. Administrative data");
+         System.out.println("2. Membership management");
+-        System.out.println("3. Exit");
++        System.out.println("3. Financial Overview");
++        System.out.println("4. Exit");
+         System.out.print("Enter your choice: ");
+     }
+ 
+Index: src/datasource/Controller.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package datasource;\n\nimport domainmodel.*;\nimport ui.UserInterface;\n\nimport java.util.ArrayList;\n\n\npublic class Controller {\n    private MembershipRegistration Memberships = new MembershipRegistration();\n\n\n    public void addMember(Member member) {\n        Memberships.addMember(member);\n    }\n\n    public ArrayList<CompetitiveSwimmer> getCompSwimmers() {\n        return Memberships.getAllCompetitiveSwimmers();\n    }\n\n    public ArrayList<Member> getMembers() {\n        return Memberships.getAllMembers();\n    }\n\n    public ArrayList<String> listOfAllMembers() {\n        return Memberships.getListOfMembers();\n    }\n\n    public ArrayList<String> listOfComp() {\n        return Memberships.getListOfCompetitiveSwimmers();\n    }\n\n    /* udkommenteret så programmet kan køre - skal stadig bruges tror jeg\n    public void addMemberToTeam(Member newMember) {\n        Memberships.addMemberToTeam(newMember,  );\n    }\n\n     */\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/datasource/Controller.java b/src/datasource/Controller.java
+--- a/src/datasource/Controller.java	(revision a3390fba33299e238f611f6c21054f7b10850135)
++++ b/src/datasource/Controller.java	(date 1733742176167)
+@@ -30,10 +30,12 @@
+         return Memberships.getListOfCompetitiveSwimmers();
+     }
+ 
+-    /* udkommenteret så programmet kan køre - skal stadig bruges tror jeg
++    public void cashierTotalIncomeGenerated(){
++        Memberships.cashierTotalIncomeGenerated();
++    }
++
++
+     public void addMemberToTeam(Member newMember) {
+-        Memberships.addMemberToTeam(newMember,  );
++        Memberships.addMemberToTeam(newMember,new Team("Pop"));
+     }
+-
+-     */
+ }
+\ No newline at end of file
+Index: src/domainmodel/Cashier.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domainmodel;\n\nimport java.util.ArrayList;\n\npublic class Cashier {\n    ArrayList<Member> allMembers;\n    ArrayList<Member> allMembersInArrears;\n\n\n    public Cashier(ArrayList<Member> allMembers){\n        this.allMembers = allMembers;\n        this.allMembersInArrears = membersInArrears();\n    }\n\n\n    public double calculateMembershipFee(Member member){\n\n        // Costs of all different membership\n        final double costOfNormalSeniorMembership = 1600;\n        final double costOfJuniorMembership = 1000;\n        final double costOfPassiveMembership = 500;\n        final double seniorDiscount = 0.75;\n\n        if (member.getMembershipStatus() == MembershipStatus.PASSIVE) {\n            return costOfPassiveMembership;\n        }\n\n        if(member.calculateAge() < 18) {\n            return costOfJuniorMembership;\n        }\n\n        if (member.calculateAge() >= 60) {\n            return costOfNormalSeniorMembership * seniorDiscount;\n        }\n\n        return costOfNormalSeniorMembership; //Den normale seniorpris over 18, under 60 år.\n    }\n\n    public void addMember(Member member){\n        allMembers.add(member);\n    }\n\n    public void addMemberInArrear(Member member){\n        allMembersInArrears.add(member);\n    }\n\n    public void removeMemberInArrear(Member member){\n        allMembersInArrears.remove(member);\n    }\n\n    public void removeMember(Member member){\n        allMembers.remove(member);\n    }\n\n\n    public ArrayList<Member> membersInArrears(){\n        ArrayList<Member> membersIsInArrears = new ArrayList<>();\n\n        for (Member member : allMembers){\n            if(member.isInArrears()) {\n                membersIsInArrears.add(member);\n            }\n        }\n        return membersIsInArrears;\n    }\n\n\n    //Denne metode virker pga. den bruger den anden membershipFee metode der tager cashieren som holder fast på alle de medlemmer der findes. uden denne metode vil det altid returnerer nul da den ikke holder på nogen mennesker\n    public double getTotalOfDebt(){\n        double totalDebt = 0;\n\n        for (Member member : allMembersInArrears){\n            totalDebt += member.getMembershipFee1(this);\n        }\n        return totalDebt;\n    }\n\n    /* Denne metode virker ikke da den kun udregner membershipFee for hvert person uden rigitg at tilføje det nogen stedet\n    public double getTotalOfDebt(){\n        double totalDebt = 0;\n\n        for (Member member : allMembersInArrears){\n            totalDebt += member.getMembershipFee();\n        }\n        return totalDebt;\n    }\n\n     */\n\n\n    public double getTotalGeneratedIncome(){\n        double totalMoney = 0;\n\n        //Calculates all money generated from paid members\n        for(Member member : allMembers){\n            totalMoney += member.getMembershipFee1(this);\n        }\n        return totalMoney;\n    }\n\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/domainmodel/Cashier.java b/src/domainmodel/Cashier.java
+--- a/src/domainmodel/Cashier.java	(revision a3390fba33299e238f611f6c21054f7b10850135)
++++ b/src/domainmodel/Cashier.java	(date 1733746916471)
+@@ -3,8 +3,8 @@
+ import java.util.ArrayList;
+ 
+ public class Cashier {
+-    ArrayList<Member> allMembers;
+-    ArrayList<Member> allMembersInArrears;
++    private ArrayList<Member> allMembers;
++    private ArrayList<Member> allMembersInArrears;
+ 
+ 
+     public Cashier(ArrayList<Member> allMembers){
+@@ -75,18 +75,6 @@
+         return totalDebt;
+     }
+ 
+-    /* Denne metode virker ikke da den kun udregner membershipFee for hvert person uden rigitg at tilføje det nogen stedet
+-    public double getTotalOfDebt(){
+-        double totalDebt = 0;
+-
+-        for (Member member : allMembersInArrears){
+-            totalDebt += member.getMembershipFee();
+-        }
+-        return totalDebt;
+-    }
+-
+-     */
+-
+ 
+     public double getTotalGeneratedIncome(){
+         double totalMoney = 0;
+Index: src/domainmodel/MembershipRegistration.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package domainmodel;\n\nimport datasource.FileHandler;\n\nimport java.util.ArrayList;\n\npublic class MembershipRegistration {\n    private ArrayList<Member> membersList;\n    private ArrayList<Team> teams;\n    private FileHandler fileHandler;\n\n    public MembershipRegistration() {\n        this.fileHandler = new FileHandler();\n        this.membersList = fileHandler.loadMembersFromFile(\"members.csv\");\n        this.teams = new ArrayList<>();\n    }\n\n    // Hent alle medlemmer\n    public ArrayList<Member> getAllMembers() {\n        return new ArrayList<>(membersList); // Returner en kopi for at beskytte listen\n    }\n\n    // Tilføj nyt medlem\n    public boolean addMember(Member member) {\n        if (!membersList.contains(member)) {\n            membersList.add(member);\n            fileHandler.saveMembersToFile(membersList, \"members.csv\");\n            return true;\n        }\n        return false; // Return false, hvis medlemmet allerede findes\n    }\n\n    // Fjern medlem\n    public boolean removeMember(Member member) {\n        if (membersList.remove(member)) {\n            fileHandler.saveMembersToFile(membersList, \"members.csv\");\n            return true;\n        }\n        return false; // Return false, hvis medlemmet ikke findes\n    }\n\n    // Hent alle konkurrerende svømmere\n    public ArrayList<CompetitiveSwimmer> getAllCompetitiveSwimmers() {\n        ArrayList<CompetitiveSwimmer> competitiveSwimmers = new ArrayList<>();\n        for (Member member : membersList) {\n            if (member instanceof CompetitiveSwimmer) {\n                competitiveSwimmers.add((CompetitiveSwimmer) member);\n            }\n        }\n        return competitiveSwimmers;\n    }\n\n    // Hent hold\n    public ArrayList<Team> getAllTeams() {\n        return new ArrayList<>(teams);\n    }\n\n    // Tilføj nyt hold\n    public boolean addTeam(Team team) {\n        if (!teams.contains(team)) {\n            teams.add(team);\n            return true;\n        }\n        return false; // Return false, hvis holdet allerede findes\n    }\n\n    // Tilføj medlem til hold\n    public void addMemberToTeam(Member member, Team team) {\n        if (teams.contains(team)) {\n            team.addSwimmersToTeam((CompetitiveSwimmer) member);\n        }\n    }\n\n    // Liste over medlemmer\n    public ArrayList<String> getListOfMembers() {\n        ArrayList<String> list = new ArrayList<>();\n        for (Member member : membersList) {\n            list.add(member.toString());\n        }\n        return list;\n    }\n\n    // Liste over konkurrerende svømmere\n    public ArrayList<String> getListOfCompetitiveSwimmers() {\n        ArrayList<String> list = new ArrayList<>();\n        for (CompetitiveSwimmer swimmer : getAllCompetitiveSwimmers()) {\n            list.add(swimmer.toString());\n        }\n        return list;\n    }\n\n    @Override\n    public String toString() {\n        return \"MembershipRegistration{\" +\n                \"membersListSize=\" + membersList.size() +\n                \", teamsSize=\" + teams.size() +\n                '}';\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/domainmodel/MembershipRegistration.java b/src/domainmodel/MembershipRegistration.java
+--- a/src/domainmodel/MembershipRegistration.java	(revision a3390fba33299e238f611f6c21054f7b10850135)
++++ b/src/domainmodel/MembershipRegistration.java	(date 1733691913212)
+@@ -8,12 +8,16 @@
+     private ArrayList<Member> membersList;
+     private ArrayList<Team> teams;
+     private FileHandler fileHandler;
++    private Cashier cashier;
+ 
+     public MembershipRegistration() {
+         this.fileHandler = new FileHandler();
+         this.membersList = fileHandler.loadMembersFromFile("members.csv");
+         this.teams = new ArrayList<>();
++        this.cashier = new Cashier(membersList); // Initialize the cashier with the members list
+     }
++
++
+ 
+     // Hent alle medlemmer
+     public ArrayList<Member> getAllMembers() {
+@@ -71,6 +75,11 @@
+         }
+     }
+ 
++    public void cashierTotalIncomeGenerated(){
++        cashier.getTotalGeneratedIncome();
++        System.out.printf("Total money generated: %.2f%n", cashier.getTotalGeneratedIncome());
++    }
++
+     // Liste over medlemmer
+     public ArrayList<String> getListOfMembers() {
+         ArrayList<String> list = new ArrayList<>();

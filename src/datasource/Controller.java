@@ -36,10 +36,12 @@ public class Controller {
         return Memberships.getListOfCompetitiveSwimmers();
     }
 
-    /* udkommenteret så programmet kan køre - skal stadig bruges tror jeg
-    public void addMemberToTeam(Member newMember) {
-        Memberships.addMemberToTeam(newMember,  );
+    public void cashierTotalIncomeGenerated(){
+        Memberships.cashierTotalIncomeGenerated();
     }
 
-     */
+
+    public void addMemberToTeam(Member newMember) {
+        Memberships.addMemberToTeam(newMember,new Team("Pop"));
+    }
 }
