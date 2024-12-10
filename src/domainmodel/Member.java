@@ -29,7 +29,7 @@ public class Member extends Person{
 
 
 
-    private String generateMemberIDRandom(String firstName, String lastName) {
+    private void generateMemberIDRandom(String firstName, String lastName) {
         Random random = new Random();
 
         String firstInitials;
@@ -48,7 +48,7 @@ public class Member extends Person{
 
         int randomNum = random.nextInt(8999) + 1000;
 
-        return firstInitials + lastInitials + randomNum;
+        memberID = firstInitials + lastInitials + randomNum;
     }
 
 

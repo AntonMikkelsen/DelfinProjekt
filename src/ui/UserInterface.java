@@ -314,6 +314,8 @@ public class UserInterface {
         String memberId = "ID" + (controller.getMembers().size() + 1);
 
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
+        // tilse denne metode
+        newMember.generateMemberIDRandom();
 
         // Ændre til nye add metode
         controller.addMember(firstName, lastName, dob, email, phone, address, memberId, status);

@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56fbd3d6-8d8d-4361-b361-784d3a053765" name="Changes" comment="- Added some comments">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/junit_jupiter.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/domainmodel/CashierTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DelfinProjekt.iml" beforeDir="false" afterPath="$PROJECT_DIR$/DelfinProjekt.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/datasource/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasource/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domainmodel/Cashier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domainmodel/Cashier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/members.csv" beforeDir="false" afterPath="$PROJECT_DIR$/members.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/datasource/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/datasource/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/domainmodel/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domainmodel/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/domainmodel/MembershipRegistration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domainmodel/MembershipRegistration.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ui/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/UserInterface.java" afterDir="false" />
     </list>
@@ -125,6 +122,7 @@
       <workItem from="1732529892558" duration="4759000" />
       <workItem from="1732619202511" duration="69994000" />
       <workItem from="1733688078453" duration="10179000" />
+      <workItem from="1733834991051" duration="4328000" />
     </task>
     <task id="LOCAL-00001" summary="Første commit - tester">
       <option name="closed" value="true" />
@@ -368,6 +366,11 @@
           <properties class="java.lang.ClassNotFoundException" package="java.lang" />
           <option name="timeStamp" value="2" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/domainmodel/MembershipRegistration.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
