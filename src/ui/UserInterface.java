@@ -19,6 +19,7 @@ public class UserInterface {
 
     // Startmenu der gør brugeren kan komme ind på andre menuer bla administrivemenu osv.
     public void startMenu() {
+        System.out.println("\n**Press 4 to create test Members in the club** (Must do first, to test program with existing members/teams/Income\n");
         boolean menuRunning = true;
         while (menuRunning) {
             greetingsMSG();
@@ -117,7 +118,7 @@ public class UserInterface {
             System.out.println("\n=== Member Overview ===");
             System.out.println("1. View all members");
             System.out.println("2. View all team members Competitive swimmers");
-            System.out.println("3. View all team members casual swimmers");
+            System.out.println("3. Configure Casual Team");
             // System.out.println("4. View best competitive swimmers sorted by discipline"); // New
             System.out.println("0. Back to main menu");
             System.out.print("Enter your choice: ");
@@ -154,7 +155,7 @@ public class UserInterface {
     //Ny display members huss arbejder på
     public void displayAllTeamMembersRegularNew(){
 
-        System.out.println("\n--1. Add casual swimmers to casual team--");
+        System.out.println("\n--1. Add all non competitive swimmers to casual team--");
         System.out.println("--2. View casual team members--\n");
         int choice = scanner.nextInt();
 
