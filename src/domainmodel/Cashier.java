@@ -40,6 +40,7 @@ public class Cashier {
         allMembers.add(member);
     }
 
+
     public void addMemberInArrear(Member member){
         allMembersInArrears.add(member);
     }
@@ -85,6 +86,25 @@ public class Cashier {
         }
         return totalMoney;
     }
+
+    // Method to set arrears status and update the arrears list
+    public void setInArrears(Member member, boolean inArrears) {
+        member.setInArrears(inArrears);
+        if (inArrears) {
+            addMemberInArrear(member); // Add member to arrears
+        } else {
+            removeMemberInArrear(member); // Remove member from arrears
+        }
+    }
+
+    public double getNetIncome() {
+        double totalIncome = getTotalGeneratedIncome(); // Total income from all members
+        double totalDebt = getTotalOfDebt(); // Total debt from members in arrears
+
+        return totalIncome - totalDebt; // Net income after subtracting the debt
+    }
+
+
 
 
 

@@ -80,8 +80,19 @@ public class MembershipRegistration {
     }
 
     public void cashierTotalIncomeGenerated(){
-        cashier.getTotalGeneratedIncome();
-        System.out.printf("Total money generated: %.2f%n", cashier.getTotalGeneratedIncome());
+        System.out.printf("Total money expected (Including Arrears): %.2f%n", cashier.getTotalGeneratedIncome());
+    }
+
+    public void addMemberToArrears(Member member, boolean boolean1){
+        cashier.setInArrears(member, boolean1);
+    }
+
+    public void cashierTotalDebtFromArrears(){
+        System.out.printf("Total debt owed by members in Arrears: %.2f%n", cashier.getTotalOfDebt());
+    }
+
+    public void netIncomeWithoutArrearsMoney(){
+        System.out.printf("Total Net Income (Excluding Members in Arrears): %.2f%n", cashier.getNetIncome());
     }
 
     // Liste over medlemmer

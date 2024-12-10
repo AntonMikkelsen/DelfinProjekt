@@ -1,8 +1,6 @@
 package domainmodel;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Member extends Person{
@@ -61,6 +59,9 @@ public class Member extends Person{
     public boolean isInArrears(){
         return isInArrears;
     }
+
+    // Set arrears status and notify Cashier about the change
+
 
     public void setInArrears(boolean inArrears){
         isInArrears = inArrears;
