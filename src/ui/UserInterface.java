@@ -295,14 +295,12 @@ public class UserInterface {
             }
         }
 
-
-        String memberId = "ID" + (controller.getMembers().size() + 1);
+        Random random = new Random();
+        int randomNum = random.nextInt(8999) + 1000;
+        String memberId = "ID" + (randomNum);
 
         Member newMember = new Member(firstName, lastName, dob, email, phone, address, memberId, status);
-        // tilse denne metode
-        newMember.generateMemberIDRandom();
 
-        // Ændre til nye add metode
         controller.addMember(firstName, lastName, dob, email, phone, address, memberId, status);
         controller.displayMembers();
 
